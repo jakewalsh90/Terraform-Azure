@@ -9,7 +9,7 @@ To utilise the code you may therefore just deploy as is and see the concept bein
 
 ## How to Deploy
  
-For all of the Projects the following files are provided for each:
+For all of the Projects the following files are provided:
 
 - azuredeploy.tf
 - variables.tf

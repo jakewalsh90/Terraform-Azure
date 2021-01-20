@@ -15,3 +15,5 @@ In this example the following actions are carried out:
 3. Creates a Key Vault using the generated name, and sets permissions for Secrets within. 
 4. Creates a Password using the random_password resource. 
 5. Stores the generated Password inside the generated Key Vault.
+
+The Secret can then be used as the administrator password for VMs created in Terraform. The password value can be accessed via the Key Vault. 

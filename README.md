@@ -20,4 +20,8 @@ These should be placed into a directory, and then terraform initialised and appl
 
 ## Projects in this Repository
 
-1. **Automatic NSG based on the Client IP of the Machine running Terraform** - See: [Automatic-ClientIP-NSG](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Automatic-ClientIP-NSG)
+### 1. **Automatic NSG based on the Client IP of the Machine running Terraform**
+*This creates a data item that gets the external IP of the machine that is running Terraform. The IP is then used to create an    inbound security rule inside a Network Security Group.* **See: [Automatic-ClientIP-NSG](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Automatic-ClientIP-NSG)**
+
+### 2. **Azure KeyVault with Secret for Virtual Machine Password**
+*This creates an Azure Key Vault using a random name like "keyvault##########", and then creates a password string, using the random_string resource, which is stored inside the KeyVault. This can then be used during the setup of VMs with Terraform .* **See: [Azure-KeyVault-with-Secret](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Azure-KeyVault-with-Secret)**

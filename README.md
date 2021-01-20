@@ -1,5 +1,5 @@
 # Terraform-Azure
-This repository will contain Terraform code for Azure -  snippets, useful bits, samples, labs and more.
+This repository contains Terraform code for Azure -  snippets, useful bits, samples, labs and more. Be warned - some of these are simply things I use in my lab and may have no real world use!
 
 ## About the code in this Repository
 

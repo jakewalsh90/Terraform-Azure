@@ -13,7 +13,8 @@ For all of the Projects the following files are provided:
 
 - azuredeploy.tf
 - variables.tf
-- terraform.tfvars 
+- terraform.tfvars
+- provider.tf
 
 These should be placed into a directory, and then terraform initialised and applied. 
 

@@ -6,7 +6,9 @@ This code dynamically creates an Azure Network Security Group (NSG) using Terraf
 ### A full overview is available here: https://jakewalsh.co.uk/automating-nsg-rules-with-an-external-ip-in-terraform/
 
 ## Actions
-This code creates a data source within Terraform, and then uses this during deployment, so that the NSG rule is created dynamically based on the Client IP. To do this, a data source is used, and a URL from an IP check service - see [azuredeploy.tf](azuredeploy.tf). In this example 3 things are carried out:
+This code creates a data source within Terraform, and then uses this during deployment, so that the NSG rule is created dynamically based on the Client IP. To do this, a data source is used, and a URL from an IP check service - see [azuredeploy.tf](azuredeploy.tf). 
+
+In this example 3 things are carried out:
 
  1. Creates a Resource Group to hold Resources
  2. Checks the Client IP with https://ipv4.icanhazip.com/

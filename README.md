@@ -19,4 +19,4 @@ These should be placed into a directory, and then terraform initialised and appl
 
 ## Projects in this Repository
 
-1. Automatic NSG based on the Client IP of the Machine running Terraform - See: <a href="https://github.com/jakewalsh90/Terraform-Azure/tree/main/Automatic-ClientIP-NSG">Automatic-ClientIP-NSG</a>
+1. Automatic NSG based on the Client IP of the Machine running Terraform - See: Automatic-ClientIP-NSG

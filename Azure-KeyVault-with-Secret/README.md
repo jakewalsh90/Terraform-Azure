@@ -16,4 +16,6 @@ In this example the following actions are carried out:
 4. Creates a Password using the random_password resource. 
 5. Stores the generated Password inside the generated Key Vault.
 
-The Secret can then be used as the administrator password for VMs created in Terraform. The password value can be accessed via the Key Vault. 
+The Secret can then be used as the administrator password for VMs created in Terraform. The password value can be accessed via the Key Vault. When creating a VM using this code, reference the password as below:
+
+  admin_password      = azurerm_key_vault_secret.vmpassword.value

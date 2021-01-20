@@ -16,7 +16,7 @@ For all of the Projects the following files are provided:
 - terraform.tfvars
 - provider.tf
 
-These should be placed into a directory, and then terraform initialised and applied. 
+These should be placed into a directory, and then Terraform initialised and applied. 
 
 ## Projects in this Repository
 

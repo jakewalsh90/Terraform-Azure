@@ -1,4 +1,4 @@
-# Creating an Azure Key Vault with a Secret Value
+# Creating an Azure Key Vault with a Secret
 
 ## Overview
 This code creates a randomly named Azure Key Vault (keyvault##########), and then creates a Secret based on a random string, and stores that within the Key Vault. This allows automated creation of unique Key Vaults (as Key Vault names need to be unique) and unique passwords - ideal for environments that need to be created by multiple people - labs for example.

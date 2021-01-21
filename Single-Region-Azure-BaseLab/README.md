@@ -1,7 +1,7 @@
 # Single Region Base Lab Environment for Azure
 
 ## Overview
-This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for infrastructure testing. 
+This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements. *It is not intended for production use!*
 
 ## Actions
 The following resources are deployed:

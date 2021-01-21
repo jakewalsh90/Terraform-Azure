@@ -8,7 +8,7 @@ This code creates a simple Lab environment within a Single Azure Region. The ide
 ## Actions
 The following resources are deployed:
 
-1. Two Resource Groups, one for the Lab infrastructure, and another for Security related items
+1. Two Resource Groups, one for the Lab infrastructure, and another for Security related items.
 2. Two VNETs, a Hub and a Spoke, which are peered. DNS is set on the VNETs to the Domain Controller IP, Azure DNS, and finally, Google DNS. 
 3. Three Subnets in each VNET, with a Subnet delegated to Azure NetApp Files in the Spoke VNET. 
 4. Uses the [Automatic-ClientIP-NSG](../Automatic-ClientIP-NSG) to setup a Network Security Group that allows RDP access in - this NSG rule uses the external IP of the machine that runs Terraform. 
@@ -27,7 +27,7 @@ The following resources are deployed:
   - Installs the Windows Features required for Active Directory and DNS. 
 
 ## Manual Steps to complete 
-### The two powershell scripts should be run to complete the setup as a Domain Controller
+### The two powershell scripts should be run to complete the setup process, on the created Virtual Machine, as a functional AD Domain Controller.
 
 These will be in C:\baselabSetup of the DC VM after deployment, and should be run in this order:
 1. baselab_DomainSetup.ps1 - the machine will reboot after this

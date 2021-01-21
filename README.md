@@ -25,3 +25,6 @@ These should be placed into a directory, and then Terraform initialised and appl
 
 ### 2. **Azure KeyVault with Secret for Virtual Machine Password**
 *This creates an Azure Key Vault using a random name like "keyvault##########", and then creates a password string, using the random_string resource, which is stored inside the KeyVault. This can then be used during the setup of VMs with Terraform .* **See: [Azure-KeyVault-with-Secret](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Azure-KeyVault-with-Secret)**
+
+### 3. **Single Region Base Lab Environment for Azure**
+*This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements.* **See: [Single-Region-Azure-BaseLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Single-Region-Azure-BaseLab)**

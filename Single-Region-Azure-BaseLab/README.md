@@ -19,7 +19,7 @@ The following resources are deployed:
 9. Creates a Data Disk for NTDS Storage on the Domain Controller VM
 10. Creates a Windows 2019 VM to act as a Domain Controller. The Username for this VM is a Variable, and the Password is saved as a Secret in the Key Vault. (It was automatically generated in Step 6).
 11. Attaches the Data Disk created in step 9, with caching Turned off. 
-12. Runs a Setup script on the Domain Controller VM - that carries out the following actions:
+12. Runs a Setup script on the Domain Controller VM (baselab_DCSetup.ps1 withing this repos PowerShell folder), as a Custom Script Extension - that carries out the following actions:
   - Uses Chocolatey to install Google Chrome, Putty, Notepad++, WinSCP, Sysinternals, and bginfo
   - Creates a directory - c:\BaselabSetup
   - Downloads two further PowerShell scripts (which are in the root of this repository) which setup the Domain Controller, and create a Lab OU Structure. 

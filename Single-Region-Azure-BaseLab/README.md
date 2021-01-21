@@ -27,7 +27,7 @@ The following resources are deployed:
   - Sets a Windows Firewall Rule to allow File/Printer sharing.
   - Installs the Windows Features required for Active Directory and DNS. 
 
-## Manual Steps to complete 
+## Manual Steps to complete Lab Environment
 ### The two powershell scripts should be run to complete the setup process, on the created Virtual Machine, as a functional AD Domain Controller.
 
 These will be in C:\baselabSetup of the DC VM after deployment, and should be run in this order:

@@ -17,6 +17,6 @@ Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR 
 #Allow Ping
 Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
 Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv6-In)" -enabled True
-#Install Roles to make Server DC
+#Install Roles to make Server a Domain Controller
 Install-windowsfeature -name AD-Domain-Services -IncludeManagementTools
 Install-windowsfeature -name DNS -IncludeManagementTools

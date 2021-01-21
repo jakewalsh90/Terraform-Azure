@@ -20,6 +20,7 @@ The following resources are deployed:
 10. Creates a Windows 2019 VM to act as a Domain Controller. The Username for this VM is a Variable, and the Password is saved as a Secret in the Key Vault. (It was automatically generated in Step 6).
 11. Attaches the Data Disk created in step 9, with caching Turned off. 
 12. Runs a Setup script on the Domain Controller VM (baselab_DCSetup.ps1 within this repos PowerShell folder), as a Custom Script Extension - that carries out the following actions:
+
   - Uses Chocolatey to install Google Chrome, Putty, Notepad++, WinSCP, Sysinternals, and bginfo
   - Creates a directory - c:\BaselabSetup
   - Downloads two further PowerShell scripts (found within this repos PowerShell folder) which will be used to setup the Domain Controller, and create a Lab OU Structure after deployment. 
@@ -30,6 +31,7 @@ The following resources are deployed:
 ### The two powershell scripts should be run to complete the setup process, on the created Virtual Machine, as a functional AD Domain Controller.
 
 These will be in C:\baselabSetup of the DC VM after deployment, and should be run in this order:
+
 1. baselab_DomainSetup.ps1 - the machine will reboot after this
 2. baselab_LabStructure.ps1 - this will setup a basic OU structure
 

@@ -243,7 +243,7 @@ resource "azurerm_network_security_group" "region1-nsg" {
 resource "azurerm_network_security_group" "region2-nsg" {
   name                = "region2-nsg"
   location            = var.loc2
-  resource_group_name = azurerm_resource_group.rg3.name
+  resource_group_name = azurerm_resource_group.rg2.name
 
   security_rule {
     name                       = "RDP-In"

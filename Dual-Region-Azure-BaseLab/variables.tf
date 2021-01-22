@@ -54,3 +54,99 @@ variable "region2-vnet2-address-space" {
   description = "VNET address space"
   type = string
 }
+variable "region1-vnet1-snet1-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region1-vnet1-snet2-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region1-vnet1-snet3-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region1-vnet2-snet1-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region1-vnet2-snet2-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region1-vnet2-snet3-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region1-vnet1-snet1-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region1-vnet1-snet2-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region1-vnet1-snet3-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region1-vnet2-snet1-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region1-vnet2-snet2-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region1-vnet2-snet3-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region2-vnet1-snet1-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region2-vnet1-snet2-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region2-vnet1-snet3-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region2-vnet2-snet1-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region2-vnet2-snet2-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region2-vnet2-snet3-name" {
+  description = "subnet name"
+  type = string
+}
+variable "region2-vnet1-snet1-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region2-vnet1-snet2-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region2-vnet1-snet3-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region2-vnet2-snet1-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region2-vnet2-snet2-range" {
+  description = "subnet range"
+  type = string
+}
+variable "region2-vnet2-snet3-range" {
+  description = "subnet range"
+  type = string
+}

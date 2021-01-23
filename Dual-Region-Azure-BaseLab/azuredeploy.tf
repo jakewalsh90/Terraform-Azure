@@ -261,3 +261,46 @@ resource "azurerm_network_security_group" "region2-nsg" {
        Function = "baselabv2-security"
    }
 }
+# Setup NSG association to all Lab Subnets in each region (excluding ANF subnet)
+# Region 1
+resource "azurerm_subnet_network_security_group_association" "region1-vnet1-snet1" {
+  subnet_id                 = azurerm_subnet.region1-vnet1-snet1.id
+  network_security_group_id = azurerm_network_security_group.region1-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region1-vnet1-snet2" {
+  subnet_id                 = azurerm_subnet.region1-vnet1-snet2.id
+  network_security_group_id = azurerm_network_security_group.region1-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region1-vnet1-snet3" {
+  subnet_id                 = azurerm_subnet.region1-vnet1-snet3.id
+  network_security_group_id = azurerm_network_security_group.region1-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region1-vnet2-snet1" {
+  subnet_id                 = azurerm_subnet.region1-vnet2-snet1.id
+  network_security_group_id = azurerm_network_security_group.region1-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region1-vnet2-snet2" {
+  subnet_id                 = azurerm_subnet.region1-vnet2-snet2.id
+  network_security_group_id = azurerm_network_security_group.region1-nsg.id
+}
+# Region 2
+resource "azurerm_subnet_network_security_group_association" "region2-vnet1-snet1" {
+  subnet_id                 = azurerm_subnet.region2-vnet1-snet1.id
+  network_security_group_id = azurerm_network_security_group.region2-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region2-vnet1-snet2" {
+  subnet_id                 = azurerm_subnet.region2-vnet1-snet2.id
+  network_security_group_id = azurerm_network_security_group.region2-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region2-vnet1-snet3" {
+  subnet_id                 = azurerm_subnet.region2-vnet1-snet3.id
+  network_security_group_id = azurerm_network_security_group.region2-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region2-vnet2-snet1" {
+  subnet_id                 = azurerm_subnet.region2-vnet2-snet1.id
+  network_security_group_id = azurerm_network_security_group.region2-nsg.id
+}
+resource "azurerm_subnet_network_security_group_association" "region2-vnet2-snet2" {
+  subnet_id                 = azurerm_subnet.region2-vnet2-snet2.id
+  network_security_group_id = azurerm_network_security_group.region2-nsg.id
+}

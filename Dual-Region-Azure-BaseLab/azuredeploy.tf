@@ -356,3 +356,69 @@ resource "azurerm_key_vault_secret" "vmpassword" {
   key_vault_id = azurerm_key_vault.kv1.id
   depends_on = [ azurerm_key_vault.kv1 ]
 }
+#Public IPs
+#Region1
+resource "azurerm_public_ip" "region1-dc01-pip" {
+  name                = "region1-dc01-pip"
+  resource_group_name = azurerm_resource_group.rg1.name
+  location            = var.loc1
+  allocation_method   = "Static"
+  sku = "Standard"
+
+   tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv2-activedirectory"
+   }
+}
+#Region2
+resource "azurerm_public_ip" "region2-dc01-pip" {
+  name                = "region2-dc01-pip"
+  resource_group_name = azurerm_resource_group.rg3.name
+  location            = var.loc2
+  allocation_method   = "Static"
+  sku = "Standard"
+
+   tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv2-activedirectory"
+   }
+}
+#Create NICs and associate the Public IPs
+#Region1
+resource "azurerm_network_interface" "region1-dc01-nic" {
+  name                = "region1-dc01-nic"
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg1.name
+
+
+  ip_configuration {
+    name                          = "region1-dc01-ipconfig"
+    subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
+    private_ip_address_allocation = "Dynamic"
+	  public_ip_address_id = azurerm_public_ip.region1-dc01-pip.id
+  }
+  
+   tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv2-activedirectory"
+   }
+}
+#Region2
+resource "azurerm_network_interface" "region2-dc01-nic" {
+  name                = "region2-dc01-nic"
+  location            = var.loc2
+  resource_group_name = azurerm_resource_group.rg3.name
+
+
+  ip_configuration {
+    name                          = "region2-dc01-ipconfig"
+    subnet_id                     = azurerm_subnet.region2-vnet1-snet1.id
+    private_ip_address_allocation = "Dynamic"
+	  public_ip_address_id = azurerm_public_ip.region2-dc01-pip.id
+  }
+  
+   tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv2-activedirectory"
+   }
+}

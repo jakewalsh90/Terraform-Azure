@@ -12,6 +12,7 @@ choco install bginfo -y
 New-Item -Path "c:\" -Name "BaselabSetup" -ItemType "directory" -Force
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/baselab_DomainSetup.ps1" -OutFile "C:\BaselabSetup\baselab_DomainSetup.ps1"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/baselab_LabStructure.ps1" -OutFile "C:\BaselabSetup\baselab_LabStructure.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/baselab_DomainController2.ps1" -OutFile "C:\BaselabSetup\baselab_DomainController2.ps1"
 #Setup and Partition Data Disk
 Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel 'Data' -Confirm:$false 
 #Allow Ping

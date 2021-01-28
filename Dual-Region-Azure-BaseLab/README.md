@@ -29,4 +29,19 @@ The following resources are deployed:
 
 ## Manual Steps to complete Lab Environment
 
-[ TBC ]
+## Manual Steps to complete Lab Environment
+#### The two powershell scripts should be run to complete the setup process on the created Virtual Machine. The scripts promote the VM to a domain controller and then setup a basic Lab OU structure. 
+
+#### First Region 
+
+These will be in C:\baselabSetup of the DC VM after deployment, and should be run in this order:
+
+1. baselab_DomainSetup.ps1 - the machine will reboot after this.
+2. baselab_LabStructure.ps1 - this will setup a basic OU structure.
+
+#### Second Region 
+
+1. Join the 2nd DC VM to your Lab Active Directory Domain
+2. Run the PowerShell script in the C:\baselabSetup folder called baselab_DomainController2.ps1, and reboot. 
+
+The lab is now deployed and ready to use.

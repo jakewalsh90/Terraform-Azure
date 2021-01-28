@@ -41,7 +41,7 @@ The AD Domain is now created and you can move onto the Second Region Active Dire
 
 #### Second Region 
 
-After the first DC has been promoted, and has come back online, reboot region2-dc01-vm (After region1-dc01-vm has been setup and DNS is functional a reboot clears any stale DNS records on the 2nd DC).
+After the first DC has been promoted, and has come back online, <b>reboot region2-dc01-vm</b> (After region1-dc01-vm has been setup and DNS is functional a reboot clears any stale DNS records on the 2nd DC).
 
 The next setup scripts are in C:\baselabSetup of the region2-dc01-vm after deployment, and should be run in this order:
 

@@ -21,3 +21,4 @@ Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv
 #Install Roles to make Server a Domain Controller
 Install-windowsfeature -name AD-Domain-Services -IncludeManagementTools
 Install-windowsfeature -name DNS -IncludeManagementTools
+Clear-DnsClientCache

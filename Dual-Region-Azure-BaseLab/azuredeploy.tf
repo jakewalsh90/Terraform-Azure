@@ -541,7 +541,7 @@ resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup1.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
@@ -564,7 +564,7 @@ resource "azurerm_virtual_machine_extension" "region2-dc01-basesetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup2.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 

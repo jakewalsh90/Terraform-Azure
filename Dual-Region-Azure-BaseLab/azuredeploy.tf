@@ -422,3 +422,157 @@ resource "azurerm_network_interface" "region2-dc01-nic" {
        Function = "baselabv2-activedirectory"
    }
 }
+#Create data disk for NTDS storage
+#Region 1
+resource "azurerm_managed_disk" "region1-dc01-data" {
+  name                 = "region1-dc01-data"
+  location             = var.loc1
+  resource_group_name  = azurerm_resource_group.rg1.name
+  storage_account_type = "StandardSSD_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = "5"
+
+  tags  = {
+    Environment  = var.environment_tag
+    Function = "baselabv2-activedirectory"
+  }
+}
+#Region2
+resource "azurerm_managed_disk" "region2-dc01-data" {
+  name                 = "region2-dc01-data"
+  location             = var.loc2
+  resource_group_name  = azurerm_resource_group.rg3.name
+  storage_account_type = "StandardSSD_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = "5"
+
+  tags  = {
+    Environment  = var.environment_tag
+    Function = "baselabv2-activedirectory"
+  }
+}
+#Create Domain Controller VMs
+#Region1
+resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
+  name                = "region1-dc01-vm"
+  depends_on = [ azurerm_key_vault.kv1 ]
+  resource_group_name = azurerm_resource_group.rg1.name
+  location            = var.loc1
+  size                = var.vmsize-domaincontroller
+  admin_username      = var.adminusername
+  admin_password      = azurerm_key_vault_secret.vmpassword.value
+  network_interface_ids = [
+    azurerm_network_interface.region1-dc01-nic.id,
+  ]
+
+  tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv2-activedirectory"
+   }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2019-Datacenter"
+    version   = "latest"
+  }
+}
+#Region2
+resource "azurerm_windows_virtual_machine" "region2-dc01-vm" {
+  name                = "region2-dc01-vm"
+  depends_on = [ azurerm_key_vault.kv1 ]
+  resource_group_name = azurerm_resource_group.rg3.name
+  location            = var.loc2
+  size                = var.vmsize-domaincontroller
+  admin_username      = var.adminusername
+  admin_password      = azurerm_key_vault_secret.vmpassword.value
+  network_interface_ids = [
+    azurerm_network_interface.region2-dc01-nic.id,
+  ]
+
+  tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv2-activedirectory"
+   }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2019-Datacenter"
+    version   = "latest"
+  }
+}
+#Attach Data Disk to DC Virtual Machines
+#Region 1
+resource "azurerm_virtual_machine_data_disk_attachment" "region1-dc01-data" {
+  managed_disk_id    = azurerm_managed_disk.region1-dc01-data.id
+  depends_on = [ azurerm_windows_virtual_machine.region1-dc01-vm ]
+  virtual_machine_id = azurerm_windows_virtual_machine.region1-dc01-vm.id
+  lun                = "10"
+  caching            = "None"
+  }
+#Region 2
+resource "azurerm_virtual_machine_data_disk_attachment" "region2-dc01-data" {
+  managed_disk_id    = azurerm_managed_disk.region2-dc01-data.id
+  depends_on = [ azurerm_windows_virtual_machine.region2-dc01-vm ]
+  virtual_machine_id = azurerm_windows_virtual_machine.region2-dc01-vm.id
+  lun                = "10"
+  caching            = "None"
+  }
+#Run setup scripts on dc01 virtual machines
+#Region1
+resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
+  name                 = "region1-dc01-basesetup"
+  virtual_machine_id   = azurerm_windows_virtual_machine.region1-dc01-vm.id
+  depends_on = [ azurerm_virtual_machine_data_disk_attachment.region1-dc01-data ]
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup.ps1; exit 0;\""
+    }
+  PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/baselab_DCSetup.ps1"
+        ]
+    }
+  SETTINGS
+}
+#Region2
+resource "azurerm_virtual_machine_extension" "region2-dc01-basesetup" {
+  name                 = "region2-dc01-basesetup"
+  virtual_machine_id   = azurerm_windows_virtual_machine.region2-dc01-vm.id
+  depends_on = [ azurerm_virtual_machine_data_disk_attachment.region2-dc01-data ]
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup.ps1; exit 0;\""
+    }
+  PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/baselab_DCSetup.ps1"
+        ]
+    }
+  SETTINGS
+}

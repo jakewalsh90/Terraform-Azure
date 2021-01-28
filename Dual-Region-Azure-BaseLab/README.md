@@ -13,12 +13,9 @@ The following resources are deployed:
 3. Three Subnets in each VNET, with a Subnet delegated to Azure NetApp Files in the Spoke VNET. 
 4. Uses the [Automatic-ClientIP-NSG](../Automatic-ClientIP-NSG) to setup a Network Security Group that allows RDP access in - this NSG rule uses the external IP of the machine that runs Terraform. 
 5. Associates the created NSG to all Lab Subnets.
-6. Creates a Key Vault with a randomised name, using [Azure-KeyVault-with-Secret](../Azure-KeyVault-with-Secret), and then creates a password as a Secret within the Key Vault that is used later to setup a VM.
+6. Creates a Key Vault with a randomised name, using [Azure-KeyVault-with-Secret](../Azure-KeyVault-with-Secret), and then creates a password as a Secret within the Key Vault that is used later to setup two VMs.
 7. Creates Public IPs for the Domain Controller VMs.
 8. Creates a Network Interface Card and associates the above Public IP.
-
-Yet to be added:
-
 9. Creates a Data Disk for NTDS Storage on the Domain Controller VM.
 10. Creates a Windows 2019 VM to act as a Domain Controller. The Username for this VM is a Variable, and the Password is saved as a Secret in the Key Vault. (It was automatically generated in Step 6).
 11. Attaches the Data Disk created in step 9, with caching Turned off. 

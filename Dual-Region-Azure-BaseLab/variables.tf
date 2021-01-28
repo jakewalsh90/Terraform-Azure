@@ -150,3 +150,11 @@ variable "region2-vnet2-snet3-range" {
   description = "subnet range"
   type = string
 }
+variable "vmsize-domaincontroller" {
+  description = "size of vm for domain controller"
+  type = string
+}
+variable "adminusername" {
+  description = "administrator username for virtual machines"
+  type = string
+}

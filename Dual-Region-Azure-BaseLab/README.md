@@ -28,7 +28,7 @@ The following resources are deployed:
   - Installs the Windows Features required for Active Directory and DNS. 
 
 ## Manual Steps to complete Lab Environment
-#### The two powershell scripts should be run to complete the setup process on the created Virtual Machine. The scripts promote the VM to a domain controller and then setup a basic Lab OU structure. 
+#### The 4 powershell scripts should be run to complete the setup process on the created Virtual Machines. Follow the instructions below to complete the Lab Setup.  
 
 #### First Region 
 

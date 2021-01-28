@@ -37,9 +37,11 @@ These will be in C:\baselabSetup of the DC VM after deployment, and should be ru
 1. baselab_DomainSetup.ps1 - the machine will reboot after this.
 2. baselab_LabStructure.ps1 - this will setup a basic OU structure.
 
+The AD Domain is now created and you can move onto the Second Region Active Directory setup steps. 
+
 #### Second Region 
 
 1. Join the 2nd DC VM to your Lab Active Directory Domain
-2. Run the PowerShell script in the C:\baselabSetup folder called baselab_DomainController2.ps1, and reboot. 
+2. Run the PowerShell script in the C:\baselabSetup folder called baselab_DomainController2.ps1, and reboot.
 
 The lab is now deployed and ready to use.

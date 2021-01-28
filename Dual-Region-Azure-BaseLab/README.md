@@ -32,7 +32,7 @@ The following resources are deployed:
 
 #### First Region 
 
-These will be in C:\baselabSetup of the DC VM after deployment, and should be run in this order:
+The setup scripts are in C:\baselabSetup of the region1-dc01-vm after deployment, and should be run in this order:
 
 1. baselab_DomainSetup.ps1 - the machine will reboot after this.
 2. baselab_LabStructure.ps1 - this will setup a basic OU structure.
@@ -41,7 +41,9 @@ The AD Domain is now created and you can move onto the Second Region Active Dire
 
 #### Second Region 
 
-1. Join the 2nd DC VM to your Lab Active Directory Domain
-2. Run the PowerShell script in the C:\baselabSetup folder called baselab_DomainController2.ps1, and reboot.
+After the first DC has been promoted, and has come back online. The next setup scripts are in C:\baselabSetup of the region2-dc01-vm after deployment, and should be run in this order:
+
+1. baselab_DC2JoinDomain.ps1 - joins the VM to the Domain.
+2. baselab_DC2Promote.ps1 - promotes the VM to a Domain Controller.
 
 The lab is now deployed and ready to use.

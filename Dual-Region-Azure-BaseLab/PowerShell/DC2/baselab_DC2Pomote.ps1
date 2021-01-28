@@ -1,4 +1,4 @@
-ipconfig /registerdns 
+ipconfig /registerdns
 Install-ADDSDomainController `
 -InstallDns:$true `
 -CreateDnsDelegation:$false `

@@ -29,7 +29,7 @@ resource "azurerm_virtual_network" "region1-vnet1-hub1" {
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg1.name
   address_space       = [var.region1-vnet1-address-space]
-  dns_servers         = ["10.10.1.4", "10.11.1.4", "168.63.129.16", "8.8.8.8"]
+  dns_servers         = ["10.10.1.4", "10.20.1.4", "168.63.129.16", "8.8.8.8"]
    tags     = {
        Environment  = var.environment_tag
        Function = "baselabv2-network"
@@ -40,7 +40,7 @@ resource "azurerm_virtual_network" "region1-vnet2-spoke1" {
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg1.name
   address_space       = [var.region1-vnet2-address-space]
-  dns_servers         = ["10.10.1.4", "10.11.1.4", "168.63.129.16", "8.8.8.8"]
+  dns_servers         = ["10.10.1.4", "10.20.1.4", "168.63.129.16", "8.8.8.8"]
    tags     = {
        Environment  = var.environment_tag
        Function = "baselabv2-network"
@@ -51,7 +51,7 @@ resource "azurerm_virtual_network" "region2-vnet1-hub1" {
   location            = var.loc2
   resource_group_name = azurerm_resource_group.rg3.name
   address_space       = [var.region2-vnet1-address-space]
-  dns_servers         = ["10.10.1.4", "10.11.1.4", "168.63.129.16", "8.8.8.8"]
+  dns_servers         = ["10.10.1.4", "10.20.1.4", "168.63.129.16", "8.8.8.8"]
    tags     = {
        Environment  = var.environment_tag
        Function = "baselabv2-network"
@@ -62,7 +62,7 @@ resource "azurerm_virtual_network" "region2-vnet2-spoke1" {
   location            = var.loc2
   resource_group_name = azurerm_resource_group.rg3.name
   address_space       = [var.region2-vnet2-address-space]
-  dns_servers         = ["10.10.1.4", "10.11.1.4", "168.63.129.16", "8.8.8.8"]
+  dns_servers         = ["10.10.1.4", "10.20.1.4", "168.63.129.16", "8.8.8.8"]
    tags     = {
        Environment  = var.environment_tag
        Function = "baselabv2-network"

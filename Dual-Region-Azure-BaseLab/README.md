@@ -48,4 +48,4 @@ The next setup scripts are in C:\baselabSetup of the region2-dc01-vm after deplo
 1. baselab_DC2JoinDomain.ps1 - joins the VM to the Domain.
 2. baselab_DC2Promote.ps1 - promotes the VM to a Domain Controller.
 
-The lab is now deployed and ready to use.
+The lab is now deployed and ready to use!

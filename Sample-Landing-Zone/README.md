@@ -1,1 +1,0 @@
-TBC - Sample Landing Zone deployment... work in progress!

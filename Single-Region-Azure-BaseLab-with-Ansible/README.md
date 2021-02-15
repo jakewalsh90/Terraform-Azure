@@ -11,4 +11,4 @@ This code creates a simple Lab environment within a Single Azure Region, and als
 2. Creates an Ubuntu Server VM to use for Ansible
 3. Creates a Custom Script Extension which runs AnsibleSetup.sh from the Ansible directory in this repo. 
 
-This lab includes everything from the [Single-Region-Azure-BaseLab](..//Single-Region-Azure-BaseLab), but with the additional Ansible VM above. The Domain Setup scripts still need to be run as per the [Single-Region-Azure-BaseLab](..//Single-Region-Azure-BaseLab) documentation.
+This lab includes everything from the [Single-Region-Azure-BaseLab](..//Single-Region-Azure-BaseLab), but with the additional Ansible VM above. The Domain Setup scripts still need to be run as per the linked Single-Region-Azure-Baselab documentation. 

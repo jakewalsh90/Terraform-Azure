@@ -390,3 +390,25 @@ resource "azurerm_linux_virtual_machine" "region1-an01-vm" {
     version   = "latest"
   }
 }
+#Run setup script on an01-vm
+resource "azurerm_virtual_machine_extension" "region1-an01-basesetup" {
+  name                 = "region1-an01-basesetup"
+  virtual_machine_id   = azurerm_windows_virtual_machine.region1-an01-vm.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "commandToExecute": "./ansiblesetup.sh"
+    }
+  PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Single-Region-Azure-BaseLab-with-Ansible/Ansible/AnsibleSetup.sh"
+        ]
+    }
+  SETTINGS
+}

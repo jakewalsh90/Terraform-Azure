@@ -393,7 +393,7 @@ resource "azurerm_linux_virtual_machine" "region1-an01-vm" {
 #Run setup script on an01-vm
 resource "azurerm_virtual_machine_extension" "region1-an01-basesetup" {
   name                 = "region1-an01-basesetup"
-  virtual_machine_id   = azurerm_windows_virtual_machine.region1-an01-vm.id
+  virtual_machine_id   = azurerm_linux_virtual_machine.region1-an01-vm.id
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"

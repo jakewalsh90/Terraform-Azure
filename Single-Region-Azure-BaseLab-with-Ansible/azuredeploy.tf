@@ -389,6 +389,10 @@ resource "azurerm_linux_virtual_machine" "region1-an01-vm" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
+    tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv1-ansible"
+   }
 }
 #Run setup script on an01-vm
 resource "azurerm_virtual_machine_extension" "region1-an01-basesetup" {
@@ -400,7 +404,7 @@ resource "azurerm_virtual_machine_extension" "region1-an01-basesetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "./ansiblesetup.sh"
+      "commandToExecute": "sh AnsibleSetup.sh"
     }
   PROTECTED_SETTINGS
 

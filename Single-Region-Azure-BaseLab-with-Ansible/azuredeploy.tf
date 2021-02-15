@@ -404,11 +404,11 @@ resource "azurerm_virtual_machine_extension" "region1-an01-basesetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "sh AnsibleSetup.sh"
+      "commandToExecute": "bash AnsibleSetup.sh"
     }
   PROTECTED_SETTINGS
 
-  settings = <<SETTINGS
+    settings = <<SETTINGS
     {
         "fileUris": [
           "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Single-Region-Azure-BaseLab-with-Ansible/Ansible/AnsibleSetup.sh"

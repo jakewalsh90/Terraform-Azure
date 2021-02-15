@@ -1,4 +1,4 @@
-# Single Region Base Lab Environment for Azure
+# Single Region Base Lab Environment for Azure - with Ansible 
 
 ## Overview
 This code creates a simple Lab environment within a Single Azure Region, and also includes an Ubuntu Server VM with Ansible installed. For documentation please see [Single-Region-Azure-BaseLab](..//Single-Region-Azure-BaseLab) - this lab is identical, albeit for the Ansible elements. 

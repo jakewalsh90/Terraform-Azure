@@ -123,6 +123,18 @@ resource "azurerm_network_security_group" "region1-nsg" {
     source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
     destination_address_prefix = "*"
   }
+
+  security_rule {
+    name                       = "SSH-In"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
+    destination_address_prefix = "*"
+  }
    tags     = {
        Environment  = var.environment_tag
        Function = "baselabv1-security"
@@ -189,19 +201,32 @@ resource "azurerm_key_vault" "kv1" {
        Function = "baselabv1-security"
    }
 }
-#Create KeyVault VM password
+#Create KeyVault VM password - Windows
 resource "random_password" "vmpassword" {
   length = 20
   special = true
 }
-#Create Key Vault Secret
+#Create Key Vault Secret - Windows
 resource "azurerm_key_vault_secret" "vmpassword" {
   name         = "vmpassword"
   value        = random_password.vmpassword.result
   key_vault_id = azurerm_key_vault.kv1.id
   depends_on = [ azurerm_key_vault.kv1 ]
 }
-#Public IP
+#Create KeyVault VM password - Ansible VM
+resource "random_password" "anpassword" {
+  length = 20
+  special = true
+}
+#Create Key Vault Secret - Ansible VM
+resource "azurerm_key_vault_secret" "anpassword" {
+  name         = "anpassword"
+  value        = random_password.anpassword.result
+  key_vault_id = azurerm_key_vault.kv1.id
+  depends_on = [ azurerm_key_vault.kv1 ]
+}
+
+#Public IP - Windows VM
 resource "azurerm_public_ip" "region1-dc01-pip" {
   name                = "region1-dc01-pip"
   resource_group_name = azurerm_resource_group.rg1.name
@@ -214,7 +239,7 @@ resource "azurerm_public_ip" "region1-dc01-pip" {
        Function = "baselabv1-activedirectory"
    }
 }
-#Create NIC and associate the Public IP
+#Create NIC and associate the Public IP - Windows VM
 resource "azurerm_network_interface" "region1-dc01-nic" {
   name                = "region1-dc01-nic"
   location            = var.loc1
@@ -231,6 +256,38 @@ resource "azurerm_network_interface" "region1-dc01-nic" {
    tags     = {
        Environment  = var.environment_tag
        Function = "baselabv1-activedirectory"
+   }
+}
+#Public IP - Ansible VM
+resource "azurerm_public_ip" "region1-an01-pip" {
+  name                = "region1-an01-pip"
+  resource_group_name = azurerm_resource_group.rg1.name
+  location            = var.loc1
+  allocation_method   = "Static"
+  sku = "Standard"
+
+   tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv1-ansible"
+   }
+}
+#Create NIC and associate the Public IP - Ansible VM
+resource "azurerm_network_interface" "region1-an01-nic" {
+  name                = "region1-an01-nic"
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg1.name
+
+
+  ip_configuration {
+    name                          = "region1-an01-ipconfig"
+    subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
+    private_ip_address_allocation = "Dynamic"
+	  public_ip_address_id = azurerm_public_ip.region1-an01-pip.id
+  }
+  
+   tags     = {
+       Environment  = var.environment_tag
+       Function = "baselabv1-ansible"
    }
 }
 #Create data disk for NTDS storage
@@ -253,7 +310,7 @@ resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
   depends_on = [ azurerm_key_vault.kv1 ]
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
-  size                = var.vmsize-domaincontroller
+  size                = var.vmsize
   admin_username      = var.adminusername
   admin_password      = azurerm_key_vault_secret.vmpassword.value
   network_interface_ids = [
@@ -307,4 +364,29 @@ resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
         ]
     }
   SETTINGS
+}
+#Create Ansible VM
+resource "azurerm_linux_virtual_machine" "region1-an01-vm" {
+  name                = "region1-an01-vm"
+  resource_group_name = azurerm_resource_group.rg1.name
+  location            = var.loc1
+  size                = var.vmsize
+  admin_username      = var.adminusername
+  admin_password      = azurerm_key_vault_secret.anpassword.value
+  disable_password_authentication = false
+  network_interface_ids = [
+    azurerm_network_interface.region1-an01-nic.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
+    version   = "latest"
+  }
 }

@@ -78,7 +78,7 @@ variable "region1-vnet2-snet3-range" {
   description = "subnet range"
   type = string
 }
-variable "vmsize-domaincontroller" {
+variable "vmsize" {
   description = "size of vm for domain controller"
   type = string
 }

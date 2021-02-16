@@ -34,20 +34,8 @@ resource "azurerm_network_security_group" "region1-nsg" {
   resource_group_name = azurerm_resource_group.rg1.name
 
   security_rule {
-    name                       = "RDP-In"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
     name                       = "SSH-In"
-    priority                   = 101
+    priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"

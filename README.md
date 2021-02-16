@@ -31,5 +31,8 @@ These should be placed into a directory, and then Terraform initialised and appl
 ### 3. **Single Region Base Lab Environment for Azure**
 *This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements.* **See: [Single-Region-Azure-BaseLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Single-Region-Azure-BaseLab)**
 
-### 4. **Dual Region Base Lab Environment for Azure**
+### 4. **Single Region Base Lab Environment for Azure - with Ansible VM**
+*This code creates a simple Lab environment within a Single Azure Region, and also includes an Ubuntu VM with Ansible installed. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements, and also to provide Ansible.* **See: [Single-Region-Azure-BaseLab-with-Ansible](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Single-Region-Azure-BaseLab-with-Ansible)**
+
+### 5. **Dual Region Base Lab Environment for Azure**
 *This code creates a simple Lab environment within two Azure Regions. The idea here is that it allows for quick deployment of VNETs, Subnets, and two Domain Controllers to simulate smaller environments or provide a quick lab for any test requirements.* **See: [Dual-Region-Azure-BaseLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Dual-Region-Azure-BaseLab)**

@@ -13,4 +13,4 @@ sudo pip3 install -r requirements-azure.txt
 #install python-pip
 sudo apt install python-pip
 #install preview modules
-pip install -r ~/.ansible/roles/azure.azure_preview_modules/files/requirements-azure.txt
+sudo pip install -r ~/.ansible/roles/azure.azure_preview_modules/files/requirements-azure.txt

@@ -13,3 +13,5 @@ This code creates a Ubuntu Server VM with Ansible installed. Designed to get you
 4. Gets your client IP and uses this to create an NSG for secure SSH access into the VM
 5. Creates an Ubuntu Server VM
 6. Uses a custom script extension to install Ansible & dependencies for Azure on the Ubuntu VM
+
+See [https://jakewalsh.co.uk/ansible-and-azure-30-minute-quickstart/](https://jakewalsh.co.uk/ansible-and-azure-30-minute-quickstart/) for a guide to setup and usage. 

@@ -12,9 +12,9 @@ resource "azurerm_virtual_network" "region1-vnet1-hub1" {
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg1.name
   address_space       = [var.region1-vnet1-address-space]
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 resource "azurerm_subnet" "region1-vnet1-snet1" {
   name                 = var.region1-vnet1-snet1-name
@@ -44,9 +44,9 @@ resource "azurerm_network_security_group" "region1-nsg" {
     source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
     destination_address_prefix = "*"
   }
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #NSG Association to all Lab Subnets
 resource "azurerm_subnet_network_security_group_association" "vnet1-snet1" {
@@ -56,12 +56,12 @@ resource "azurerm_subnet_network_security_group_association" "vnet1-snet1" {
 #Create KeyVault ID
 resource "random_id" "kvname" {
   byte_length = 5
-  prefix = "ansible"
+  prefix      = "ansible"
 }
 #Keyvault Creation
 data "azurerm_client_config" "current" {}
 resource "azurerm_key_vault" "kv1" {
-  depends_on = [ azurerm_resource_group.rg1 ]
+  depends_on                  = [azurerm_resource_group.rg1]
   name                        = random_id.kvname.hex
   location                    = var.loc1
   resource_group_name         = var.azure-rg-1
@@ -88,13 +88,13 @@ resource "azurerm_key_vault" "kv1" {
       "get",
     ]
   }
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create KeyVault VM password - Ansible VM
 resource "random_password" "anpassword" {
-  length = 20
+  length  = 20
   special = true
 }
 #Create Key Vault Secret - Ansible VM
@@ -102,7 +102,7 @@ resource "azurerm_key_vault_secret" "anpassword" {
   name         = "anpassword"
   value        = random_password.anpassword.result
   key_vault_id = azurerm_key_vault.kv1.id
-  depends_on = [ azurerm_key_vault.kv1 ]
+  depends_on   = [azurerm_key_vault.kv1]
 }
 #Public IP - Ansible VM
 resource "azurerm_public_ip" "ansible01-pip" {
@@ -110,12 +110,12 @@ resource "azurerm_public_ip" "ansible01-pip" {
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
   allocation_method   = "Static"
-  sku = "Standard"
+  sku                 = "Standard"
 
-   tags     = {
-       Environment  = var.environment_tag
+  tags = {
+    Environment = var.environment_tag
 
-   }
+  }
 }
 #Create NIC and associate the Public IP - Ansible VM
 resource "azurerm_network_interface" "ansible01-nic" {
@@ -128,21 +128,21 @@ resource "azurerm_network_interface" "ansible01-nic" {
     name                          = "ansible01-ipconfig"
     subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
     private_ip_address_allocation = "Dynamic"
-	  public_ip_address_id = azurerm_public_ip.ansible01-pip.id
+    public_ip_address_id          = azurerm_public_ip.ansible01-pip.id
   }
-  
-   tags     = {
-       Environment  = var.environment_tag
-   }
+
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create Ansible VM
 resource "azurerm_linux_virtual_machine" "ansible01-vm" {
-  name                = "ansible01-vm"
-  resource_group_name = azurerm_resource_group.rg1.name
-  location            = var.loc1
-  size                = var.vmsize
-  admin_username      = var.adminusername
-  admin_password      = azurerm_key_vault_secret.anpassword.value
+  name                            = "ansible01-vm"
+  resource_group_name             = azurerm_resource_group.rg1.name
+  location                        = var.loc1
+  size                            = var.vmsize
+  admin_username                  = var.adminusername
+  admin_password                  = azurerm_key_vault_secret.anpassword.value
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.ansible01-nic.id,
@@ -159,9 +159,9 @@ resource "azurerm_linux_virtual_machine" "ansible01-vm" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
-    tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Run setup script on an01-vm
 resource "azurerm_virtual_machine_extension" "ansible01-basesetup" {
@@ -171,7 +171,7 @@ resource "azurerm_virtual_machine_extension" "ansible01-basesetup" {
   type                 = "CustomScript"
   type_handler_version = "2.0"
 
-    settings = <<SETTINGS
+  settings = <<SETTINGS
     {
         "commandToExecute": "bash AnsibleSetup.sh",
         "fileUris": [

@@ -9,12 +9,12 @@ resource "azurerm_resource_group" "rg1" {
 #Create KeyVault ID
 resource "random_id" "kvname" {
   byte_length = 5
-  prefix = "keyvault"
+  prefix      = "keyvault"
 }
 #Keyvault Creation
 data "azurerm_client_config" "current" {}
 resource "azurerm_key_vault" "kv1" {
-  depends_on = [ azurerm_resource_group.rg1 ]
+  depends_on                  = [azurerm_resource_group.rg1]
   name                        = random_id.kvname.hex
   location                    = var.loc1
   resource_group_name         = var.azure-rg-1
@@ -41,13 +41,13 @@ resource "azurerm_key_vault" "kv1" {
       "get",
     ]
   }
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create KeyVault VM password
 resource "random_password" "vmpassword" {
-  length = 20
+  length  = 20
   special = true
 }
 #Create Key Vault Secret
@@ -55,5 +55,5 @@ resource "azurerm_key_vault_secret" "vmpassword" {
   name         = "vmpassword"
   value        = random_password.vmpassword.result
   key_vault_id = azurerm_key_vault.kv1.id
-  depends_on = [ azurerm_key_vault.kv1 ]
+  depends_on   = [azurerm_key_vault.kv1]
 }

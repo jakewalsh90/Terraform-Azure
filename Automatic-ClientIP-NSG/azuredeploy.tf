@@ -27,7 +27,7 @@ resource "azurerm_network_security_group" "Automatic-ClientIP-NSG" {
     source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
     destination_address_prefix = "*"
   }
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }

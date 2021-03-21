@@ -172,7 +172,7 @@ resource "azurerm_key_vault" "kv1" {
 
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = "bc3ce6b8-87b4-42c9-8b68-3ad7b03aaf1f"
+    object_id = "__portaladminaccount__"
 
     key_permissions = [
       "get",

@@ -1,0 +1,50 @@
+{
+    "builders": [{
+      "type": "azure-arm",
+  
+      "client_id": "__client_id__",
+      "client_secret": "__client_secret__",
+      "subscription_id": "__subscription_id__",
+  
+      "managed_image_resource_group_name": "demolabv1-packer",
+      "managed_image_name": "DemoLabPackerImage",
+  
+      "os_type": "Windows",
+      "image_publisher": "MicrosoftWindowsDesktop",
+      "image_offer": "Windows-10",
+      "image_sku": "20h2-evd",
+  
+      "communicator": "winrm",
+      "winrm_use_ssl": true,
+      "winrm_insecure": true,
+      "winrm_timeout": "5m",
+      "winrm_username": "packer",
+  
+      "azure_tags": {
+          "environment": "demolabv1-packer"
+      },
+  
+      "build_resource_group_name": "demolabv1-packer",
+      "vm_size": "Standard_D2s_v4"
+    }],
+    "provisioners": [{
+      "type": "powershell",
+      "inline": [
+        "while ((Get-Service RdAgent).Status -ne 'Running') { Start-Sleep -s 5 }",
+        "while ((Get-Service WindowsAzureGuestAgent).Status -ne 'Running') { Start-Sleep -s 5 }",
+        "Set-ExecutionPolicy Bypass -Scope Process -Force",
+        "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12",
+        "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))",
+        "choco install notepadplusplus -y --force --force-dependencies",
+        "choco install putty -y --force --force-dependencies",
+        "choco install winscp -y --force --force-dependencies",
+        "choco install 7zip -y --force --force-dependencies",
+        "choco install firefox -y --force --force-dependencies",
+        "choco install audacity -y --force --force-dependencies",
+        "choco install foxitreader -y --force --force-dependencies",
+        "choco install fslogix -y --force --force-dependencies",
+        "& $env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /quiet /quit",
+        "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
+      ]
+    }]
+  }

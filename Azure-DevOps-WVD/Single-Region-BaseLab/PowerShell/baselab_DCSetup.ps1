@@ -8,10 +8,6 @@ choco install notepadplusplus -y
 choco install winscp -y
 choco install sysinternals -y
 choco install bginfo -y
-#Download Scripts to Set the rest of the Domain up when logged in
-New-Item -Path "c:\" -Name "BaselabSetup" -ItemType "directory" -Force
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Azure-DevOps-WVD/Single-Region-BaseLab/PowerShell/baselab_DomainSetup.ps1" -OutFile "C:\BaselabSetup\baselab_DomainSetup.ps1"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Azure-DevOps-WVD/Single-Region-BaseLab/PowerShell/baselab_LabStructure.ps1" -OutFile "C:\BaselabSetup\baselab_LabStructure.ps1"
 #Setup and Partition Data Disk
 Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel 'Data' -Confirm:$false 
 #Allow Ping

@@ -211,10 +211,21 @@ resource "random_password" "vmpassword" {
   length = 20
   special = true
 }
-#Create Key Vault Secret
+#Create KeyVault user password
+resource "random_password" "userpassword" {
+  length = 20
+  special = true
+}
+#Create Key Vault VM Secret
 resource "azurerm_key_vault_secret" "vmpassword" {
   name         = "vmpassword"
   value        = random_password.vmpassword.result
+  key_vault_id = azurerm_key_vault.kv1.id
+}
+#Create Key Vault User Secret
+resource "azurerm_key_vault_secret" "userpassword" {
+  name         = "userpassword"
+  value        = random_password.userpassword.result
   key_vault_id = azurerm_key_vault.kv1.id
 }
 #Public IP
@@ -239,7 +250,8 @@ resource "azurerm_network_interface" "region1-dc01-nic" {
   ip_configuration {
     name                          = "region1-dc01-ipconfig"
     subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address = "10.10.1.4"
 	  public_ip_address_id = azurerm_public_ip.region1-dc01-pip.id
   }
   
@@ -315,7 +327,7 @@ resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Single-Region-Azure-BaseLab/PowerShell/baselab_DCSetup.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Azure-DevOps-WVD/Single-Region-BaseLab/PowerShell/baselab_DCSetup.ps1"
         ]
     }
   SETTINGS

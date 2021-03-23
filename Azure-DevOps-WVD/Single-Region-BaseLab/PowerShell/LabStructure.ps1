@@ -1,7 +1,7 @@
 #Setup Variables
 $DCRoot = "DC=ad,DC=lab"
 $LabDCRoot = "OU=Lab,DC=ad,DC=Lab"
-$password = $password = ConvertTo-SecureString '__userpassword__' -AsPlainText -Force
+$password = ConvertTo-SecureString '__userpassword__' -AsPlainText -Force
 #Create Root Lab OU
 New-ADOrganizationalUnit -Name "Lab" -Path $DCRoot -ProtectedFromAccidentalDeletion $False -Description "Lab Environment"
 #Create Other OUs

@@ -576,3 +576,32 @@ resource "azurerm_virtual_machine_extension" "region2-dc01-basesetup" {
     }
   SETTINGS
 }
+#Create Azure NetApp Files Account and Capacity Pool - Region 1
+resource "azurerm_netapp_account" "region1-anf" {
+  name                = "region1-anf"
+  resource_group_name = azurerm_resource_group.rg1.name
+  location            = var.loc1
+}
+resource "azurerm_netapp_pool" "region1-anf-pool1" {
+  name                = "pool1"
+  account_name        = azurerm_netapp_account.region1-anf.name
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg1.name
+  service_level       = "Standard"
+  size_in_tb          = 4
+}
+
+#Create Azure NetApp Files Account and Capacity Pool - Region 2
+resource "azurerm_netapp_account" "region2-anf" {
+  name                = "region2-anf"
+  resource_group_name = azurerm_resource_group.rg3.name
+  location            = var.loc2
+}
+resource "azurerm_netapp_pool" "region2-anf-pool1" {
+  name                = "pool2"
+  account_name        = azurerm_netapp_account.region2-anf.name
+  location            = var.loc2
+  resource_group_name = azurerm_resource_group.rg3.name
+  service_level       = "Standard"
+  size_in_tb          = 4
+}

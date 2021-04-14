@@ -1,7 +1,7 @@
-# Dual Region Base Lab Environment for Azure
+# Dual Region Base Lab Environment for Azure NetApp Files Cross Region Replication
 
 ## Overview
-This code creates a simple Lab environment within two Azure Regions. The idea here is that it allows for quick deployment of VNETs, Subnets, and Domain Controllers to simulate smaller environments or provide a quick lab for any test requirements.
+This code creates a simple Lab environment within two Azure Regions. It is a copy of the Dual-Region-Azure-BaseLab](../Dual-Region-Azure-BaseLab), but includes Azure NetApp Files Accounts and Capacity Pools.
 
 *It is not intended for production use!*
 
@@ -19,7 +19,8 @@ The following resources are deployed:
 9. Creates a Data Disk for NTDS Storage on the Domain Controller VM.
 10. Creates a Windows 2019 VM to act as a Domain Controller. The Username for this VM is a Variable, and the Password is saved as a Secret in the Key Vault. (It was automatically generated in Step 6).
 11. Attaches the Data Disk created in step 9, with caching Turned off. 
-12. Runs a Setup script on the Domain Controller VM (baselab_DCSetup.ps1 within this repos PowerShell folder), as a Custom Script Extension - that carries out the following actions:
+12. Sets up Azure NetApp Files Accounts and Capacity Pools in Region 1 and Region 2. 
+13. Runs a Setup script on the Domain Controller VM (baselab_DCSetup.ps1 within this repos PowerShell folder), as a Custom Script Extension - that carries out the following actions:
 
   - Uses Chocolatey to install Google Chrome, Putty, Notepad++, WinSCP, Sysinternals, and bginfo.
   - Creates a directory - c:\BaselabSetup.
@@ -49,3 +50,7 @@ The next setup scripts are in C:\baselabSetup of the region2-dc01-vm after deplo
 2. baselab_DC2Promote.ps1 - promotes the VM to a Domain Controller.
 
 The lab is now deployed and ready to use!
+
+#### Azure NetApp Files
+
+To start using Azure NetApp files, you will need to create the Active Directory Connections, and then create any shares/replication. This lab just creates all the supporting elements. 

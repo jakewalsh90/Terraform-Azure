@@ -10,8 +10,8 @@ choco install sysinternals -y
 choco install bginfo -y
 #Download Scripts to Set the rest of the Domain up when logged in
 New-Item -Path "c:\" -Name "BaselabSetup" -ItemType "directory" -Force
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/DC2/baselab_DC2JoinDomain.ps1" -OutFile "C:\BaselabSetup\baselab_DC2JoinDomain.ps1"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Dual-Region-Azure-BaseLab/PowerShell/DC2/baselab_DC2Promote.ps1" -OutFile "C:\BaselabSetup\baselab_DC2Promote.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Azure-NetApp-Files-CRR-BaseLab/PowerShell/DC2/baselab_DC2JoinDomain.ps1" -OutFile "C:\BaselabSetup\baselab_DC2JoinDomain.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Azure-NetApp-Files-CRR-BaseLab/PowerShell/DC2/baselab_DC2Promote.ps1" -OutFile "C:\BaselabSetup\baselab_DC2Promote.ps1"
 #Setup and Partition Data Disk
 Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel 'Data' -Confirm:$false 
 #Allow Ping

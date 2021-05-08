@@ -53,4 +53,4 @@ The lab is now deployed and ready to use!
 
 #### Azure NetApp Files
 
-To start using Azure NetApp files, you will need to create the Active Directory Connections, and then create any shares/replication. This lab just creates all the supporting elements. 
+To start using Azure NetApp files, you will need to create the Active Directory Connections, and then create any shares/replication. This lab just creates all the supporting elements. For setup videos/guides, please see this post on by blog [https://jakewalsh.co.uk/uk-windows-virtual-desktop-user-group-azure-netapp-files-cross-region-replication/]

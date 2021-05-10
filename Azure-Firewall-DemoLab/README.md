@@ -1,4 +1,4 @@
-# Single Region Base Lab Environment for Azure
+# Azure Firewall Single Region Base Lab
 
 ## Overview
 This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements. ### This lab also includes a single Azure Firewall and Firewall Policy to allow quick testing of Firewall requirements/concepts. 
@@ -26,6 +26,8 @@ The following resources are deployed:
   - Downloads two further PowerShell scripts (found within this repos PowerShell folder) which will be used to setup the Domain Controller, and create a Lab OU Structure after deployment. 
   - Sets a Windows Firewall Rule to allow File/Printer sharing.
   - Installs the Windows Features required for Active Directory and DNS. 
+
+13. Azure Firewall, including Policy, the Firewall instance, and a Public IP. 
 
 ## Manual Steps to complete Lab Environment
 #### The two powershell scripts should be run to complete the setup process on the created Virtual Machine. The scripts promote the VM to a domain controller and then setup a basic Lab OU structure. 

@@ -329,23 +329,90 @@ resource "azurerm_public_ip" "region1-fw01-pip" {
     Function    = "baselabv1-azurefirewall"
   }
 }
+#Firewall Instance
+resource "azurerm_firewall" "region1-fw01" {
+  name                = "region1-fw01"
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg1.name
+  sku_tier            = "Premium"
+  depends_on          = [azurerm_firewall_policy.region1-fw-pol01]
+
+  ip_configuration {
+    name                 = "fw-ipconfig"
+    subnet_id            = azurerm_subnet.region1-vnet1-snetfw.id
+    public_ip_address_id = azurerm_public_ip.region1-fw01-pip.id
+  }
+}
+#Classic Rules
+resource "azurerm_firewall_network_rule_collection" "specific-range-rules" {
+  name                = "specific-range-firewall-rules"
+  azure_firewall_name = azurerm_firewall.region1-fw01.name
+  resource_group_name = azurerm_resource_group.rg1.name
+  priority            = 100
+  action              = "Allow"
+  rule {
+    name                  = "specific-range-firewall-rules"
+    source_addresses      = ["10.0.0.0/16"]
+    destination_addresses = [var.region1-gateway-address-space]
+    destination_ports     = ["*"]
+    protocols             = ["Any"]
+  }
+}
+resource "azurerm_firewall_network_rule_collection" "specific-destination-rules2" {
+  name                = "specific-destination-firewall-rules2"
+  azure_firewall_name = azurerm_firewall.region1-fw01.name
+  resource_group_name = azurerm_resource_group.rg1.name
+  priority            = 101
+  action              = "Allow"
+  rule {
+    name                  = "specific-range-firewall-rules"
+    source_addresses      = ["10.0.0.0/16"]
+    destination_addresses = ["10.10.100.1/32"]
+    destination_ports     = ["3389"]
+    protocols             = ["TCP"]
+  }
+}
 #Firewall Policy
 resource "azurerm_firewall_policy" "region1-fw-pol01" {
   name                = "region1-firewall-policy01"
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
 }
-#Firewall Instance
-resource "azurerm_firewall" "region1-fw01" {
-  name                = "region1-fw01"
-  location            = var.loc1
-  resource_group_name = azurerm_resource_group.rg1.name
-  sku_tier = "Premium"
-  depends_on = [azurerm_firewall_policy.region1-fw-pol01]
+# Firewall Policy Rules
+resource "azurerm_firewall_policy_rule_collection_group" "region1-policy1" {
+  name               = "region1-policy1"
+  firewall_policy_id = azurerm_firewall_policy.region1-fw-pol01.id
+  priority           = 100
 
-  ip_configuration {
-    name                 = "fw-ipconfig"
-    subnet_id            = azurerm_subnet.region1-vnet1-snetfw.id
-    public_ip_address_id = azurerm_public_ip.region1-fw01-pip.id
+  application_rule_collection {
+    name     = "blocked_websites1"
+    priority = 500
+    action   = "Deny"
+    rule {
+      name = "dodgy_website"
+      protocols {
+        type = "Http"
+        port = 80
+      }
+      protocols {
+        type = "Https"
+        port = 443
+      }
+      source_addresses  = ["*"]
+      destination_fqdns = ["jakewalsh.co.uk"]
+    }
+  }
+
+  network_rule_collection {
+    name     = "network_rules1"
+    priority = 400
+    action   = "Allow"
+    rule {
+      name                  = "network_rule_collection1_rule1"
+      protocols             = ["TCP", "UDP"]
+      source_addresses      = ["*"]
+      destination_addresses = ["192.168.1.1", "192.168.1.2"]
+      destination_ports     = ["80", "8000-8080"]
+    }
   }
 }

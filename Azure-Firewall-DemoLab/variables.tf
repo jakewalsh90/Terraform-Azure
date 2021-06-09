@@ -94,3 +94,9 @@ variable "adminusername" {
   description = "administrator username for virtual machines"
   type        = string
 }
+variable "region1-gateway-address-space" {
+  description = "remote address space for VPN"
+  type        = string
+}
+
+

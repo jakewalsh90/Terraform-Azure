@@ -1,5 +1,7 @@
 # Azure Firewall Single Region Base Lab
 
+## For a lab overview, please visit my blog: [here](https://jakewalsh.co.uk/deploying-and-configuring-azure-firewall-using-terraform/). 
+
 ## Overview
 This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements. ### This lab also includes a single Azure Firewall and Firewall Policy to allow quick testing of Firewall requirements/concepts. 
 

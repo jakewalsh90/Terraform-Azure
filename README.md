@@ -39,3 +39,9 @@ These should be placed into a directory, and then Terraform initialised and appl
 
 ### 6. **Dual Region Base Lab Environment for Azure**
 *This code creates a simple Lab environment within two Azure Regions. The idea here is that it allows for quick deployment of VNETs, Subnets, and two Domain Controllers to simulate smaller environments or provide a quick lab for any test requirements.* **See: [Dual-Region-Azure-BaseLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Dual-Region-Azure-BaseLab)**
+
+### 7. **Azure NetApp Files Cross Region Replication Base Lab**
+*This code creates a simple Lab environment within two Azure Regions. A number of Azure NetApp Files Resources are also provisioned ready for setting up a basic Active Directory Domain, and then configuring Azure NetApp Files, with Cross Region Replication. This Lab is covered in detail on my blog, and was the subject of a user group talk, for which the slides are available in my events repo:* **See: [Azure-NetApp-Files-CRR-BaseLab](https://jakewalsh.co.uk/uk-windows-virtual-desktop-user-group-azure-netapp-files-cross-region-replication/)**
+
+### 8. **Azure Firewall Demolab**
+*This code sets up an Azure Base Lab, based on the Single Region Lab above, but also includes Azure Firewall. Firewall options, policies, and deployment settings can be tested using this lab.* **See: [Azure-Firewall-Baselab](https://jakewalsh.co.uk/deploying-and-configuring-azure-firewall-using-terraform/)**

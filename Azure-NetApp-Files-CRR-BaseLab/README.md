@@ -1,5 +1,9 @@
 # Dual Region Base Lab Environment for Azure NetApp Files Cross Region Replication
 
+
+
+# Note - the below is the Dual Region Base Lab Overview. For a lab readme, please visit my blog: [click-here](https://jakewalsh.co.uk/uk-windows-virtual-desktop-user-group-azure-netapp-files-cross-region-replication/)
+
 ## Overview
 This code creates a simple Lab environment within two Azure Regions. It is a copy of the Dual-Region-Azure-BaseLab](../Dual-Region-Azure-BaseLab), but includes Azure NetApp Files Accounts and Capacity Pools.
 

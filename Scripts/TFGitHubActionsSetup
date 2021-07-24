@@ -1,4 +1,4 @@
-# This Azure CLI script is design to prepare everything you need to run Terraform in GitHub Actions. It Sets up:
+# This Azure CLI script helps prepare everything you need to run Terraform in GitHub Actions. It Sets up:
 
     # Storage Account and Container to store Terraform State remotely.
     # Creates a Service Principal and then assigns contributor at tenant root. Note: you may wish to reduce this scope for your deployment down to single Subscriptions etc!

@@ -1,0 +1,50 @@
+# This Azure CLI script is design to prepare everything you need to run Terraform in GitHub Actions. It Sets up:
+
+    # Storage Account and Container to store Terraform State remotely.
+    # Creates a Service Principal and then assigns contributor at tenant root. Note: you may wish to reduce this scope for your deployment down to single Subscriptions etc!
+    # Please change the variables to suit your requirements!
+ 
+az login
+
+########################################
+# Set the below
+########################################
+
+$location = "uksouth"
+$rgname = "rg-uks-tfdeployment"
+$strname = "tfdeploymentstorage"
+$containername = "tfstate"
+$envtag = "Environment=TerraformEnvironment" 
+$datetag = "Build-Date=20072024"
+$spname = "tfdeploy"
+# Below Subscription should be the Management Subscription
+$mansub = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+########################################
+
+# Creates Resource Group and Storage Account for TF State File Storage
+az account set -s $mansub
+az group create --location $location --name $rgname --tags $envtag $datetag
+az storage account create --location $location --resource-group $rgname --name $strname --tags $envtag $datetag --https-only --sku Standard_LRS --encryption-services blob --subscription $mansub
+$storageacckey=$(az storage account keys list --resource-group $rgname --account-name $strname --query '[0].value' -o tsv)
+az storage container create --name $containername --account-name $strname --account-key $storageacckey
+
+# Creates Service Principal for TF to use and gives root Contributor access. 
+$spid = az ad sp create-for-rbac --role Contributor -n $spname --sdk-auth | convertfrom-json
+az role assignment create --role 'Contributor' --assignee $spid.clientid --scope "/"
+
+########################################
+# Information to setup GitHub Secrets and Terraform backend configuration is output by the script below. 
+########################################
+Write-Output "
+Below are the details of the storage account that will need to be in the Terraform:
+Resource Group: $rgname
+Storage Account: $strname
+Container Name: $containername
+
+Below are the details of the Service Principal that will need to be in the GitHub Repo Secrets:
+ARM_CLIENT_ID: "$spid.clientid"
+ARM_CLIENT_SECRET: "$spid.clientsecret"
+ARM_TENANT_ID: "$spid.tenantid"
+ARM_SUBSCRIPTION_ID: $mansub
+"

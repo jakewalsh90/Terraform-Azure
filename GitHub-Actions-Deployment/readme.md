@@ -22,7 +22,7 @@ Before running the above script, be sure to run through and update the following
 
 When the script runs, you will have a Storage Account and Container setup, and also you will see an output similar to the below:
 
-![Output of Setup Script sample](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/ScriptOutputSample.png)
+![Output of Setup Script sample](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/ScriptOutputSample.png)
 
 Copy all of the values outputted by the script and save them somewhere. We will need them for subsequent tasks. 
 
@@ -43,5 +43,14 @@ Within your Terraform, you will need to configure a backend. This is so that Ter
 Once this has been configured, save the file. 
 
 ## 4. Configure the Secrets within the GitHub Repo
+
+At the end of running the CLI Script, you will also have noticed 4 outputs:
+
+    ARM_CLIENT_ID: 
+    ARM_CLIENT_SECRET: 
+    ARM_TENANT_ID: 
+    ARM_SUBSCRIPTION_ID:
+    
+These are the details we will need to store as Secrets (https://docs.github.com/en/actions/reference/encrypted-secrets) within the Repository, so that Terraform can authenticate correctly to Azure.
 
 

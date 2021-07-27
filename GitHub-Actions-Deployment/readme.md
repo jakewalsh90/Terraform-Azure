@@ -26,13 +26,13 @@ Copy all of the values outputted by the script and save them somewhere. We will 
 
 ## 3. Configure your backend within Terraform
 
-Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be our Azure Resources we created earlier (Storage Account and Container), using the script. Add the following to your Terraform:
+Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be our Azure Resources we created earlier (Storage Account and Container), using the script. The script outputted the values required below - be sure to use your Resource Group, Storage Account, and Container name correctly (based on the output of the script, as shown above):
 
     #backend
     terraform {
       backend "azurerm" {
-        resource_group_name  = "rg-uks-cdwdeploy"
-        storage_account_name = "jakestrcdwdeploy"
+        resource_group_name  = "your-resource-group"
+        storage_account_name = "yourstorageaccount123"
         container_name       = "tfstate"
         key                  = "terraform.tfstate"
       }

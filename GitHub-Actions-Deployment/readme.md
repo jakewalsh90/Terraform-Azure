@@ -28,7 +28,7 @@ Copy all of the values outputted by the script and save them somewhere. We will 
 
 ## 3. Configure your backend within Terraform
 
-Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be our Azure Resources we created earlier (Storage Account and Container), using the script. The script outputted the values required below - be sure to use your Resource Group, Storage Account, and Container name correctly (based on the output of the script, as shown above):
+Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be our Azure Resources we created earlier using the CLI Script (Storage Account and Container). The script outputted the values required below - be sure to use your Resource Group, Storage Account, and Container name correctly, based on the output of the Azure CLI script:
 
     #backend
     terraform {
@@ -40,7 +40,7 @@ Within your Terraform, you will need to configure a backend. This is so that Ter
       }
     }
     
-Once this has been configured, save the file. 
+Once this has been configured, save the file. For any of the projects in this repo, add the above to azuredeploy.tf in the project folder. 
 
 ## 4. Configure the Secrets within the GitHub Repo
 
@@ -79,4 +79,8 @@ We are now ready to run GitHub Actions!
 As previously mentioned, the actions are set to be run manually within the YAML. So we need to manually trigger the deployment. To do this, browse to the Action, and then follow the steps in the image below:
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions3.png)
+
+The actions will then be run, and your Azure Resources will be deployed:
+
+
 

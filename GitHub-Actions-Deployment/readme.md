@@ -55,7 +55,7 @@ These are the details we will need to store as Secrets (https://docs.github.com/
 
 ![Setting up Secrets](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/GitHubSecrets.png)
 
-We are now ready to start setting up some Actions!
+We are now ready to start setting up some GitHub Actions!
 
 ## Setting up the GitHub Actions
 

@@ -57,7 +57,7 @@ These are the details we will need to store as Secrets (https://docs.github.com/
 
 We are now ready to start setting up some GitHub Actions!
 
-## 5. Setting up the GitHub Actions
+## 5. Setting up GitHub Actions
 
 GitHub Actions will provide us with a location where our Terraform code will be run, and therefore our deployment will take place. The actions for this task are configured using YAML. To keep things simple and easy, two sample Actions have been created:
 

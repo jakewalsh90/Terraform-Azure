@@ -22,7 +22,7 @@ When the script runs, you will have a Storage Account and Container setup, and a
 
 Copy all of the values outputted by the script and save them somewhere. We will need them for subsequent tasks. 
 
-## 3. Configure your backend within Terraform
+## 3. Configure a Terraform Backend
 
 Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be the Azure Resources we created earlier using the Azure CLI Script (Storage Account and Container). The script outputted the values required below - be sure to use your Resource Group, Storage Account, and Container name correctly, based on the output of the Azure CLI script:
 

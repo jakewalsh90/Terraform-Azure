@@ -46,5 +46,5 @@ Below are the details of the Service Principal that will need to be in the GitHu
 ARM_CLIENT_ID: "$spid.clientid"
 ARM_CLIENT_SECRET: "$spid.clientsecret"
 ARM_TENANT_ID: "$spid.tenantid"
-ARM_SUBSCRIPTION_ID: $mansub
-"
+ARM_SUBSCRIPTION_ID: $mansub"
+

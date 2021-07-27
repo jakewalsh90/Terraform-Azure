@@ -1,9 +1,9 @@
 # Deploying Terraform using GitHub Actions
-To deploy any of the Terraform-Azure Environments within this repository using GitHub Actions, follow the guide below. 
+To deploy any of the Terraform-Azure Environments within this repository using GitHub Actions, follow the steps outlined below. 
 
 ## 1. Fork this repository
 
-Fork this repository - this will then allow you to access backend settings privately and create your own deployments based on the code within. You can then of course customise code and make changes as it will be your own copy.  
+Fork this repository - this will then allow you to access backend settings privately and create your own deployments based on the code within. You can then of course customise code, make changes, or upload your own Terraform files.  
 
 ## 2. Setup the Backend Storage and Service Principal
 
@@ -14,9 +14,7 @@ Before we can start to run any Actions, we need two supporting items in place:
 
 I have created an Azure CLI script that does all this for you! See here: https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/scripts/AzCLIPreReqSetup
 
-Before running the above script, be sure to run through and update the following items in the script to suit your needs:
-
-1. Run through the "Set the below" section of the script and update the variables. Note: storage account names must be unique so change this to something that suits your deployment! You will also need to provide a Subscription ID.
+Before running the above script, be sure to run through and update the following items in the script to suit your needs. Look through the "Set the below" section of the script and update the variables. Note: Storage Account names must be unique so change this to something that suits your deployment! You will also need to provide a Subscription ID.
 
 When the script runs, you will have a Storage Account and Container setup, and also you will see an output similar to the below:
 
@@ -26,7 +24,7 @@ Copy all of the values outputted by the script and save them somewhere. We will 
 
 ## 3. Configure your backend within Terraform
 
-Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be our Azure Resources we created earlier using the CLI Script (Storage Account and Container). The script outputted the values required below - be sure to use your Resource Group, Storage Account, and Container name correctly, based on the output of the Azure CLI script:
+Within your Terraform, you will need to configure a backend. This is so that Terraform knows where you would like the State file to be stored. This will be the Azure Resources we created earlier using the Azure CLI Script (Storage Account and Container). The script outputted the values required below - be sure to use your Resource Group, Storage Account, and Container name correctly, based on the output of the Azure CLI script:
 
     #backend
     terraform {
@@ -49,18 +47,18 @@ At the end of running the CLI Script, you will also have noticed 4 outputs:
     ARM_TENANT_ID: 
     ARM_SUBSCRIPTION_ID:
     
-These are the details we will need to store as Secrets (https://docs.github.com/en/actions/reference/encrypted-secrets) within the Repository, so that Terraform can authenticate correctly to Azure. Configure the secrets using the Settings section of the GitHub repo - name the secrets as shown in the screenshot, and paste in the GUID outputs for each one as the earlier Azure CLI script provided:
+These are the details we will need to store as Secrets (https://docs.github.com/en/actions/reference/encrypted-secrets) within the Repository, so that Terraform can authenticate correctly to Azure. Configure the secrets using the Settings section of the GitHub repo - name the secrets as shown in the screenshot, and paste in the outputs for each one as the earlier Azure CLI script provided:
 
 ![Setting up Secrets](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/GitHubSecrets.png)
 
-We are now ready to start setting up some GitHub Actions!
+We are now ready to start setting up some GitHub Actions! 😄
 
 ## 5. Setting up GitHub Actions
 
-The actions for this task are configured using YAML. To keep things simple and easy, two sample Actions have been created:
+The actions for this task are configured using YAML. To keep things simple and easy, two sample Actions have been created within this repository:
 
-1. Terraform Apply - this will setup, initialise, validate, plan and apply using Terraform, based on the chosen directory. 
-2. Terraform Destroy - this will setup, initialise, and run destroy using Terraform, based on the chosen directory.
+1. Terraform Apply - this will setup, initialise, validate, plan and apply Terraform, based on the chosen directory. 
+2. Terraform Destroy - this will setup, initialise, and run Terraform destroy, based on the chosen directory.
 
 These are both contained, and configured from within the ./github/workflows folder within this repository. Both of these are set to run only when manually triggered (using [workflow_dispatch]). If you browse to the Actions tab in the repo - you will see both actions are available:
 
@@ -70,7 +68,7 @@ All that needs to be configured before running the actions is the folder within 
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions2.png)
 
-We are now ready to run GitHub Actions!
+We are now ready to run GitHub Actions! ✅
 
 ## 6. Running GitHub Actions and deploying Terraform
 

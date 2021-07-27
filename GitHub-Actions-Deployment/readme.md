@@ -59,7 +59,7 @@ We are now ready to start setting up some GitHub Actions!
 
 ## 5. Setting up GitHub Actions
 
-GitHub Actions will provide us with a location where our Terraform code will be run, and therefore our deployment will take place. The actions for this task are configured using YAML. To keep things simple and easy, two sample Actions have been created:
+The actions for this task are configured using YAML. To keep things simple and easy, two sample Actions have been created:
 
 1. Terraform Apply - this will setup, initialise, validate, plan and apply using Terraform, based on the chosen directory. 
 2. Terraform Destroy - this will setup, initialise, and run destroy using Terraform, based on the chosen directory.

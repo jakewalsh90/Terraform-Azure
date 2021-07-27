@@ -8,6 +8,8 @@ Due to the fact that some of the Terraform Projects in this Repository are unlik
 To utilise the code you may therefore just deploy as is and see the concept being demonstrated,  *without needing to adapt the code or rework it.* You can then take any elements you require and work them into your code, to move forward from there. 
 
 ## How to Deploy
+
+### Manual Deployment
  
 For all of the Projects the following files are provided:
 
@@ -19,6 +21,10 @@ For all of the Projects the following files are provided:
 Note: some larger projects split out the Terraform elements into separate files for sanity reasons. 
 
 These should be placed into a directory, and then Terraform initialised and applied. 
+
+### GitHub Actions
+
+COMING SOON!
 
 ## Projects in this Repository
 

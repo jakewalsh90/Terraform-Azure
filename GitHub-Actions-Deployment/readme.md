@@ -82,5 +82,11 @@ As previously mentioned, the actions are set to be run manually within the YAML.
 
 The actions will then be run, and your Azure Resources will be deployed:
 
+![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions4.png)
 
+Once completed - you will see the Azure Resources deployed from the Terraform you have run:
+
+![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions5.png)
+
+## Hope this helps! :thumbsup: Any issues/questions please reach out via Twitter or open an issue :satellite:
 

@@ -14,7 +14,7 @@ Before we can start to run any Actions, we need two supporting items in place:
 1. Some backend Storage for Terraform to store the state file
 2. A Service Principal for Terraform to use to authenticate to our Azure Tenant/Subscriptions
 
-I have created an Azure CLI script that does all this for you! See here: https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/AzCLIPreReqSetup
+I have created an Azure CLI script that does all this for you! See here: https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/scripts/AzCLIPreReqSetup
 
 Before running the above script, be sure to run through and update the following items in the script to suit your needs:
 

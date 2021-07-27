@@ -51,8 +51,13 @@ At the end of running the CLI Script, you will also have noticed 4 outputs:
     ARM_TENANT_ID: 
     ARM_SUBSCRIPTION_ID:
     
-These are the details we will need to store as Secrets (https://docs.github.com/en/actions/reference/encrypted-secrets) within the Repository, so that Terraform can authenticate correctly to Azure. Configure the secrets using the Settings section of the GitHub repo:
+These are the details we will need to store as Secrets (https://docs.github.com/en/actions/reference/encrypted-secrets) within the Repository, so that Terraform can authenticate correctly to Azure. Configure the secrets using the Settings section of the GitHub repo - name the secrets as shown in the screenshot, and paste in the GUID outputs for each one as the earlier Azure CLI script provided:
 
 ![Setting up Secrets](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/GitHubSecrets.png)
+
+We are now ready to start setting up some Actions!
+
+## Setting up the GitHub Actions
+
 
 

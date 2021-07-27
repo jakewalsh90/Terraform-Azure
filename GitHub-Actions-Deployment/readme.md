@@ -72,5 +72,11 @@ All that needs to be configured before running the actions is the folder within 
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions2.png)
 
+We are now ready to run GitHub Actions!
 
+## 6. Running GitHub Actions and deploying Terraform
+
+As previously mentioned, the actions are set to be run manually within the YAML. So we need to manually trigger the deployment. To do this, browse to the Action, and then follow the steps in the image below:
+
+![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions3.png)
 

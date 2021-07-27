@@ -1,15 +1,17 @@
 # Terraform-Azure
 This repository contains Terraform sample code for Azure -  mostly smaller deployments, labs, test environments. These are environments I used to demonstrate/test. Feel free to use these as you wish! :)
 
-## About the code in this Repository
-
 Due to the fact that some of the Terraform Projects in this Repository are unlikely to be used alone, the samples provided may also contain supporting elements. So in some cases, items like Resource Groups, VNETs, Subnets and more are deployed to support whatever is being demonstrated. 
   
 To utilise the code you may therefore just deploy as is and see the concept being demonstrated,  *without needing to adapt the code or rework it.* You can then take any elements you require and work them into your code, to move forward from there. 
 
 ## How to Deploy
 
-### Manual Deployment
+### :arrow_right: GitHub Actions
+
+These projects can be deployed easily using GitHub Actions - for a full guide, please see [here.](https://github.com/jakewalsh90/Terraform-Azure/tree/main/GitHub-Actions-Deployment)
+
+### :arrow_right: Manual Deployment
  
 For all of the Projects the following files are provided:
 
@@ -18,15 +20,9 @@ For all of the Projects the following files are provided:
 - terraform.tfvars
 - provider.tf
 
-Note: some larger projects split out the Terraform elements into separate files for sanity reasons. 
+These should be placed into a directory, and then Terraform initialised and applied. (Note: some larger projects split out the Terraform elements into separate files for sanity reasons.)
 
-These should be placed into a directory, and then Terraform initialised and applied. 
-
-### GitHub Actions
-
-These projects can also be deployed easily using GitHub Actions - for a full guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/GitHub-Actions-Deployment)
-
-## Projects in this Repository
+## :heavy_check_mark: Projects in this Repository
 
 ### 1. **Automatic NSG based on the Client IP of the Machine running Terraform**
 *This creates a data item that gets the external IP of the machine that is running Terraform. The IP is then used to create an    inbound security rule inside a Network Security Group.* **See: [Automatic-ClientIP-NSG](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Automatic-ClientIP-NSG)**

@@ -11,11 +11,11 @@ az login
 ########################################
 
 $location = "uksouth"
-$rgname = "rg-uks-tfdeployment"
-$strname = "tfdeploymentstorage"
+$rgname = "rgname"
+$strname = "storageaccoutname"
 $containername = "tfstate"
 $envtag = "Environment=TerraformEnvironment" 
-$datetag = "Build-Date=20072024"
+$datetag = "Build-Date=27072024"
 $spname = "tfdeploy"
 # Below Subscription should be the Management Subscription
 $mansub = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"

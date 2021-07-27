@@ -1,8 +1,6 @@
 # Readme for Terraform deployment using GitHub Actions
 To deploy any of the Terraform-Azure Environments within this repository using GitHub Actions, follow the guide below. 
 
-### Please note this is still work in progress!
-
 ## 1. Fork this repository
 
 Fork this repository - this will then allow you to access backend settings privately and create your own deployments based on the code within. You can then of course customise code and make changes as it will be your own copy.  
@@ -88,5 +86,5 @@ Once completed - you will see the Azure Resources deployed from the Terraform yo
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions5.png)
 
-## Hope this helps! :thumbsup: Any issues/questions please reach out via Twitter or open an issue :satellite:
+### Hope this helps! :thumbsup: Any issues/questions please reach out via Twitter or open an issue :satellite:
 

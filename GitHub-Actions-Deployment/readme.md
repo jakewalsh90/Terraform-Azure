@@ -68,7 +68,7 @@ These are both contained, and configured from within the ./github/workflows fold
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions1.png)
 
-All that needs to be configured before running the actions is the folder within the Action - as this will determine which Terraform files are used. For example, if you wish to deploy the Single Region Azure BaseLab within this repo, change the folder in the image below to ./single-region-azure-baselab
+All that needs to be configured before running the actions is the folder within the Action - as this will determine which Terraform files are used. For example, if you wish to deploy the Single Region Azure BaseLab within this repo, change the folder in the image below to ./Single-Region-Azure-BaseLab 
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions2.png)
 

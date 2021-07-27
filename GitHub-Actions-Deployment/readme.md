@@ -84,5 +84,5 @@ Once completed - you will see the Azure Resources deployed from the Terraform yo
 
 ![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions5.png)
 
-### Hope this helps! :thumbsup: Any issues/questions please reach out via Twitter or open an issue :satellite:
+### Hope this helps! :thumbsup: Any issues/questions please reach out via [Twitter](https://twitter.com/jakewalsh90) or open an issue :satellite:
 

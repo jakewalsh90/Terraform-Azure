@@ -1,4 +1,4 @@
-# Readme for Terraform deployment using GitHub Actions
+# Deploying Terraform using GitHub Actions
 To deploy any of the Terraform-Azure Environments within this repository using GitHub Actions, follow the guide below. 
 
 ## 1. Fork this repository

@@ -57,7 +57,16 @@ These are the details we will need to store as Secrets (https://docs.github.com/
 
 We are now ready to start setting up some GitHub Actions!
 
-## Setting up the GitHub Actions
+## 5. Setting up the GitHub Actions
+
+GitHub Actions will provide us with a location where our Terraform code will be run, and therefore our deployment will take place. The actions for this task are configured using YAML. To keep things simple and easy, two sample Actions have been created:
+
+1. Terraform Apply
+2. Terraform Destroy 
+
+These are both contained, and configured from within the ./github/workflows folder within this repository. Both of these are set to run only when manually triggered (using [workflow_dispatch]). If you browse to the Actions tab in the repo - you will see both actions are available:
+
+![Actions](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/GitHub-Actions-Deployment/images/Actions1.png)
 
 
 

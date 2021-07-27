@@ -38,4 +38,8 @@ Within your Terraform, you will need to configure a backend. This is so that Ter
       }
     }
     
-Once this has been configured, 
+Once this has been configured, save the file. 
+
+## 4. Configure the Secrets within the GitHub Repo
+
+

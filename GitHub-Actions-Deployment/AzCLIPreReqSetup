@@ -37,7 +37,7 @@ az role assignment create --role 'Contributor' --assignee $spid.clientid --scope
 # Information to setup GitHub Secrets and Terraform backend configuration is output by the script below. 
 ########################################
 Write-Output "
-Below are the details of the storage account that will need to be in the Terraform:
+Below are the details of the storage account that will need to be in the Terraform Backend Configuration:
 Resource Group: $rgname
 Storage Account: $strname
 Container Name: $containername

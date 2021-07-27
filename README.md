@@ -24,7 +24,7 @@ These should be placed into a directory, and then Terraform initialised and appl
 
 ### GitHub Actions
 
-COMING SOON!
+These projects can also be deployed easily using GitHub Actions - for a full guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/GitHub-Actions-Deployment)
 
 ## Projects in this Repository
 

@@ -19,5 +19,5 @@ resource "azurerm_virtual_hub" "vhub1" {
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
   virtual_wan_id      = azurerm_virtual_wan.vwan1.id
-  address_prefix      = "10.10.0.0/21"
+  address_prefix      = var.vwan1-hub1-prefix1
 }

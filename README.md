@@ -47,3 +47,6 @@ These should be placed into a directory, and then Terraform initialised and appl
 
 ### 8. **Azure Firewall Demolab**
 *This code sets up an Azure Base Lab, based on the Single Region Lab above, but also includes Azure Firewall. Firewall options, policies, and deployment settings can be tested using this lab.* **See: [Azure-Firewall-Baselab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Azure-Firewall-DemoLab)**
+
+### 9. **Azure vWAN Demo Lab**
+*This is work in progress to provide a small demonstration and testing environment for Azure vWAN.**

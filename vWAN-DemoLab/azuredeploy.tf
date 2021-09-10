@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg1" {
 }
 resource "azurerm_resource_group" "rg2" {
   name     = "${var.lab-name}-vwan-rg-02"
-  location = var.loc1
+  location = var.loc2
   tags = {
     Environment = var.environment_tag
     Function    = "vWAN-DemoLab-ResourceGroups"
@@ -18,7 +18,7 @@ resource "azurerm_resource_group" "rg2" {
 # Resource Groups Local Branches
 resource "azurerm_resource_group" "rg3" {
   name     = "${var.lab-name}-localbranch1-rg-01"
-  location = var.loc1
+  location = var.loc3
   tags = {
     Environment = var.environment_tag
     Function    = "vWAN-DemoLab-ResourceGroups"
@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "rg3" {
 }
 resource "azurerm_resource_group" "rg4" {
   name     = "${var.lab-name}-localbranch2-rg-01"
-  location = var.loc1
+  location = var.loc4
   tags = {
     Environment = var.environment_tag
     Function    = "vWAN-DemoLab-ResourceGroups"

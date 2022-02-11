@@ -29,9 +29,8 @@ az storage account create --location $location --resource-group $rgname --name $
 $storageacckey=$(az storage account keys list --resource-group $rgname --account-name $strname --query '[0].value' -o tsv)
 az storage container create --name $containername --account-name $strname --account-key $storageacckey
 
-# Creates Service Principal for TF to use and gives root Contributor access. 
-$spid = az ad sp create-for-rbac --role Contributor -n $spname --sdk-auth | convertfrom-json
-az role assignment create --role 'Contributor' --assignee $spid.clientid --scope "/"
+# Creates Service Principal for TF to use and gives access at root. 
+$spid = az ad sp create-for-rbac -n $spname --role Contributor --scopes "/" | convertfrom-json
 
 ########################################
 # Information to setup GitHub Secrets and Terraform backend configuration is output by the script below. 
@@ -43,8 +42,7 @@ Storage Account: $strname
 Container Name: $containername
 
 Below are the details of the Service Principal that will need to be in the GitHub Repo Secrets:
-ARM_CLIENT_ID: "$spid.clientid"
-ARM_CLIENT_SECRET: "$spid.clientsecret"
-ARM_TENANT_ID: "$spid.tenantid"
+ARM_CLIENT_ID: "$spid.appid"
+ARM_CLIENT_SECRET: "$spid.password"
+ARM_TENANT_ID: "$spid.tenant"
 ARM_SUBSCRIPTION_ID: $mansub"
-

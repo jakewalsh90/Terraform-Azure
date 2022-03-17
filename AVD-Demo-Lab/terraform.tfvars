@@ -1,6 +1,7 @@
 environment_tag             = "jakewalsh90-AVD-Demo-Lab"
 azure-rg-1                  = "baselabv1-region1infra"
 azure-rg-2                  = "baselabv1-security"
+azure-rg-3                  = "baselabv1-avd"
 loc1                        = "uk south"
 region1-vnet1-name          = "region1-vnet1-hub1"
 region1-vnet2-name          = "region1-vnet1-spoke1"

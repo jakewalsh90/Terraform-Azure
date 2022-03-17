@@ -309,3 +309,83 @@ resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
     }
   SETTINGS
 }
+
+# AVD Elements
+# Resource Group
+resource "azurerm_resource_group" "rg3" {
+  name     = var.azure-rg-3
+  location = var.loc1
+  tags = {
+    Environment = var.environment_tag
+    Function    = "baselabv1-resourcegroups"
+  }
+}
+# Host Pools
+resource "azurerm_virtual_desktop_host_pool" "hp1" {
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg3.name
+
+  name                     = "multi-user-pool"
+  friendly_name            = "multi-user-pool"
+  validate_environment     = false
+  start_vm_on_connect      = false
+  custom_rdp_properties    = "audiocapturemode:i:1;audiomode:i:0;"
+  description              = "1 to many Host Pool"
+  type                     = "Pooled"
+  maximum_sessions_allowed = 50
+  load_balancer_type       = "DepthFirst"
+}
+resource "azurerm_virtual_desktop_host_pool" "hp2" {
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg3.name
+
+  name                     = "single-user-pool"
+  friendly_name            = "single-user-pool"
+  validate_environment     = false
+  start_vm_on_connect      = false
+  custom_rdp_properties    = "audiocapturemode:i:1;audiomode:i:0;"
+  description              = "1 to 1 Host Pool"
+  type                     = "Personal"
+  maximum_sessions_allowed = 999999
+  load_balancer_type       = "Persistent"
+  personal_desktop_assignment_type = "Automatic"
+}
+# App Groups
+resource "azurerm_virtual_desktop_application_group" "appgroup1" {
+  name                = "app-group1-multi"
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg3.name
+
+  type          = "Desktop"
+  host_pool_id  = azurerm_virtual_desktop_host_pool.hp1.id
+  friendly_name = "Multi User Desktop"
+  description   = "Multi User Desktop Session"
+}
+resource "azurerm_virtual_desktop_application_group" "appgroup2" {
+  name                = "app-group2-single"
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg3.name
+
+  type          = "Desktop"
+  host_pool_id  = azurerm_virtual_desktop_host_pool.hp2.id
+  friendly_name = "Single User Desktop"
+  description   = "Single User Desktop Session"
+}
+# Workspaces 
+resource "azurerm_virtual_desktop_workspace" "demo-avd-workspace" {
+  name                = "demolab-workspace"
+  location            = var.loc1
+  resource_group_name = azurerm_resource_group.rg3.name
+
+  friendly_name = "demo-avd-workspace"
+  description   = "Demo AVD Workspace"
+}
+# App Group to Workspace Assignment
+resource "azurerm_virtual_desktop_workspace_application_group_association" "multi-user" {
+  workspace_id         = azurerm_virtual_desktop_workspace.demo-avd-workspace.id
+  application_group_id = azurerm_virtual_desktop_application_group.appgroup1.id
+}
+resource "azurerm_virtual_desktop_workspace_application_group_association" "single-user" {
+  workspace_id         = azurerm_virtual_desktop_workspace.demo-avd-workspace.id
+  application_group_id = azurerm_virtual_desktop_application_group.appgroup2.id
+}

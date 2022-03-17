@@ -10,6 +10,10 @@ variable "azure-rg-2" {
   description = "resource group 2"
   type        = string
 }
+variable "azure-rg-3" {
+  description = "resource group 3"
+  type        = string
+}
 variable "loc1" {
   description = "The location for this Lab environment"
   type        = string

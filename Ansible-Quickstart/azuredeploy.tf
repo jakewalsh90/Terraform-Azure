@@ -77,15 +77,15 @@ resource "azurerm_key_vault" "kv1" {
     object_id = data.azurerm_client_config.current.object_id
 
     key_permissions = [
-      "get",
+      "Get",
     ]
 
     secret_permissions = [
-      "get", "backup", "delete", "list", "purge", "recover", "restore", "set",
+      "Get", "Backup", "Delete", "List", "Purge", "Recover", "Restore", "Set",
     ]
 
     storage_permissions = [
-      "get",
+      "Get",
     ]
   }
   tags = {

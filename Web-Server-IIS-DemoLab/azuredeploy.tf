@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg1" {
   location = var.loc1
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-resourcegroups"
+    Function    = "webdemo-resourcegroups"
   }
 }
 #Resource Groups
@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "rg2" {
   location = var.loc1
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-resourcegroups"
+    Function    = "webdemo-resourcegroups"
   }
 }
 #VNETs and Subnets
@@ -26,7 +26,7 @@ resource "azurerm_virtual_network" "region1-vnet1-hub1" {
   dns_servers         = ["10.10.1.4", "168.63.129.16", "8.8.8.8"]
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-network"
+    Function    = "webdemo-network"
   }
 }
 resource "azurerm_subnet" "region1-vnet1-snet1" {
@@ -56,7 +56,7 @@ resource "azurerm_virtual_network" "region1-vnet2-spoke1" {
   dns_servers         = ["10.10.1.4", "168.63.129.16", "8.8.8.8"]
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-network"
+    Function    = "webdemo-network"
   }
 }
 resource "azurerm_subnet" "region1-vnet2-snet1" {
@@ -125,7 +125,7 @@ resource "azurerm_network_security_group" "region1-nsg" {
   }
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-security"
+    Function    = "webdemo-security"
   }
 }
 #NSG Association to all Lab Subnets
@@ -186,7 +186,7 @@ resource "azurerm_key_vault" "kv1" {
   }
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-security"
+    Function    = "webdemo-security"
   }
 }
 #Create KeyVault VM password
@@ -202,26 +202,26 @@ resource "azurerm_key_vault_secret" "vmpassword" {
   depends_on   = [azurerm_key_vault.kv1]
 }
 #Create NIC for VM1
-resource "azurerm_network_interface" "region1-dc01-nic" {
-  name                = "region1-dc01-nic"
+resource "azurerm_network_interface" "region1-web01-nic" {
+  name                = "region1-web01-nic"
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg1.name
 
 
   ip_configuration {
-    name                          = "region1-dc01-ipconfig"
+    name                          = "region1-web01-ipconfig"
     subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
     private_ip_address_allocation = "Dynamic"
   }
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-activedirectory"
+    Function    = "webdemo-activedirectory"
   }
 }
 #Create data disk for VM1
-resource "azurerm_managed_disk" "region1-dc01-data" {
-  name                 = "region1-dc01-data"
+resource "azurerm_managed_disk" "region1-web01-data" {
+  name                 = "region1-web01-data"
   location             = var.loc1
   resource_group_name  = azurerm_resource_group.rg1.name
   storage_account_type = "StandardSSD_LRS"
@@ -231,12 +231,12 @@ resource "azurerm_managed_disk" "region1-dc01-data" {
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-activedirectory"
+    Function    = "webdemo-activedirectory"
   }
 }
 #Create IIS VM
-resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
-  name                = "region1-dc01-vm"
+resource "azurerm_windows_virtual_machine" "region1-web01-vm" {
+  name                = "region1-web01-vm"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
@@ -244,12 +244,12 @@ resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
   admin_username      = var.adminusername
   admin_password      = azurerm_key_vault_secret.vmpassword.value
   network_interface_ids = [
-    azurerm_network_interface.region1-dc01-nic.id,
+    azurerm_network_interface.region1-web01-nic.id,
   ]
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv1-webserver"
+    Function    = "webdemo-webserver"
   }
 
   os_disk {
@@ -265,32 +265,32 @@ resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
   }
 }
 #Attach Data Disk to VM1
-resource "azurerm_virtual_machine_data_disk_attachment" "region1-dc01-data" {
-  managed_disk_id    = azurerm_managed_disk.region1-dc01-data.id
-  depends_on         = [azurerm_windows_virtual_machine.region1-dc01-vm]
-  virtual_machine_id = azurerm_windows_virtual_machine.region1-dc01-vm.id
+resource "azurerm_virtual_machine_data_disk_attachment" "region1-web01-data" {
+  managed_disk_id    = azurerm_managed_disk.region1-web01-data.id
+  depends_on         = [azurerm_windows_virtual_machine.region1-web01-vm]
+  virtual_machine_id = azurerm_windows_virtual_machine.region1-web01-vm.id
   lun                = "10"
   caching            = "None"
 }
 #Run setup script on VM1
-resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
-  name                 = "region1-dc01-basesetup"
-  virtual_machine_id   = azurerm_windows_virtual_machine.region1-dc01-vm.id
-  depends_on           = [azurerm_virtual_machine_data_disk_attachment.region1-dc01-data]
+resource "azurerm_virtual_machine_extension" "region1-web01-basesetup" {
+  name                 = "region1-web01-basesetup"
+  virtual_machine_id   = azurerm_windows_virtual_machine.region1-web01-vm.id
+  depends_on           = [azurerm_virtual_machine_data_disk_attachment.region1-web01-data]
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./baselab_DCSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Web-Server-IIS-DemoLab/PowerShell/IISlab_VMSetup1.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Web-Server-IIS-DemoLab/PowerShell/webdemo_VMSetup1.ps1"
         ]
     }
   SETTINGS

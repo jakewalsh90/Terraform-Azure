@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 
 defaults:
   run:
-    working-directory: ./your-tf-directory
+    working-directory: ./Azure-KeyVault-with-Secret
 
 jobs:
   terraform:

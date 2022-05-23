@@ -103,7 +103,7 @@ resource "azurerm_virtual_network_peering" "peer2" {
 }
 #Lab NSG
 resource "azurerm_network_security_group" "region1-nsg" {
-  name                = "region1-nsg"
+  name                = "r1-nsg"
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg2.name
 
@@ -115,6 +115,17 @@ resource "azurerm_network_security_group" "region1-nsg" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+    security_rule {
+    name                       = "RDP-In"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
@@ -147,7 +158,7 @@ resource "azurerm_subnet_network_security_group_association" "vnet2-snet2" {
 #Create KeyVault ID
 resource "random_id" "kvname" {
   byte_length = 5
-  prefix      = "keyvault"
+  prefix      = "r1-kv-"
 }
 #Keyvault Creation
 data "azurerm_client_config" "current" {}
@@ -196,9 +207,17 @@ resource "azurerm_key_vault_secret" "vmpassword" {
   key_vault_id = azurerm_key_vault.kv1.id
   depends_on   = [azurerm_key_vault.kv1]
 }
+# Create Public IP Address for VM1
+resource "azurerm_public_ip" "region1-web01-pip" {
+  name                = "r1-web01-pip"
+  resource_group_name = azurerm_resource_group.rg1.name
+  location            = var.loc1
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
 #Create NIC for VM1
 resource "azurerm_network_interface" "region1-web01-nic" {
-  name                = "region1-web01-nic"
+  name                = "r1-web01-nic"
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg1.name
 
@@ -207,6 +226,7 @@ resource "azurerm_network_interface" "region1-web01-nic" {
     name                          = "region1-web01-ipconfig"
     subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.region1-web01-pip.id
   }
 
   tags = {
@@ -216,7 +236,7 @@ resource "azurerm_network_interface" "region1-web01-nic" {
 }
 #Create data disk for VM1
 resource "azurerm_managed_disk" "region1-web01-data" {
-  name                 = "region1-web01-data"
+  name                 = "r1-web01-data"
   location             = var.loc1
   resource_group_name  = azurerm_resource_group.rg1.name
   storage_account_type = "StandardSSD_LRS"
@@ -231,7 +251,7 @@ resource "azurerm_managed_disk" "region1-web01-data" {
 }
 #Create IIS VM
 resource "azurerm_windows_virtual_machine" "region1-web01-vm" {
-  name                = "region1-web01-vm"
+  name                = "r1-web01-vm"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
@@ -269,7 +289,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "region1-web01-data" {
 }
 #Run setup script on VM1
 resource "azurerm_virtual_machine_extension" "region1-web01-basesetup" {
-  name                 = "region1-web01-basesetup"
+  name                 = "r1-web01-basesetup"
   virtual_machine_id   = azurerm_windows_virtual_machine.region1-web01-vm.id
   depends_on           = [azurerm_virtual_machine_data_disk_attachment.region1-web01-data]
   publisher            = "Microsoft.Compute"
@@ -278,7 +298,7 @@ resource "azurerm_virtual_machine_extension" "region1-web01-basesetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup1.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 

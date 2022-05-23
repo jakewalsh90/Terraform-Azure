@@ -101,11 +101,6 @@ resource "azurerm_virtual_network_peering" "peer2" {
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
 }
-#RDP Access Rules for Lab
-#Get Client IP Address for NSG
-data "http" "clientip" {
-  url = "https://ipv4.icanhazip.com/"
-}
 #Lab NSG
 resource "azurerm_network_security_group" "region1-nsg" {
   name                = "region1-nsg"
@@ -113,14 +108,14 @@ resource "azurerm_network_security_group" "region1-nsg" {
   resource_group_name = azurerm_resource_group.rg2.name
 
   security_rule {
-    name                       = "RDP-In"
+    name                       = "Web-In"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
   tags = {

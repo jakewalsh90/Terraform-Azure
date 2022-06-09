@@ -7,7 +7,7 @@ To utilise the code you may therefore just deploy as is and see the concept bein
 
 ## How to Deploy
 
-### :point_right: Install the Right Tools First!
+### :heavy_check_mark:: Install the Right Tools First!
 
 I have setup a Chocolatey script that will provide all the tools you need to work with Terraform on Azure - see [here](https://github.com/jakewalsh90/Terraform-Azure/blob/main/Chocolatey-Setup/TerraformApps.ps1).
 

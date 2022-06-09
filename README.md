@@ -26,7 +26,7 @@ For most of the Projects the following files are provided:
 
 These should be placed into a directory, and then Terraform initialised and applied. (Note: some larger projects split out the Terraform elements into separate files for sanity reasons.) Note that for some projects the TF Files are split out into seperate files for ease of use!
 
-## :grey_question: Want to see new Projects in this Repository?
+## :question: Want to see new Projects in this Repository?
 
 Please reach out to me via my Website or Twitter - I am happy to create new projects or collaborate!
 

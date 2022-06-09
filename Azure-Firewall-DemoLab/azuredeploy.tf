@@ -336,6 +336,7 @@ resource "azurerm_firewall" "region1-fw01" {
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg1.name
   sku_tier            = "Premium"
+  sku_name            = "AZFW_VNet"
   depends_on          = [azurerm_firewall_policy.region1-fw-pol01]
 
   ip_configuration {

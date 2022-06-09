@@ -54,3 +54,6 @@ These should be placed into a directory, and then Terraform initialised and appl
 
 ### 9. **Azure vWAN Demo Lab**
 *This is work in progress to provide a small demonstration and testing environment for Azure vWAN.*
+
+### 10. **Web Server IIS Demo Lab**
+*This code sets up an Azure Base Lab, based on the Single Region Lab above, but installs IIS onto the VM it creates using a Custom Script Extension* **See: [Web-Server-IIS-DemoLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Web-Server-IIS-DemoLab)**

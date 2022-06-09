@@ -17,14 +17,14 @@ These projects can be deployed easily using GitHub Actions - for a full guide, p
 
 ### :arrow_right: Manual Deployment
  
-For all of the Projects the following files are provided:
+For most of the Projects the following files are provided:
 
 - azuredeploy.tf
 - variables.tf
 - terraform.tfvars
 - provider.tf
 
-These should be placed into a directory, and then Terraform initialised and applied. (Note: some larger projects split out the Terraform elements into separate files for sanity reasons.)
+These should be placed into a directory, and then Terraform initialised and applied. (Note: some larger projects split out the Terraform elements into separate files for sanity reasons.) Note that for some projects the TF Files are split out into seperate files for ease of use!
 
 ## :heavy_check_mark: Projects in this Repository
 

@@ -1,8 +1,9 @@
 # Azure vWAN DemoLab
 
-## Overview
-This is work in progress to provide a Terraform based demonstration of Azure vWAN! 10/06/2022
-## What this Lab Deploys
+## :heavy_check_mark: Overview
+This is work in progress to provide a Terraform based demonstration of Azure vWAN 10/06/2022
+
+## :question: What this Lab Deploys
 
 This lab deploys the following:
 1. A Resource Group in two Azure Regions (based on variables)

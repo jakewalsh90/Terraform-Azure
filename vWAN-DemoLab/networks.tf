@@ -1,32 +1,32 @@
 # Region 1 VNET 1
 resource "azurerm_virtual_network" "region1-vnet1" {
-  name                = "${var.lab-name}-${var.region1}-vnet-01"
+  name                = "${var.region1}-vnet-01"
   location            = var.region1
-  resource_group_name = azurerm_resource_group.rg1.name
+  resource_group_name = azurerm_resource_group.region1-rg1.name
   address_space       = [var.region1-vnet1-address-space]
   tags = {
     Environment = var.environment_tag
   }
 }
 resource "azurerm_subnet" "region1-vnet1-snet1" {
-  name                 = "${var.lab-name}-${var.region1}-vnet-01-snet-01"
-  resource_group_name  = azurerm_resource_group.rg1.name
+  name                 = "${var.region1}-vnet-01-snet-01"
+  resource_group_name  = azurerm_resource_group.region1-rg1.name
   virtual_network_name = azurerm_virtual_network.region1-vnet1.name
   address_prefixes     = [var.region1-vnet1-snet1-range]
 }
 # Region 2 VNET 1
 resource "azurerm_virtual_network" "region2-vnet1" {
-  name                = "${var.lab-name}-${var.region2}-vnet-01"
+  name                = "${var.region2}-vnet-01"
   location            = var.region2
-  resource_group_name = azurerm_resource_group.rg2.name
+  resource_group_name = azurerm_resource_group.region2-rg1.name
   address_space       = [var.region2-vnet1-address-space]
   tags = {
     Environment = var.environment_tag
   }
 }
 resource "azurerm_subnet" "region2-vnet1-snet1" {
-  name                 = "${var.lab-name}-${var.region2}-vnet-01-snet-01"
-  resource_group_name  = azurerm_resource_group.rg2.name
+  name                 = "${var.region2}-vnet-01-snet-01"
+  resource_group_name  = azurerm_resource_group.region2-rg1.name
   virtual_network_name = azurerm_virtual_network.region2-vnet1.name
   address_prefixes     = [var.region2-vnet1-snet1-range]
 }
@@ -35,7 +35,7 @@ resource "azurerm_subnet" "region2-vnet1-snet1" {
 resource "azurerm_network_security_group" "region1-nsg" {
   name                = "${var.region1}-nsg-01"
   location            = var.region1
-  resource_group_name = azurerm_resource_group.rg1.name
+  resource_group_name = azurerm_resource_group.region1-rg1.name
 
   security_rule {
     name                       = "RDP-In"
@@ -55,7 +55,7 @@ resource "azurerm_network_security_group" "region1-nsg" {
 resource "azurerm_network_security_group" "region2-nsg" {
   name                = "${var.region2}-nsg-01"
   location            = var.region2
-  resource_group_name = azurerm_resource_group.rg2.name
+  resource_group_name = azurerm_resource_group.region2-rg1.name
 
   security_rule {
     name                       = "RDP-In"

@@ -1,14 +1,14 @@
 # Resource Groups vWAN
-resource "azurerm_resource_group" "rg1" {
-  name     = "${var.lab-name}-vwan-rg-01"
+resource "azurerm_resource_group" "region1-rg1" {
+  name     = "${var.lab-name}-${var.region1}-vwan-rg-01"
   location = var.region1
   tags = {
     Environment = var.environment_tag
     Function    = "vWAN-DemoLab-ResourceGroups"
   }
 }
-resource "azurerm_resource_group" "rg2" {
-  name     = "${var.lab-name}-vwan-rg-02"
+resource "azurerm_resource_group" "region2-rg1" {
+  name     = "${var.lab-name}-${var.region2}-vwan-rg-01"
   location = var.region2
   tags = {
     Environment = var.environment_tag

@@ -1,7 +1,7 @@
 #Public IPs
 resource "azurerm_public_ip" "region1-vm01-pip" {
   name                = "${var.region1}-vm01-pip"
-  resource_group_name = azurerm_resource_group.rg1.name
+  resource_group_name = azurerm_resource_group.region1-rg1.name
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
@@ -12,7 +12,7 @@ resource "azurerm_public_ip" "region1-vm01-pip" {
 }
 resource "azurerm_public_ip" "region2-vm01-pip" {
   name                = "${var.region2}-vm01-pip"
-  resource_group_name = azurerm_resource_group.rg2.name
+  resource_group_name = azurerm_resource_group.region2-rg1.name
   location            = var.region2
   allocation_method   = "Static"
   sku                 = "Standard"
@@ -25,11 +25,11 @@ resource "azurerm_public_ip" "region2-vm01-pip" {
 resource "azurerm_network_interface" "region1-vm01-nic" {
   name                = "${var.region1}-vm01-nic"
   location            = var.region1
-  resource_group_name = azurerm_resource_group.rg1.name
+  resource_group_name = azurerm_resource_group.region1-rg1.name
 
 
   ip_configuration {
-  name                = "${var.region1}-vm01-ipconfig"
+    name                          = "${var.region1}-vm01-ipconfig"
     subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.region1-vm01-pip.id
@@ -42,11 +42,11 @@ resource "azurerm_network_interface" "region1-vm01-nic" {
 resource "azurerm_network_interface" "region2-vm01-nic" {
   name                = "${var.region2}-vm01-nic"
   location            = var.region2
-  resource_group_name = azurerm_resource_group.rg2.name
+  resource_group_name = azurerm_resource_group.region2-rg1.name
 
 
   ip_configuration {
-  name                = "${var.region2}-vm01-ipconfig"
+    name                          = "${var.region2}-vm01-ipconfig"
     subnet_id                     = azurerm_subnet.region2-vnet1-snet1.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.region2-vm01-pip.id
@@ -60,7 +60,7 @@ resource "azurerm_network_interface" "region2-vm01-nic" {
 resource "azurerm_windows_virtual_machine" "region1-vm01" {
   name                = "${var.region1}-vm01"
   depends_on          = [azurerm_key_vault.kv1]
-  resource_group_name = azurerm_resource_group.rg1.name
+  resource_group_name = azurerm_resource_group.region1-rg1.name
   location            = var.region1
   size                = var.vmsize
   admin_username      = var.adminusername
@@ -88,7 +88,7 @@ resource "azurerm_windows_virtual_machine" "region1-vm01" {
 resource "azurerm_windows_virtual_machine" "region2-vm01" {
   name                = "${var.region2}-vm01"
   depends_on          = [azurerm_key_vault.kv1]
-  resource_group_name = azurerm_resource_group.rg2.name
+  resource_group_name = azurerm_resource_group.region2-rg1.name
   location            = var.region2
   size                = var.vmsize
   admin_username      = var.adminusername
@@ -115,7 +115,7 @@ resource "azurerm_windows_virtual_machine" "region2-vm01" {
 }
 # Setup Scripts for Apps and Windows Firewall
 resource "azurerm_virtual_machine_extension" "region1-vm01-vmsetup" {
-  name                = "${var.region1}-vm01-vmsetup"
+  name                 = "${var.region1}-vm01-vmsetup"
   virtual_machine_id   = azurerm_windows_virtual_machine.region1-vm01.id
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
@@ -136,7 +136,7 @@ resource "azurerm_virtual_machine_extension" "region1-vm01-vmsetup" {
   SETTINGS
 }
 resource "azurerm_virtual_machine_extension" "region2-vm01-vmsetup" {
-  name                = "${var.region2}-vm01-vmsetup"
+  name                 = "${var.region2}-vm01-vmsetup"
   virtual_machine_id   = azurerm_windows_virtual_machine.region2-vm01.id
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"

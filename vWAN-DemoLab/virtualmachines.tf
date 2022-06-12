@@ -130,7 +130,7 @@ resource "azurerm_virtual_machine_extension" "region1-vm01-vmsetup" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/vWAN-DemoLab/PowerShell/VMSetup.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/vWAN-DemoLab/PowerShell/VMSetup.PS1"
         ]
     }
   SETTINGS
@@ -151,7 +151,7 @@ resource "azurerm_virtual_machine_extension" "region2-vm01-vmsetup" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/vWAN-DemoLab/PowerShell/VMSetup.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/vWAN-DemoLab/PowerShell/VMSetup.PS1"
         ]
     }
   SETTINGS

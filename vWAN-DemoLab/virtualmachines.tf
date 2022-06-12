@@ -57,7 +57,7 @@ resource "azurerm_network_interface" "region2-vm01-nic" {
   }
 }
 #Create VMs
-resource "azurerm_windows_virtual_machine" "region1-vm01-vm" {
+resource "azurerm_windows_virtual_machine" "region1-vm01" {
   name                = "${var.region1}-vm01"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg1.name
@@ -85,7 +85,7 @@ resource "azurerm_windows_virtual_machine" "region1-vm01-vm" {
     version   = "latest"
   }
 }
-resource "azurerm_windows_virtual_machine" "region2-vm01-vm" {
+resource "azurerm_windows_virtual_machine" "region2-vm01" {
   name                = "${var.region2}-vm01"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg2.name

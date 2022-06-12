@@ -12,3 +12,4 @@ This lab deploys the following:
 4. A vNet in each Azure Region which is connected to the vWAN Hub.
 5. A Subnet and NSG in each of the above vNets. 
 6. A Virtual Machine in each Azure Region (in the Regional vNets), to allow testing of Connectivity. Note: these VMs have a Public IP and RDP is enabled for easy testing access. 
+7. A Custom Script Extension that runs on both VMs to add a few testing Apps (using Chocolatey) and allows ICMP through Windows Firewall for testing. 

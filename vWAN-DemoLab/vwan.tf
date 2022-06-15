@@ -10,7 +10,6 @@ resource "azurerm_virtual_wan" "vwan1" {
   tags = {
     Environment = var.environment_tag
   }
-
 }
 # vWAN Hub 1
 resource "azurerm_virtual_hub" "region1-vhub1" {
@@ -23,7 +22,6 @@ resource "azurerm_virtual_hub" "region1-vhub1" {
   tags = {
     Environment = var.environment_tag
   }
-
 }
 # vWAN Hub 2
 resource "azurerm_virtual_hub" "region2-vhub1" {
@@ -36,7 +34,6 @@ resource "azurerm_virtual_hub" "region2-vhub1" {
   tags = {
     Environment = var.environment_tag
   }
-
 }
 # vWAN Connection 1
 resource "azurerm_virtual_hub_connection" "region1-connection1" {

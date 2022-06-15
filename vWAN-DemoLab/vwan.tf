@@ -35,13 +35,13 @@ resource "azurerm_virtual_hub" "region2-vhub1" {
     Environment = var.environment_tag
   }
 }
-# vWAN Connection 1
+# vWAN Hub Connection 1
 resource "azurerm_virtual_hub_connection" "region1-connection1" {
   name                      = "${var.region1}-conn-vnet1-to-vwan-hub"
   virtual_hub_id            = azurerm_virtual_hub.region1-vhub1.id
   remote_virtual_network_id = azurerm_virtual_network.region1-vnet1.id
 }
-# vWAN Connection 2
+# vWAN Hub Connection 2
 resource "azurerm_virtual_hub_connection" "region2-connection1" {
   name                      = "${var.region2}-conn-vnet1-to-vwan-hub"
   virtual_hub_id            = azurerm_virtual_hub.region2-vhub1.id

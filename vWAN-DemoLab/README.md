@@ -1,4 +1,4 @@
-# Azure vWAN DemoLab
+# Azure vWAN DemoLab Environment
 
 ## :heavy_check_mark: Overview
 This is a Terraform based demonstration of Azure vWAN 13/06/2022

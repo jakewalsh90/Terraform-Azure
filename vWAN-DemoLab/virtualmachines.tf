@@ -1,3 +1,4 @@
+# Virtual Machines
 #Public IPs
 resource "azurerm_public_ip" "region1-vm01-pip" {
   name                = "${var.region1}-vm01-pip"

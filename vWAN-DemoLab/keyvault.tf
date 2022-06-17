@@ -1,9 +1,9 @@
-#Create KeyVault ID
+# Create KeyVault ID
 resource "random_id" "kvname" {
   byte_length = 5
   prefix      = "keyvault"
 }
-#Keyvault Creation
+# Keyvault Creation
 data "azurerm_client_config" "current" {}
 resource "azurerm_key_vault" "kv1" {
   depends_on                  = [azurerm_resource_group.region1-rg1]
@@ -37,12 +37,12 @@ resource "azurerm_key_vault" "kv1" {
     Environment = var.environment_tag
   }
 }
-#Create KeyVault VM password
+# Create KeyVault VM password
 resource "random_password" "vmpassword" {
   length  = 20
   special = true
 }
-#Create Key Vault Secret
+# Create Key Vault Secret
 resource "azurerm_key_vault_secret" "vmpassword" {
   name         = "vmpassword"
   value        = random_password.vmpassword.result

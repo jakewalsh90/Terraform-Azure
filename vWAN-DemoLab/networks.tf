@@ -1,3 +1,4 @@
+# Networks 
 # Region 1 VNET 1
 resource "azurerm_virtual_network" "region1-vnet1" {
   name                = "${var.region1}-vnet-01"

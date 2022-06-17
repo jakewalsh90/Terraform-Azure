@@ -1,3 +1,4 @@
+# vWAN Resources
 # vWAN
 resource "azurerm_virtual_wan" "vwan1" {
   name                = "${var.lab-name}-vWAN-01"

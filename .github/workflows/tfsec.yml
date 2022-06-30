@@ -1,4 +1,4 @@
-name: Run TFSec Analysis
+name: TFSec Analysis
 on: [workflow_dispatch]
 
 jobs:

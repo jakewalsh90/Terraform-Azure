@@ -1,4 +1,4 @@
-name: Run Terrascan
+name: Terrascan
 on: [workflow_dispatch]
 
 jobs:

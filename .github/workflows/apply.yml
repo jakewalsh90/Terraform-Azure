@@ -1,4 +1,4 @@
-name: Apply TF
+name: Terraform Validate -> Plan -> Apply
 
 on: [workflow_dispatch]
 

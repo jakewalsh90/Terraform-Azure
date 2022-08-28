@@ -172,7 +172,7 @@ resource "azurerm_key_vault" "kv1" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
-     key_permissions = [
+    key_permissions = [
       "Get",
     ]
 
@@ -339,15 +339,15 @@ resource "azurerm_virtual_desktop_host_pool" "hp2" {
   location            = var.loc1
   resource_group_name = azurerm_resource_group.rg3.name
 
-  name                     = "single-user-pool"
-  friendly_name            = "single-user-pool"
-  validate_environment     = false
-  start_vm_on_connect      = false
-  custom_rdp_properties    = "audiocapturemode:i:1;audiomode:i:0;"
-  description              = "1 to 1 Host Pool"
-  type                     = "Personal"
-  maximum_sessions_allowed = 999999
-  load_balancer_type       = "Persistent"
+  name                             = "single-user-pool"
+  friendly_name                    = "single-user-pool"
+  validate_environment             = false
+  start_vm_on_connect              = false
+  custom_rdp_properties            = "audiocapturemode:i:1;audiomode:i:0;"
+  description                      = "1 to 1 Host Pool"
+  type                             = "Personal"
+  maximum_sessions_allowed         = 999999
+  load_balancer_type               = "Persistent"
   personal_desktop_assignment_type = "Automatic"
 }
 # App Groups

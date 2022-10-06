@@ -15,9 +15,9 @@ In my example, the following Resources are created:
 
 Within my demo environment, I am creating the following, based on a Single Azure Region. IP address spacing is as below:
 
-- In my first Azure Region, the assigned CIDR range is 10.x.0.0/19
+- In my first Azure Region, the assigned CIDR range is 10.x.0.0/19 (for the whole Region)
 - For each VNET I am using /21 (2046 addresses per VNET), 10.x.0.0/21
-- This means I can use /24 for each Subnet, giving simple easy to understand Subnets that provide ample room. 
+- This means I can use /24 for each Subnet, giving simple easy to understand Subnets that provide ample room for Resources. 
 
 ## Using cidrsubnet - VNETs
 

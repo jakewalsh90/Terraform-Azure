@@ -45,15 +45,15 @@ Would give us 10.x.16.0/21, and so on...
 
 ## Using cidrsubnet - Subnets
 
-Within Subnets, we just need to break down the network further. For example:
+Within Subnets, we just need to break down the network further. For example, the below will change my original variable of 10.x.0.0/19, to 10.x.0.0/24 and select net number 0, which is 10.x.0.0/24:
 
-        address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, 1)]
+        address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, 0)]
 
 However, in my example, I am also using Count, to create multiple Subnets. Like this:
 
         address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index}")]
 
-The full resource block is like this:
+Count index is added above so that the CIDR range is incremented with each Subnet created. The full resource block is like this:
 
         resource "azurerm_subnet" "region1-hub1-subnets" {
         count                = 8

@@ -56,11 +56,11 @@ However, in my example, I am also using Count, to create multiple Subnets. Like 
 Count index is added above so that the CIDR range is incremented with each Subnet created. The full resource block is like this:
 
         resource "azurerm_subnet" "region1-hub1-subnets" {
-        count                = 8
-        name                 = "snet-${var.region1}-vnet-hub-01-${count.index}"
-        resource_group_name  = azurerm_resource_group.rg1.name
-        virtual_network_name = azurerm_virtual_network.region1-hub1.name
-        address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index}")]
+            count                = 8
+            name                 = "snet-${var.region1}-vnet-hub-01-${count.index}"
+            resource_group_name  = azurerm_resource_group.rg1.name
+            virtual_network_name = azurerm_virtual_network.region1-hub1.name
+            address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index}")]
         }
 
 This will start from 10.x.0.0/24, then 10.x.1.0/24 etc. 
@@ -70,9 +70,9 @@ This works well as you can customise the number of subnets to your requirement, 
 Note - for subsequent VNETs, you will need to increment the count index to take into account the next available Subnets to be used. For example:
 
         resource "azurerm_subnet" "region1-spoke1-subnets" {
-        count                = 8
-        name                 = "snet-${var.region1}-vnet-spoke-01-${count.index}"
-        resource_group_name  = azurerm_resource_group.rg1.name
-        virtual_network_name = azurerm_virtual_network.region1-spoke1.name
-        address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index + 8}")]
+            count                = 8
+            name                 = "snet-${var.region1}-vnet-spoke-01-${count.index}"
+            resource_group_name  = azurerm_resource_group.rg1.name
+            virtual_network_name = azurerm_virtual_network.region1-spoke1.name
+            address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index + 8}")]
         }

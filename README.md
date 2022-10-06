@@ -79,5 +79,5 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 ### 10. **Web Server IIS Demo Lab**
 *This code sets up an Azure Base Lab, based on the Single Region Lab above, but installs IIS onto the VM it creates using a Custom Script Extension* **See: [Web-Server-IIS-DemoLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Web-Server-IIS-DemoLab)**
 
-### 10. **cidrsubnet Function Demo**
+### 11. **cidrsubnet Function Demo**
 *This code demonstrates the use of the cidrsubnet function, and shows how it can be used to create an environment whereby network CIDR ranges can be specified once, and then Terraform used to do the splitting of networks easily.* **See: [CIDRSubnet-Demo](https://github.com/jakewalsh90/Terraform-Azure/tree/main/CIDRSubnet-Demo)**

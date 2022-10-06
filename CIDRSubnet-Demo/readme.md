@@ -15,8 +15,8 @@ In my example, the following Resources are created:
 
 Within my demo environment, I am creating the following, based on a Single Azure Region. IP address spacing is as below:
 
-- In my first Azure Region, the assigned CIDR range is 10.x.0.0/19 (for the whole Region)
-- For each VNET I am using /21 (2046 addresses per VNET), 10.x.0.0/21
+- In my first Azure Region, the assigned CIDR range is ```10.x.0.0/19``` (for the whole Region)
+- For each VNET I am using /21 (2046 addresses per VNET), ```10.x.0.0/21```
 - This means I can use /24 for each Subnet, giving simple easy to understand Subnets that provide ample room for Resources. 
 
 ## Using cidrsubnet - VNETs
@@ -25,7 +25,7 @@ To use CIDR Subnet, we need to add the following line to our VNET:
 
         address_space       = [cidrsubnet("${var.region1cidr}", 2, 0)]
 
-This is essentially taking a variable (var.region1cidr) which is listed in my tfvars file as "10.10.0.0/19" - thanks to cidrsubnet, this is the only place the CIDR range is noted. Everything else is split automatically, and we don't need to use lots of additional variables for each range. 
+This is essentially taking a variable (var.region1cidr) which is listed in my tfvars file as ```"10.10.0.0/19"``` - thanks to cidrsubnet, this is the only place the CIDR range is noted. Everything else is split automatically, and we don't need to use lots of additional variables for each range. 
 
 cidrsubnet works by splitting the CIDR range out like this: **```cidrsubnet(prefix, newbits, netnum)```**
 

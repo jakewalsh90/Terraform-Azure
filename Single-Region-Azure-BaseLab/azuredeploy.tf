@@ -304,7 +304,7 @@ resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Single-Region-Azure-BaseLab/PowerShell/baselab_DCSetup.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/baselab_DCSetup.ps1"
         ]
     }
   SETTINGS

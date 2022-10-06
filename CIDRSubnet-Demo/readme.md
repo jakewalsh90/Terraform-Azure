@@ -33,9 +33,9 @@ So in my case, I am asking for the prefix of 10.x.0.0/19 to be updated to 10.x.0
 
 This results in the VNET being given the range of 10.x.0.0/21
 
-For additional VNETs, we can just select the next netnum, for example:
+For additional VNETs, we can just select the next netnum, for example, the below updates my original variable of 10.x.0.0/19 to 10.x.0.0/24, and then selects network 1 (which is 10.x.0.0/24) :
 
-        address_space       = [cidrsubnet("${var.region1cidr}", 2, 1)]
+        address_space       = [cidrsubnet("${var.region1cidr}", 5, 1)]
 
 Would give us 10.x.8.0/21, or
 

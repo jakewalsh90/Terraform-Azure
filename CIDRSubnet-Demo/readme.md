@@ -29,9 +29,9 @@ This is essentially taking a variable (var.region1cidr) which is listed in my tf
 
 cidrsubnet works by splitting the CIDR range out like this: **```cidrsubnet(prefix, newbits, netnum)```**
 
-So in my case, I am asking for the prefix of 10.x.0.0/19 to be updated to 10.x.0.0/21 (that's the 2 in the newbits section being added to the Subnet Mask). I am then selecting net number 0. 
+So in my case, I am asking for the prefix of ```10.x.0.0/19``` to be updated to ```10.x.0.0/21``` (that's the 2 in the newbits section being added to the Subnet Mask). I am then selecting net number 0. 
 
-This results in the VNET being given the range of 10.x.0.0/21
+This results in the VNET being given the range of ```10.x.0.0/21```
 
 For additional VNETs, we can just select the next netnum, for example:
 
@@ -41,11 +41,11 @@ Would give us 10.x.8.0/21, or
 
         address_space       = [cidrsubnet("${var.region1cidr}", 2, 2)]
 
-Would give us 10.x.16.0/21, and so on...
+Would give us ```10.x.16.0/21```, and so on...
 
 ## Using cidrsubnet - Subnets
 
-Within Subnets, we just need to break down the network further. For example, the below will change my original variable of 10.x.0.0/19, to 10.x.0.0/24 and select net number 0, which is 10.x.0.0/24:
+Within Subnets, we just need to break down the network further. For example, the below will change my original variable of ```10.x.0.0/19```, to ```10.x.0.0/24``` and select net number 0, which is ```10.x.0.0/24```:
 
         address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, 0)]
 
@@ -63,7 +63,7 @@ Count index is added above so that the CIDR range is incremented with each Subne
             address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index}")]
         }
 
-This will start from 10.x.0.0/24, then 10.x.1.0/24 etc. 
+This will start from ```10.x.0.0/24```, then ```10.x.1.0/24``` etc. 
 
 This works well as you can customise the number of subnets to your requirement, based on the CIDR range initially specified (as a single variable), and count keeps thing neat and to a single block. 
 

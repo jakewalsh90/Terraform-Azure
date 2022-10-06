@@ -27,7 +27,7 @@ To use CIDR Subnet, we need to add the following line to our VNET:
 
 This is essentially taking a variable (var.region1cidr) which is listed in my tfvars file as "10.10.0.0/19" - thanks to cidrsubnet, this is the only place the CIDR range is noted. Everything else is split automatically, and we don't need to use lots of additional variables for each range. 
 
-cidrsubnet works by splitting the CIDR range out like this: **cidrsubnet(prefix, newbits, netnum)**
+cidrsubnet works by splitting the CIDR range out like this: **```cidrsubnet(prefix, newbits, netnum)```**
 
 So in my case, I am asking for the prefix of 10.x.0.0/19 to be updated to 10.x.0.0/21 (that's the 2 in the newbits section being added to the Subnet Mask). I am then selecting net number 0. 
 

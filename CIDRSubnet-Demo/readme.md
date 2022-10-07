@@ -19,6 +19,8 @@ Within my demo environment, I am creating the following, based on a Single Azure
 - For each VNET I am using /21 (2046 addresses per VNET), ```10.x.0.0/21```
 - This means I can use /24 for each Subnet, giving simple easy to understand Subnets that provide ample room for Resources. 
 
+✅ Thanks to the cidrsubnet function, I have only 1 variable in my terraform.tfvars file, which specifies a range for the whole region!
+
 ## Using cidrsubnet - VNETs
 
 To use CIDR Subnet, we need to add the following line to our VNET:

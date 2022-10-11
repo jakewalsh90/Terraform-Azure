@@ -12,7 +12,7 @@ In my example, the following Resources are created:
  - a Network Security Group that makes use of cidrhost within two example rulesets - so this shows how you can use these dynamically within objects too. (NSGs, DNS entries, Route Tables etc.)
  - a Route Table that has two Routes in. One demonstrates cidrhost in it's pure form, the other is from the Spoke Subnet that makes use of the Count option, so you can see this in use too!
 
- ## Using cidrhost - My Environment
+ ## Using cidrhost - My Demo Environment
 
 ⚠ Note: you'll need to customise this example and calculation for your needs, this is just to demonstrate the concept!
 
@@ -46,8 +46,14 @@ This allows cidrhost (in combination with join) to increment the Private IP for 
 
 ### Network Security Group
 
+Within the Network Security Groups, we can use cidrhost easily within rules - simply by taking the relevant code item (so for example, if we wish to add a rule for a specific NIC, we'd take the cidrhost block from the NICs private IP section):
 
+        source_address_prefix      = cidrhost("${var.region1cidr}", 4)
+
+Example when Count and Count Index have been used:
+
+        source_address_prefix      = cidrhost(join(", ", "${azurerm_subnet.region1-spoke1-subnets[0].address_prefixes}"), 4)
 
 ### Route Table
 
-
+Route Tables are similar to the NSG example above, and interface addresses can be added in the same way. (No need to demo this - it's identical to the way they are used in NSGs).

@@ -5,12 +5,12 @@ This lab demonstrates the use of cidrhost Function within Terraform. [https://ww
 
 In my example, the following Resources are created:
 
- - VNETs and Subnets (for NICs later on in the lab). I've also used Count in the Spoke Subnets to show how this Function can still be used there too. 
- - DNS entries for the VNETs are also set using cidrhost so you can control these automatically too. 
+ - VNETs and Subnets (for NICs later on in the lab). I've also used Count in the Spoke Subnets to show how this Function works when using Count. Note: this is done using cidrsubnet, for which I have another Lab for in this Repo. 
+ - DNS entries for the VNETs are set using cidrhost so you can control these automatically too. 
  - a Network Interface Card in the Hub (using cidrhost)
  - a Network Interface Card in the Hub (using cidrhost and join, along with the each.key option as Count is used here)
  - a Network Security Group that makes use of cidrhost within two example rulesets - so this shows how you can use these dynamically within objects too. (NSGs, DNS entries, Route Tables etc.)
- - a Route Table that has two Routes in. One demonstrates cidrhost in it's pure form, the other is from the Spoke Subnet that makes use of the Count option, so you can see this in use too!
+ - a Route Table that has two Routes in. One demonstrates cidrhost in it's pure form, the other is from the Spoke Subnet that makes use of the Count option, so you can see this in use too.
 
  ## Using cidrhost - My Demo Environment
 

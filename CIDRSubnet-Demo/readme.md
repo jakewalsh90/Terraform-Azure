@@ -1,5 +1,5 @@
 # Overview
-This lab demonstrates the use of cidrsubnet within Terraform. [https://www.terraform.io/language/functions/cidrsubnet](https://www.terraform.io/language/functions/cidrsubnet)
+This lab demonstrates the use of cidrsubnet Function within Terraform. [https://www.terraform.io/language/functions/cidrsubnet](https://www.terraform.io/language/functions/cidrsubnet)
 
 Within this function you can split a CIDR range up easily use it within VNETs, Subnets, and more - all by referencing a single variable. 
 

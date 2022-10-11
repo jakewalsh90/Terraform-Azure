@@ -12,6 +12,7 @@ resource "azurerm_virtual_network" "region1-hub1" {
   location            = var.region1
   resource_group_name = azurerm_resource_group.rg1.name
   address_space       = [cidrsubnet("${var.region1cidr}", 2, 0)]
+  dns_servers         = [cidrhost("${var.region1cidr}", 4), cidrhost("${var.region1cidr}", 5)]
   tags = {
     Environment = var.environment_tag
   }
@@ -112,7 +113,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = cidrhost("${var.region1cidr}", 4)
     destination_address_prefix = "*"
   }
-    security_rule {
+  security_rule {
     name                       = "Testing2"
     priority                   = 101
     direction                  = "Inbound"
@@ -126,26 +127,26 @@ resource "azurerm_network_security_group" "nsg" {
 }
 # Route Table Example
 resource "azurerm_route_table" "rtb-01" {
-  name                          = "rtb-${var.region1}-demo-01"
-  location                      = var.region1
-  resource_group_name           = azurerm_resource_group.rg1.name
+  name                = "rtb-${var.region1}-demo-01"
+  location            = var.region1
+  resource_group_name = azurerm_resource_group.rg1.name
 
   route {
-    name           = "route1"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "VirtualAppliance"
+    name                   = "route1"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = cidrhost("${var.region1cidr}", 4)
   }
 }
 resource "azurerm_route_table" "rtb-02" {
-  name                          = "rtb-${var.region1}-demo-02"
-  location                      = var.region1
-  resource_group_name           = azurerm_resource_group.rg1.name
+  name                = "rtb-${var.region1}-demo-02"
+  location            = var.region1
+  resource_group_name = azurerm_resource_group.rg1.name
 
   route {
-    name           = "route1"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "VirtualAppliance"
+    name                   = "route1"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = cidrhost(join(", ", "${azurerm_subnet.region1-spoke1-subnets[0].address_prefixes}"), 4)
   }
 }

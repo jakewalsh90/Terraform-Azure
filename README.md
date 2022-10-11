@@ -81,3 +81,6 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 
 ### 11. **cidrsubnet Function Demo**
 *This code demonstrates the use of the cidrsubnet function, and shows how it can be used to create an environment whereby network CIDR ranges can be specified once, and then Terraform used to do the splitting of networks easily.* **See: [CIDRSubnet-Demo](https://github.com/jakewalsh90/Terraform-Azure/tree/main/CIDRSubnet-Demo)**
+
+### 12. **cidrhost Function Demo**
+*This code demonstrates the use of the cidrhost function, and shows how it can be used to create an environment whereby host IP addresses can be calculated from a network CIDR range. This demo includes showing usage within Virtual Network DNS Servers, Network Interfaces, NSGs, and Route Tables* **See: [CIDRHost-Demo](https://github.com/jakewalsh90/Terraform-Azure/tree/main/CIDRHost-Demo)**

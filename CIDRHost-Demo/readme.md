@@ -1,7 +1,7 @@
 # Overview
 This lab demonstrates the use of cidrhost Function within Terraform. [https://www.terraform.io/language/functions/cidrhost](https://www.terraform.io/language/functions/cidrhost)
 
-## ✅ Within this function you can calculate a host IP address from a network prefix. 
+### ✅ With this function you can calculate a host IP address from a network prefix.
 
 In my example, the following Resources are created:
 

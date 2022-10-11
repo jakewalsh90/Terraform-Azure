@@ -26,7 +26,7 @@ Within my demo environment, I am creating the following, based on a Single Azure
 
 ### Setting DNS on the VNET
 
-To set DNS on the VNET I need to provide two IP addresses, which would likely be assigned to NVAs, Load Balancers or Domain Controllers. To do this, I used the cidrhost function to calculate the IPs. This allows the IPs to be set before the NICs are even created. In the case below, my VNET is 10.x.0.0/21 (calculated using cidrsubnet from the Regional Variable of 10.x.0.0/19). 
+To set DNS on the VNET I need to provide two IP addresses, which would likely be assigned to NVAs, Load Balancers or Domain Controllers. To do this, I used the cidrhost function to calculate the IPs. This allows the IPs to be set before the NICs are even created. In the case below, my VNET is ```10.x.0.0/21``` (calculated using cidrsubnet from the Regional Variable of ```10.x.0.0/19```). 
 
         dns_servers = [cidrhost("${var.region1cidr}", 4), cidrhost("${var.region1cidr}", 5)]
 
@@ -38,7 +38,7 @@ Network Interface Cards are also set in a similar way to the DNS entries above:
 
 ### Network Interface Card - on a Subnet using Count
 
-When Count is used, we can't use the same method as above (for obvious reasons - all NICs would be assigned the same IP). To overcome this we need to add [count.index] into the mix, and use join to add the Subnet Range and the Host element together:
+When Count is used, we can't use the same method as above (for obvious reasons - all NICs would be assigned the same IP). To overcome this we need to add ```[count.index]``` into the mix, and use join to add the Subnet Range and the Host element together:
 
         private_ip_address            = cidrhost(join(", ", "${azurerm_subnet.region1-spoke1-subnets[count.index].address_prefixes}"), 4)
 

@@ -56,4 +56,10 @@ Example when Count and Count Index have been used:
 
 ### Route Table
 
-Route Tables are similar to the NSG example above, and interface addresses can be added in the same way. (No need to demo this - it's identical to the way they are used in NSGs).
+Route Tables are similar to the NSG example above, and interface addresses can be added in the same way:
+
+        next_hop_in_ip_address = cidrhost("${var.region1cidr}", 4)
+
+ Example when Count and Count Index have been used:
+
+        next_hop_in_ip_address = cidrhost(join(", ", "${azurerm_subnet.region1-spoke1-subnets[0].address_prefixes}"), 4)

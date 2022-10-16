@@ -24,7 +24,7 @@ resource "azurerm_network_security_group" "Automatic-ClientIP-NSG" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "${chomp(data.http.clientip.body)}/32"
+    source_address_prefix      = "${chomp(data.http.clientip.response_body)}/32"
     destination_address_prefix = "*"
   }
   tags = {

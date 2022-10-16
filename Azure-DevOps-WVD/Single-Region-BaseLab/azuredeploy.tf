@@ -28,9 +28,9 @@ resource "azurerm_virtual_network" "region1-vnet1-hub1" {
   resource_group_name = azurerm_resource_group.rg1.name
   address_space       = [var.region1-vnet1-address-space]
   dns_servers         = ["10.10.1.4", "168.63.129.16"]
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 resource "azurerm_subnet" "region1-vnet1-snet1" {
   name                 = var.region1-vnet1-snet1-name
@@ -57,9 +57,9 @@ resource "azurerm_virtual_network" "region1-vnet2-spoke1" {
   resource_group_name = azurerm_resource_group.rg1.name
   address_space       = [var.region1-vnet2-address-space]
   dns_servers         = ["10.10.1.4", "168.63.129.16"]
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 resource "azurerm_subnet" "region1-vnet2-snet1" {
   name                 = var.region1-vnet2-snet1-name
@@ -78,28 +78,28 @@ resource "azurerm_subnet" "region1-vnet2-snet3" {
   resource_group_name  = azurerm_resource_group.rg1.name
   virtual_network_name = azurerm_virtual_network.region1-vnet2-spoke1.name
   address_prefixes     = [var.region1-vnet2-snet3-range]
-          delegation {
-            name = "delegation"
-            service_delegation {
-                name    = "Microsoft.Netapp/volumes"
-                actions = ["Microsoft.Network/networkinterfaces/*", "Microsoft.Network/virtualNetworks/subnets/join/action"]
-        }    
+  delegation {
+    name = "delegation"
+    service_delegation {
+      name    = "Microsoft.Netapp/volumes"
+      actions = ["Microsoft.Network/networkinterfaces/*", "Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
+  }
 }
 #VNET Peering
 resource "azurerm_virtual_network_peering" "peer1" {
-  name                      = "region1-vnet1-to-region1-vnet2"
-  resource_group_name       = azurerm_resource_group.rg1.name
-  virtual_network_name      = azurerm_virtual_network.region1-vnet1-hub1.name
-  remote_virtual_network_id = azurerm_virtual_network.region1-vnet2-spoke1.id
+  name                         = "region1-vnet1-to-region1-vnet2"
+  resource_group_name          = azurerm_resource_group.rg1.name
+  virtual_network_name         = azurerm_virtual_network.region1-vnet1-hub1.name
+  remote_virtual_network_id    = azurerm_virtual_network.region1-vnet2-spoke1.id
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
 }
 resource "azurerm_virtual_network_peering" "peer2" {
-  name                      = "region1-vnet2-to-region1-vnet1"
-  resource_group_name       = azurerm_resource_group.rg1.name
-  virtual_network_name      = azurerm_virtual_network.region1-vnet2-spoke1.name
-  remote_virtual_network_id = azurerm_virtual_network.region1-vnet1-hub1.id
+  name                         = "region1-vnet2-to-region1-vnet1"
+  resource_group_name          = azurerm_resource_group.rg1.name
+  virtual_network_name         = azurerm_virtual_network.region1-vnet2-spoke1.name
+  remote_virtual_network_id    = azurerm_virtual_network.region1-vnet1-hub1.id
   allow_virtual_network_access = true
   allow_forwarded_traffic      = true
 }
@@ -120,7 +120,7 @@ resource "azurerm_network_security_group" "region1-nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-    security_rule {
+  security_rule {
     name                       = "WinRM-In"
     priority                   = 101
     direction                  = "Inbound"
@@ -131,9 +131,9 @@ resource "azurerm_network_security_group" "region1-nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #NSG Association to all Lab Subnets
 resource "azurerm_subnet_network_security_group_association" "vnet1-snet1" {
@@ -159,7 +159,7 @@ resource "azurerm_subnet_network_security_group_association" "vnet2-snet2" {
 #Keyvault Creation
 data "azurerm_client_config" "current" {}
 resource "azurerm_key_vault" "kv1" {
-  depends_on = [ azurerm_resource_group.rg2 ]
+  depends_on                  = [azurerm_resource_group.rg2]
   name                        = var.keyvault
   location                    = var.loc1
   resource_group_name         = var.azure-rg-2
@@ -186,7 +186,7 @@ resource "azurerm_key_vault" "kv1" {
       "Get",
     ]
   }
-    access_policy {
+  access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
@@ -202,18 +202,18 @@ resource "azurerm_key_vault" "kv1" {
       "get",
     ]
   }
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create KeyVault VM password
 resource "random_password" "vmpassword" {
-  length = 20
+  length  = 20
   special = true
 }
 #Create KeyVault user password
 resource "random_password" "userpassword" {
-  length = 20
+  length  = 20
   special = true
 }
 #Create Key Vault VM Secret
@@ -234,11 +234,11 @@ resource "azurerm_public_ip" "region1-dc01-pip" {
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
   allocation_method   = "Static"
-  sku = "Standard"
+  sku                 = "Standard"
 
-   tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create NIC and associate the Public IP
 resource "azurerm_network_interface" "region1-dc01-nic" {
@@ -251,13 +251,13 @@ resource "azurerm_network_interface" "region1-dc01-nic" {
     name                          = "region1-dc01-ipconfig"
     subnet_id                     = azurerm_subnet.region1-vnet1-snet1.id
     private_ip_address_allocation = "Static"
-    private_ip_address = "10.10.1.4"
-	  public_ip_address_id = azurerm_public_ip.region1-dc01-pip.id
+    private_ip_address            = "10.10.1.4"
+    public_ip_address_id          = azurerm_public_ip.region1-dc01-pip.id
   }
-  
-   tags     = {
-       Environment  = var.environment_tag
-   }
+
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create data disk for NTDS storage
 resource "azurerm_managed_disk" "region1-dc01-data" {
@@ -268,14 +268,14 @@ resource "azurerm_managed_disk" "region1-dc01-data" {
   create_option        = "Empty"
   disk_size_gb         = "5"
 
-  tags  = {
-    Environment  = var.environment_tag
+  tags = {
+    Environment = var.environment_tag
   }
 }
 #Create Domain Controller VM
 resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
   name                = "region1-dc01-vm"
-  depends_on = [ azurerm_key_vault.kv1 ]
+  depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.loc1
   size                = var.vmsize-domaincontroller
@@ -285,9 +285,9 @@ resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
     azurerm_network_interface.region1-dc01-nic.id,
   ]
 
-  tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 
   os_disk {
     caching              = "ReadWrite"
@@ -304,16 +304,16 @@ resource "azurerm_windows_virtual_machine" "region1-dc01-vm" {
 #Attach Data Disk to Virtual Machine
 resource "azurerm_virtual_machine_data_disk_attachment" "region1-dc01-data" {
   managed_disk_id    = azurerm_managed_disk.region1-dc01-data.id
-  depends_on = [ azurerm_windows_virtual_machine.region1-dc01-vm ]
+  depends_on         = [azurerm_windows_virtual_machine.region1-dc01-vm]
   virtual_machine_id = azurerm_windows_virtual_machine.region1-dc01-vm.id
   lun                = "10"
   caching            = "None"
-  }
+}
 #Run setup script on dc01-vm
 resource "azurerm_virtual_machine_extension" "region1-dc01-basesetup" {
   name                 = "region1-dc01-basesetup"
   virtual_machine_id   = azurerm_windows_virtual_machine.region1-dc01-vm.id
-  depends_on = [ azurerm_virtual_machine_data_disk_attachment.region1-dc01-data ]
+  depends_on           = [azurerm_virtual_machine_data_disk_attachment.region1-dc01-data]
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
@@ -340,9 +340,9 @@ resource "azurerm_shared_image_gallery" "demolabv1images" {
   location            = var.loc1
   description         = "Shared images for this environment."
 
-  tags     = {
-       Environment  = var.environment_tag
-   }
+  tags = {
+    Environment = var.environment_tag
+  }
 }
 #Create Azure NetApp Files Account and Capacity Pool
 resource "azurerm_netapp_account" "region1-anf" {

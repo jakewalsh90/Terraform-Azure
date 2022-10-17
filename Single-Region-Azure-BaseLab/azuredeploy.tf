@@ -76,13 +76,6 @@ resource "azurerm_subnet" "region1-vnet2-snet3" {
   resource_group_name  = azurerm_resource_group.rg1.name
   virtual_network_name = azurerm_virtual_network.region1-vnet2-spoke1.name
   address_prefixes     = [var.region1-vnet2-snet3-range]
-  delegation {
-    name = "delegation"
-    service_delegation {
-      name    = "Microsoft.Netapp/volumes"
-      actions = ["Microsoft.Network/networkinterfaces/*", "Microsoft.Network/virtualNetworks/subnets/join/action"]
-    }
-  }
 }
 #VNET Peering
 resource "azurerm_virtual_network_peering" "peer1" {

@@ -285,7 +285,7 @@ resource "azurerm_virtual_machine_extension" "region1-acse" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/webdemo_VMSetup1.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/chaosdemo_VMSetup.ps1"
         ]
     }
   SETTINGS
@@ -307,7 +307,7 @@ resource "azurerm_virtual_machine_extension" "region1-bcse" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/webdemo_VMSetup1.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/chaosdemo_VMSetup.ps1"
         ]
     }
   SETTINGS

@@ -278,7 +278,7 @@ resource "azurerm_virtual_machine_extension" "region1-acse" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup1.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./chaosdemo_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
@@ -300,7 +300,7 @@ resource "azurerm_virtual_machine_extension" "region1-bcse" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup1.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./chaosdemo_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 

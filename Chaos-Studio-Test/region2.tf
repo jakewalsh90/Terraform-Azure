@@ -110,7 +110,7 @@ resource "azurerm_network_interface" "region2-bnics" {
   resource_group_name = azurerm_resource_group.rg2.name
 
   ip_configuration {
-    name                          = "${var.region2}-nic-ab-${count.index}-ipconfig"
+    name                          = "${var.region2}-nic-b-${count.index}-ipconfig"
     subnet_id                     = azurerm_subnet.region2-hub1-subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.region2-bpips[count.index].id
@@ -212,7 +212,7 @@ resource "azurerm_virtual_machine_extension" "region2-acse" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup1.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./chaosdemo_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
@@ -234,7 +234,7 @@ resource "azurerm_virtual_machine_extension" "region2-bcse" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup1.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./chaosdemo_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 

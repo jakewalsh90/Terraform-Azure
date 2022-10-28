@@ -42,3 +42,41 @@ resource "azurerm_lb" "region2-lb" {
     public_ip_address_id = azurerm_public_ip.region2-lbpip.id
   }
 }
+# Probes
+resource "azurerm_lb_probe" "region1-probe" {
+  loadbalancer_id     = azurerm_lb.region1-lb.id
+  name                = "http-probe"
+  port                = 80
+  protocol            = "Http"
+  interval_in_seconds = 60
+  request_path        = "/"
+}
+# Backend Pool
+resource "azurerm_lb_backend_address_pool" "region1-pool" {
+  loadbalancer_id = azurerm_lb.region1-lb.id
+  name            = "BackEndAddressPool"
+}
+# NIC Association
+resource "azurerm_network_interface_backend_address_pool_association" "region1-a" {
+    count = var.servercounta
+  network_interface_id    = azurerm_network_interface.region1-anics[count.index].id
+  ip_configuration_name   = "${var.region1}-nic-a-${count.index}-ipconfig"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.region1-pool.id
+}
+resource "azurerm_network_interface_backend_address_pool_association" "region1-b" {
+    count = var.servercountb
+  network_interface_id    = azurerm_network_interface.region1-bnics[count.index].id
+  ip_configuration_name   = "${var.region1}-nic-b-${count.index}-ipconfig"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.region1-pool.id
+}
+# Rules
+resource "azurerm_lb_rule" "region1-rule" {
+  loadbalancer_id                = azurerm_lb.region1-lb.id
+  name                           = "LBRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = "${var.region1}-lb-pip"
+  probe_id                       = azurerm_lb_probe.region1-probe.id
+  backend_address_pool_ids = [azurerm_lb_backend_address_pool.region1-pool.id]
+}

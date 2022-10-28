@@ -175,7 +175,7 @@ resource "azurerm_network_interface" "region1-bnics" {
   resource_group_name = azurerm_resource_group.rg1.name
 
   ip_configuration {
-    name                          = "${var.region1}-nic-ab-${count.index}-ipconfig"
+    name                          = "${var.region1}-nic-b-${count.index}-ipconfig"
     subnet_id                     = azurerm_subnet.region1-hub1-subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.region1-bpips[count.index].id

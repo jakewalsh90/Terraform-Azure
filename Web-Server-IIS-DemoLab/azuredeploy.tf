@@ -305,7 +305,7 @@ resource "azurerm_virtual_machine_extension" "region1-web01-basesetup" {
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Web-Server-IIS-DemoLab/PowerShell/webdemo_VMSetup1.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/webdemo_VMSetup1.ps1"
         ]
     }
   SETTINGS

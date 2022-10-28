@@ -126,31 +126,6 @@ resource "azurerm_key_vault_secret" "vmpassword" {
   key_vault_id = azurerm_key_vault.kv1.id
   depends_on   = [azurerm_key_vault.kv1]
 }
-# Public IPs
-resource "azurerm_public_ip" "region1-apips" {
-  count               = var.servercounta
-  name                = "${var.region1}-pip-a-${count.index}"
-  resource_group_name = azurerm_resource_group.rg1.name
-  location            = var.region1
-  allocation_method   = "Static"
-  sku                 = "Standard"
-
-  tags = {
-    Environment = var.environment_tag
-  }
-}
-resource "azurerm_public_ip" "region1-bpips" {
-  count               = var.servercountb
-  name                = "${var.region1}-pip-b-${count.index}"
-  resource_group_name = azurerm_resource_group.rg1.name
-  location            = var.region1
-  allocation_method   = "Static"
-  sku                 = "Standard"
-
-  tags = {
-    Environment = var.environment_tag
-  }
-}
 # NICs
 resource "azurerm_network_interface" "region1-anics" {
   count               = var.servercounta
@@ -162,7 +137,6 @@ resource "azurerm_network_interface" "region1-anics" {
     name                          = "${var.region1}-nic-a-${count.index}-ipconfig"
     subnet_id                     = azurerm_subnet.region1-hub1-subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.region1-apips[count.index].id
   }
   tags = {
     Environment = var.environment_tag
@@ -178,7 +152,6 @@ resource "azurerm_network_interface" "region1-bnics" {
     name                          = "${var.region1}-nic-b-${count.index}-ipconfig"
     subnet_id                     = azurerm_subnet.region1-hub1-subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.region1-bpips[count.index].id
   }
   tags = {
     Environment = var.environment_tag

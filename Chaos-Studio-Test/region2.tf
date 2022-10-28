@@ -61,31 +61,6 @@ resource "azurerm_subnet_network_security_group_association" "region2-hub" {
   subnet_id                 = azurerm_subnet.region2-hub1-subnet.id
   network_security_group_id = azurerm_network_security_group.region2-nsg1.id
 }
-# Public IPs
-resource "azurerm_public_ip" "region2-apips" {
-  count               = var.servercounta
-  name                = "${var.region2}-pip-a-${count.index}"
-  resource_group_name = azurerm_resource_group.rg2.name
-  location            = var.region2
-  allocation_method   = "Static"
-  sku                 = "Standard"
-
-  tags = {
-    Environment = var.environment_tag
-  }
-}
-resource "azurerm_public_ip" "region2-bpips" {
-  count               = var.servercountb
-  name                = "${var.region2}-pip-b-${count.index}"
-  resource_group_name = azurerm_resource_group.rg2.name
-  location            = var.region2
-  allocation_method   = "Static"
-  sku                 = "Standard"
-
-  tags = {
-    Environment = var.environment_tag
-  }
-}
 # NICs
 resource "azurerm_network_interface" "region2-anics" {
   count               = var.servercounta
@@ -97,7 +72,6 @@ resource "azurerm_network_interface" "region2-anics" {
     name                          = "${var.region2}-nic-a-${count.index}-ipconfig"
     subnet_id                     = azurerm_subnet.region2-hub1-subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.region2-apips[count.index].id
   }
   tags = {
     Environment = var.environment_tag
@@ -113,7 +87,6 @@ resource "azurerm_network_interface" "region2-bnics" {
     name                          = "${var.region2}-nic-b-${count.index}-ipconfig"
     subnet_id                     = azurerm_subnet.region2-hub1-subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.region2-bpips[count.index].id
   }
   tags = {
     Environment = var.environment_tag

@@ -114,3 +114,4 @@ resource "azurerm_lb_rule" "region2-rule" {
   probe_id                       = azurerm_lb_probe.region2-probe.id
   backend_address_pool_ids = [azurerm_lb_backend_address_pool.region2-pool.id]
 }
+# Traffic Manager

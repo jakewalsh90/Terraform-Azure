@@ -23,35 +23,29 @@ resource "azurerm_subnet" "region2-hub1-subnet" {
   virtual_network_name = azurerm_virtual_network.region2-hub1.name
   address_prefixes     = [cidrsubnet("${var.region2cidr}", 5, 0)]
 }
+resource "azurerm_subnet" "region2-hub1-subnetlb" {
+  name                 = "snetlb-${var.region2}-vnet-hub-01"
+  resource_group_name  = azurerm_resource_group.rg2.name
+  virtual_network_name = azurerm_virtual_network.region2-hub1.name
+  address_prefixes     = [cidrsubnet("${var.region2cidr}", 5, 1)]
+}
+resource "azurerm_subnet" "region2-hub1-subnetfw" {
+  name                 = "AzureFirewallSubnet"
+  resource_group_name  = azurerm_resource_group.rg2.name
+  virtual_network_name = azurerm_virtual_network.region2-hub1.name
+  address_prefixes     = [cidrsubnet("${var.region2cidr}", 5, 2)]
+}
+resource "azurerm_subnet" "region2-hub1-subnetfwman" {
+  name                 = "AzureFirewallManagementSubnet"
+  resource_group_name  = azurerm_resource_group.rg2.name
+  virtual_network_name = azurerm_virtual_network.region2-hub1.name
+  address_prefixes     = [cidrsubnet("${var.region2cidr}", 5, 3)]
+}
 # NSGs
 resource "azurerm_network_security_group" "region2-nsg1" {
   name                = "nsg-snet-${var.region2}-vnet-hub-01"
   location            = var.region2
   resource_group_name = azurerm_resource_group.rg2.name
-
-  security_rule {
-    name                       = "RDP Inbound"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "${chomp(data.http.clientip.response_body)}/32"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "HTTP Inbound"
-    priority                   = 101
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "80"
-    source_address_prefix      = "${chomp(data.http.clientip.response_body)}/32"
-    destination_address_prefix = "*"
-  }
 
   tags = {
     Environment = var.environment_tag

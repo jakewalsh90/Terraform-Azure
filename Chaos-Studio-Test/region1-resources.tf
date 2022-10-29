@@ -72,6 +72,23 @@ resource "azurerm_subnet_network_security_group_association" "region1-hub" {
   subnet_id                 = azurerm_subnet.region1-hub1-subnet.id
   network_security_group_id = azurerm_network_security_group.region1-nsg1.id
 }
+# Route Tables
+resource "azurerm_route_table" "region1-rt1" {
+  name                = "rtb-${var.region1}-01"
+  location            = var.region1
+  resource_group_name = azurerm_resource_group.rg1.name
+
+  route {
+    name                   = "route1"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = azurerm_firewall.region1-fw1.ip_configuration[0].private_ip_address
+  }
+}
+resource "azurerm_subnet_route_table_association" "region1" {
+  subnet_id      = azurerm_subnet.region1-hub1-subnet.id
+  route_table_id = azurerm_route_table.region1-rt1.id
+}
 # Key Vault
 resource "random_id" "kvname" {
   byte_length = 5
@@ -151,7 +168,6 @@ resource "azurerm_network_interface" "region1-bnics" {
     Environment = var.environment_tag
   }
 }
-
 # Availability Sets
 resource "azurerm_availability_set" "region1-asa" {
   name                        = "${var.region1}-asa-a"
@@ -264,6 +280,9 @@ resource "azurerm_virtual_machine_extension" "region1-bcse" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
+  depends_on = [
+    azurerm_firewall_network_rule_collection.region1-outbound, azurerm_subnet_route_table_association.region1
+  ]
 
   protected_settings = <<PROTECTED_SETTINGS
     {

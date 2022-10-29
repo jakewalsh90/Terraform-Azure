@@ -34,6 +34,7 @@ resource "azurerm_firewall" "region1-fw1" {
   resource_group_name = azurerm_resource_group.rg1.name
   sku_name            = "AZFW_VNet"
   sku_tier            = "Basic"
+  threat_intel_mode   = "Off"
 
   ip_configuration {
     name                 = "ipconfig-fw-${var.region1}"
@@ -54,6 +55,7 @@ resource "azurerm_firewall" "region2-fw1" {
   resource_group_name = azurerm_resource_group.rg2.name
   sku_name            = "AZFW_VNet"
   sku_tier            = "Basic"
+  threat_intel_mode   = "Off"
 
   ip_configuration {
     name                 = "ipconfig-fw-${var.region2}"
@@ -95,5 +97,68 @@ resource "azurerm_firewall_network_rule_collection" "region2-outbound" {
     destination_addresses = ["*"]
     destination_ports     = ["*"]
     protocols             = ["Any"]
+  }
+}
+# NAT Rules
+resource "azurerm_firewall_nat_rule_collection" "region1-nat" {
+  name                = "${var.region1}-nat1"
+  azure_firewall_name = azurerm_firewall.region1-fw1.name
+  resource_group_name = azurerm_resource_group.rg1.name
+  priority            = 100
+  action              = "Dnat"
+
+  rule {
+    name = "${var.region1}-nat1"
+
+    source_addresses = [
+      "*",
+    ]
+
+    destination_ports = [
+      "80",
+    ]
+
+    destination_addresses = [
+      azurerm_public_ip.region1-fwpip.ip_address
+    ]
+
+    translated_port = 80
+
+    translated_address = azurerm_lb.region1-lb.frontend_ip_configuration[0].private_ip_address
+
+    protocols = [
+      "TCP",
+    ]
+  }
+}
+resource "azurerm_firewall_nat_rule_collection" "region2-nat" {
+  name                = "${var.region2}-nat1"
+  azure_firewall_name = azurerm_firewall.region2-fw1.name
+  resource_group_name = azurerm_resource_group.rg2.name
+  priority            = 100
+  action              = "Dnat"
+
+  rule {
+    name = "${var.region2}-nat1"
+
+    source_addresses = [
+      "*",
+    ]
+
+    destination_ports = [
+      "80",
+    ]
+
+    destination_addresses = [
+      azurerm_public_ip.region2-fwpip.ip_address
+    ]
+
+    translated_port = 80
+
+    translated_address = azurerm_lb.region2-lb.frontend_ip_configuration[0].private_ip_address
+
+    protocols = [
+      "TCP",
+    ]
   }
 }

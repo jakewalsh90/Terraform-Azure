@@ -55,6 +55,23 @@ resource "azurerm_subnet_network_security_group_association" "region2-hub" {
   subnet_id                 = azurerm_subnet.region2-hub1-subnet.id
   network_security_group_id = azurerm_network_security_group.region2-nsg1.id
 }
+# Route Tables
+resource "azurerm_route_table" "region2-rt1" {
+  name                = "rtb-${var.region2}-01"
+  location            = var.region2
+  resource_group_name = azurerm_resource_group.rg2.name
+
+  route {
+    name                   = "route1"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = azurerm_firewall.region2-fw1.ip_configuration[0].private_ip_address
+  }
+}
+resource "azurerm_subnet_route_table_association" "region2" {
+  subnet_id      = azurerm_subnet.region2-hub1-subnet.id
+  route_table_id = azurerm_route_table.region2-rt1.id
+}
 # NICs
 resource "azurerm_network_interface" "region2-anics" {
   count               = var.servercounta

@@ -75,7 +75,7 @@ resource "azurerm_subnet_route_table_association" "region2" {
 # NICs
 resource "azurerm_network_interface" "region2-anics" {
   count               = var.servercounta
-  name                = "${var.region2}-nic-a-${count.index}"
+  name                = "nic-${var.region2}-a-${count.index}"
   location            = var.region2
   resource_group_name = azurerm_resource_group.rg2.name
 
@@ -90,7 +90,7 @@ resource "azurerm_network_interface" "region2-anics" {
 }
 resource "azurerm_network_interface" "region2-bnics" {
   count               = var.servercountb
-  name                = "${var.region2}-nic-b-${count.index}"
+  name                = "nic-${var.region2}-b-${count.index}"
   location            = var.region2
   resource_group_name = azurerm_resource_group.rg2.name
 
@@ -105,7 +105,7 @@ resource "azurerm_network_interface" "region2-bnics" {
 }
 # Availability Sets
 resource "azurerm_availability_set" "region2-asa" {
-  name                        = "${var.region2}-asa-a"
+  name                        = "as-${var.region2}-a"
   location                    = var.region2
   resource_group_name         = azurerm_resource_group.rg2.name
   platform_fault_domain_count = 2
@@ -115,7 +115,7 @@ resource "azurerm_availability_set" "region2-asa" {
   }
 }
 resource "azurerm_availability_set" "region2-asb" {
-  name                        = "${var.region2}-asa-b"
+  name                        = "as-${var.region2}-b"
   location                    = var.region2
   resource_group_name         = azurerm_resource_group.rg2.name
   platform_fault_domain_count = 2
@@ -127,7 +127,7 @@ resource "azurerm_availability_set" "region2-asb" {
 # VMs
 resource "azurerm_windows_virtual_machine" "region2-avms" {
   count               = var.servercounta
-  name                = "${var.region2}-vm-a-${count.index}"
+  name                = "vm-${var.region2code}-a-${count.index}"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg2.name
   location            = var.region2
@@ -157,7 +157,7 @@ resource "azurerm_windows_virtual_machine" "region2-avms" {
 }
 resource "azurerm_windows_virtual_machine" "region2-bvms" {
   count               = var.servercountb
-  name                = "${var.region2}-vm-b-${count.index}"
+  name                = "vm-${var.region2code}-b-${count.index}"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg2.name
   location            = var.region2
@@ -193,6 +193,9 @@ resource "azurerm_virtual_machine_extension" "region2-acse" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
+  depends_on = [
+    azurerm_firewall_network_rule_collection.region2-outbound, azurerm_subnet_route_table_association.region2
+  ]
 
   protected_settings = <<PROTECTED_SETTINGS
     {
@@ -215,6 +218,9 @@ resource "azurerm_virtual_machine_extension" "region2-bcse" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
+  depends_on = [
+    azurerm_firewall_network_rule_collection.region2-outbound, azurerm_subnet_route_table_association.region2
+  ]
 
   protected_settings = <<PROTECTED_SETTINGS
     {

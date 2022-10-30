@@ -140,7 +140,7 @@ resource "azurerm_key_vault_secret" "vmpassword" {
 # NICs
 resource "azurerm_network_interface" "region1-anics" {
   count               = var.servercounta
-  name                = "${var.region1}-nic-a-${count.index}"
+  name                = "nic-${var.region1}-a-${count.index}"
   location            = var.region1
   resource_group_name = azurerm_resource_group.rg1.name
 
@@ -155,7 +155,7 @@ resource "azurerm_network_interface" "region1-anics" {
 }
 resource "azurerm_network_interface" "region1-bnics" {
   count               = var.servercountb
-  name                = "${var.region1}-nic-b-${count.index}"
+  name                = "nic-${var.region1}-b-${count.index}"
   location            = var.region1
   resource_group_name = azurerm_resource_group.rg1.name
 
@@ -170,7 +170,7 @@ resource "azurerm_network_interface" "region1-bnics" {
 }
 # Availability Sets
 resource "azurerm_availability_set" "region1-asa" {
-  name                        = "${var.region1}-asa-a"
+  name                        = "as-${var.region1}-a"
   location                    = var.region1
   resource_group_name         = azurerm_resource_group.rg1.name
   platform_fault_domain_count = 2
@@ -180,7 +180,7 @@ resource "azurerm_availability_set" "region1-asa" {
   }
 }
 resource "azurerm_availability_set" "region1-asb" {
-  name                        = "${var.region1}-asa-b"
+  name                        = "as-${var.region1}-b"
   location                    = var.region1
   resource_group_name         = azurerm_resource_group.rg1.name
   platform_fault_domain_count = 2
@@ -192,7 +192,7 @@ resource "azurerm_availability_set" "region1-asb" {
 # Virtual Machines 
 resource "azurerm_windows_virtual_machine" "region1-avms" {
   count               = var.servercounta
-  name                = "${var.region1}-vm-a-${count.index}"
+  name                = "vm-${var.region1code}-a-${count.index}"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.region1
@@ -222,7 +222,7 @@ resource "azurerm_windows_virtual_machine" "region1-avms" {
 }
 resource "azurerm_windows_virtual_machine" "region1-bvms" {
   count               = var.servercountb
-  name                = "${var.region1}-vm-b-${count.index}"
+  name                = "vm-${var.region1code}-b-${count.index}"
   depends_on          = [azurerm_key_vault.kv1]
   resource_group_name = azurerm_resource_group.rg1.name
   location            = var.region1
@@ -253,11 +253,14 @@ resource "azurerm_windows_virtual_machine" "region1-bvms" {
 # Setup Scripts on VMs
 resource "azurerm_virtual_machine_extension" "region1-acse" {
   count                = var.servercounta
-  name                 = "${var.region1}-acse-${count.index}"
+  name                 = "${var.region1code}-acse-${count.index}"
   virtual_machine_id   = azurerm_windows_virtual_machine.region1-avms[count.index].id
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
+  depends_on = [
+    azurerm_firewall_network_rule_collection.region1-outbound, azurerm_subnet_route_table_association.region1
+  ]
 
   protected_settings = <<PROTECTED_SETTINGS
     {

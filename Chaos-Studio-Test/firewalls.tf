@@ -1,10 +1,14 @@
 # Public IPs
+resource "random_id" "dns-name" {
+  byte_length = 4
+}
 resource "azurerm_public_ip" "region1-fwpip" {
   name                = "pip-fw-${var.region1}-01"
   location            = var.region1
   resource_group_name = azurerm_resource_group.rg1.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  domain_name_label   = "pip-${var.region1code}-${random_id.dns-name.hex}"
 }
 resource "azurerm_public_ip" "region1-fwmanpip" {
   name                = "pip-fwman-${var.region1}-01"
@@ -19,6 +23,7 @@ resource "azurerm_public_ip" "region2-fwpip" {
   resource_group_name = azurerm_resource_group.rg2.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  domain_name_label   = "pip-${var.region2code}-${random_id.dns-name.hex}"
 }
 resource "azurerm_public_ip" "region2-fwmanpip" {
   name                = "pip-fwman-${var.region2}-01"

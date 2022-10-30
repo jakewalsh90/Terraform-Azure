@@ -1,13 +1,11 @@
-resource random_id "tm-name" {
-  byte_length = 8  
-}
+# Traffic Manager
 resource "azurerm_traffic_manager_profile" "tm1" {
-  name                   = random_id.tm-name.hex
+  name                   = "tm-${var.labname}"
   resource_group_name    = azurerm_resource_group.rg1.name
   traffic_routing_method = "Weighted"
 
   dns_config {
-    relative_name = "${var.labname}-tm1"
+    relative_name = "${var.labname}-${random_id.dns-name.hex}"
     ttl           = 100
   }
 
@@ -16,7 +14,7 @@ resource "azurerm_traffic_manager_profile" "tm1" {
     port                         = 80
     path                         = "/"
     interval_in_seconds          = 30
-    timeout_in_seconds           = 9
+    timeout_in_seconds           = 10
     tolerated_number_of_failures = 3
   }
 

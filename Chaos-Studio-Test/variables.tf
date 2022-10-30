@@ -14,12 +14,20 @@ variable "region1cidr" {
   description = "The CIDR range for the whole of Region 1"
   type        = string
 }
+variable "region1code" {
+  description = "Server Naming Code for Region 1"
+  type        = string
+}
 variable "region2" {
   description = "The location 2 for this Lab environment"
   type        = string
 }
 variable "region2cidr" {
   description = "The CIDR range for the whole of Region 2"
+  type        = string
+}
+variable "region2code" {
+  description = "Server Naming Code for Region 2"
   type        = string
 }
 variable "servercounta" {

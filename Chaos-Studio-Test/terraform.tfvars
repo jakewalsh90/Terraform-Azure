@@ -7,4 +7,4 @@ region2         = "northeurope"
 region2cidr     = "10.20.0.0/19"
 region2code     = "neu"
 servercounta    = 1
-servercountb    = 0
+servercountb    = 1

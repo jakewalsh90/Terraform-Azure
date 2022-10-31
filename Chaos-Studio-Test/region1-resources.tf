@@ -54,10 +54,6 @@ resource "azurerm_subnet" "region1-hub1-subnetfwman" {
   virtual_network_name = azurerm_virtual_network.region1-hub1.name
   address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, 3)]
 }
-# Get Client IP Address for NSG
-data "http" "clientip" {
-  url = "https://ipv4.icanhazip.com/"
-}
 # NSGs
 resource "azurerm_network_security_group" "region1-nsg1" {
   name                = "nsg-snet-${var.region1}-vnet-hub-01"

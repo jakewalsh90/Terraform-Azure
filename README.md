@@ -84,3 +84,6 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 
 ### 12. **cidrhost Function Demo**
 *This code demonstrates the use of the cidrhost function, and shows how it can be used to create an environment whereby host IP addresses can be calculated from a network CIDR range. This demo includes showing usage within Virtual Network DNS Servers, Network Interfaces, NSGs, and Route Tables* **See: [CIDRHost-Demo](https://github.com/jakewalsh90/Terraform-Azure/tree/main/CIDRHost-Demo)**
+
+### 13. **Chaos Studio Test Environment**
+*This code sets up a demonstration environment to support a blog post around Azure Chaos Studio. It builds out a deployment of Windows Servers, running IIS, across two Regions. Azure Load Balancer, Firewall, and Traffic Manager are then used to provide Load Balancing and Failover.* **See: [Chaos-Studio-Test](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Chaos-Studio-Test).** *The blog post for this environment is also available* **[here](https://jakewalsh.co.uk/exploring-the-azure-chaos-studio-preview/).**

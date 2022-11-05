@@ -1,4 +1,4 @@
-environment_tag             = "jakewalsh90-Single-Region-Azure-BaseLab"
+environment_tag             = "jakewalsh90-baselab-v1"
 azure-rg-1                  = "baselabv1-region1infra"
 azure-rg-2                  = "baselabv1-security"
 loc1                        = "uk south"

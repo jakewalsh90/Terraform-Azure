@@ -199,14 +199,14 @@ resource "azurerm_virtual_machine_extension" "region2-acse" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./chaosdemo_VMSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./webserver_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/chaosdemo_VMSetup.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/webserver_VMSetup.ps1"
         ]
     }
   SETTINGS
@@ -224,14 +224,14 @@ resource "azurerm_virtual_machine_extension" "region2-bcse" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./chaosdemo_VMSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./webserver_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/chaosdemo_VMSetup.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/webserver_VMSetup.ps1"
         ]
     }
   SETTINGS

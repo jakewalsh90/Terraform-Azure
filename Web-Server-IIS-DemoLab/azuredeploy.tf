@@ -298,14 +298,14 @@ resource "azurerm_virtual_machine_extension" "region1-web01-basesetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./webdemo_VMSetup1.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./IIS_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/webdemo_VMSetup1.ps1"
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/IIS_VMSetup.ps1"
         ]
     }
   SETTINGS

@@ -9,4 +9,3 @@ choco install sysinternals -y
 #Allow Ping
 Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
 Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv6-In)" -enabled True
-Set-NetFirewallRule -DisplayGroup "File And Printer Sharing" -Enabled True -Profile Any

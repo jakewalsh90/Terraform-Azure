@@ -124,7 +124,7 @@ resource "azurerm_virtual_machine_extension" "region1-vm01-vmsetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./VMSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./standard_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 
@@ -145,7 +145,7 @@ resource "azurerm_virtual_machine_extension" "region2-vm01-vmsetup" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./VMSetup.ps1; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./standard_VMSetup.ps1; exit 0;\""
     }
   PROTECTED_SETTINGS
 

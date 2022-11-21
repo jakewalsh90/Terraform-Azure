@@ -14,3 +14,15 @@ variable "region1cidr" {
   type        = string
   description = "Region 1 CIDR Range"
 }
+variable "vmcount" {
+  type        = string
+  description = "Number of identity VMs to create - default is 2"
+}
+variable "vmsize" {
+  type        = string
+  description = "VM size to create"
+}
+variable "adminuser" {
+  type        = string
+  description = "admin username for the created VMs"
+}

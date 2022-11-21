@@ -1,6 +1,6 @@
 # Resource Groups
 resource "azurerm_resource_group" "rg-ide" {
-  name     = "rg-baselabv2-${var.region1code}-ide-01"
+  name     = "rg-baselabv2-${var.region1code}-identity-01"
   location = var.region1
   tags = {
     Environment = var.environment_tag
@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg-ide" {
   }
 }
 resource "azurerm_resource_group" "rg-con" {
-  name     = "rg-baselabv2-${var.region1code}-con-01"
+  name     = "rg-baselabv2-${var.region1code}-connectivity-01"
   location = var.region1
   tags = {
     Environment = var.environment_tag
@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "rg-con" {
   }
 }
 resource "azurerm_resource_group" "rg-sec" {
-  name     = "rg-baselabv2-${var.region1code}-sec-01"
+  name     = "rg-baselabv2-${var.region1code}-security-01"
   location = var.region1
   tags = {
     Environment = var.environment_tag
@@ -93,16 +93,6 @@ resource "azurerm_virtual_network" "region1-spoke1" {
     Function    = "baselabv2-connectivity"
   }
 }
-resource "azurerm_virtual_network" "region1-spoke2" {
-  name                = "vnet-${var.region1code}-spoke-02"
-  location            = var.region1
-  resource_group_name = azurerm_resource_group.rg-con.name
-  address_space       = [cidrsubnet("${var.region1cidr}", 2, 2)]
-  tags = {
-    Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
-  }
-}
 # Subnets
 resource "azurerm_subnet" "region1-hub1-GatewaySubnet" {
   name                 = "GatewaySubnet"
@@ -142,12 +132,20 @@ resource "azurerm_subnet" "region1-spoke1-subnets" {
   virtual_network_name = azurerm_virtual_network.region1-spoke1.name
   address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index + 8}")]
 }
-resource "azurerm_subnet" "region1-spoke2-subnets" {
-  count                = 8
-  name                 = "snet-${count.index}-${var.region1code}-vnet-spoke-02"
-  resource_group_name  = azurerm_resource_group.rg-con.name
-  virtual_network_name = azurerm_virtual_network.region1-spoke2.name
-  address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index + 16}")]
+# VNET Peering
+resource "azurerm_virtual_network_peering" "hub-to-spoke" {
+  name                      = "hub-to-spoke-${var.region1code}"
+  resource_group_name       = azurerm_resource_group.rg-con.name
+  virtual_network_name      = azurerm_virtual_network.region1-hub1.name
+  remote_virtual_network_id = azurerm_virtual_network.region1-spoke1.id
+  allow_gateway_transit     = true
+}
+resource "azurerm_virtual_network_peering" "spoke-to-hub" {
+  name                      = "spoke-to-hub-${var.region1code}"
+  resource_group_name       = azurerm_resource_group.rg-con.name
+  virtual_network_name      = azurerm_virtual_network.region1-spoke1.name
+  remote_virtual_network_id = azurerm_virtual_network.region1-hub1.id
+  use_remote_gateways       = true
 }
 # Get Client IP Address for NSG
 data "http" "clientip" {
@@ -196,27 +194,6 @@ resource "azurerm_network_security_group" "nsg-spoke01" {
     Function    = "baselabv2-connectivity"
   }
 }
-resource "azurerm_network_security_group" "nsg-spoke02" {
-  name                = "nsg-${var.region1code}-spoke-02"
-  location            = var.region1
-  resource_group_name = azurerm_resource_group.rg-con.name
-
-  security_rule {
-    name                       = "RDP-In"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "${chomp(data.http.clientip.response_body)}/32"
-    destination_address_prefix = "*"
-  }
-  tags = {
-    Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
-  }
-}
 # NSG Association
 resource "azurerm_subnet_network_security_group_association" "nsg-hub-subnets" {
   count                     = length(azurerm_subnet.region1-hub1-subnets)
@@ -228,17 +205,55 @@ resource "azurerm_subnet_network_security_group_association" "nsg-spoke1-subnets
   subnet_id                 = azurerm_subnet.region1-spoke1-subnets[count.index].id
   network_security_group_id = azurerm_network_security_group.nsg-spoke01.id
 }
-resource "azurerm_subnet_network_security_group_association" "nsg-spoke2-subnets" {
-  count                     = length(azurerm_subnet.region1-spoke2-subnets)
-  subnet_id                 = azurerm_subnet.region1-spoke2-subnets[count.index].id
-  network_security_group_id = azurerm_network_security_group.nsg-spoke02.id
-}
 # Public IPs
+resource "azurerm_public_ip" "pips" {
+  count               = var.vmcount
+  name                = "pip-${var.region1code}-${count.index}"
+  resource_group_name = azurerm_resource_group.rg-ide.name
+  location            = var.region1
+  allocation_method   = "Static"
+  sku                 = "Standard"
 
+  tags = {
+    Environment = var.environment_tag
+    Function    = "baselabv2-identity"
+  }
+}
 # NICs
+resource "azurerm_network_interface" "nics" {
+  count               = var.vmcount
+  name                = "pip-${var.region1code}-${count.index}"
+  resource_group_name = azurerm_resource_group.rg-ide.name
+  location            = var.region1
 
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.region1-spoke1-subnets[0].id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = cidrhost(join(", ", "${azurerm_subnet.region1-spoke1-subnets[0].address_prefixes}"), "${count.index + 4}")
+  }
+
+  tags = {
+    Environment = var.environment_tag
+    Function    = "baselabv2-identity"
+  }
+}
 # Disks
+resource "azurerm_managed_disk" "data-disks" {
+  count                = var.vmcount
+  name                 = "disk-${var.region1code}-vm-${count.index}"
+  location             = var.region1
+  resource_group_name  = azurerm_resource_group.rg-ide.name
+  storage_account_type = "StandardSSD_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = "20"
+  max_shares           = "2"
 
+  tags = {
+    Environment = var.environment_tag
+    Function    = "baselabv2-identity"
+  }
+}
 # Availability Set
 resource "azurerm_availability_set" "as1" {
   name                        = "as-${var.region1code}-ide"
@@ -248,7 +263,31 @@ resource "azurerm_availability_set" "as1" {
 
   tags = {
     Environment = var.environment_tag
-        Function    = "baselabv2-identity"
+    Function    = "baselabv2-identity"
   }
 }
 # VMs
+resource "azurerm_windows_virtual_machine" "vms" {
+  count               = var.vmcount
+  name                = "vm-${var.region1code}-${count.index}"
+  resource_group_name = azurerm_resource_group.rg-ide.name
+  location            = var.region1
+  size                = var.vmsize
+  admin_username      = var.adminuser
+  admin_password      = azurerm_key_vault_secret.vmpassword
+  network_interface_ids = [
+    azurerm_network_interface.nics[count.index].id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "StandardSSD_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2019-Datacenter"
+    version   = "latest"
+  }
+}

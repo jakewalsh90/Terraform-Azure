@@ -8,7 +8,7 @@ A list of examples is below:
 
 <hr>
 
-### 1. Using Count and subsequently, Length to create additional Resources based on those created using Count.
+#### 1. Using Count and Length together
 
 This example uses Count to create a number of Subnets, and then uses Length within an NSG Resource block to apply that NSG to all created Subnets:
 

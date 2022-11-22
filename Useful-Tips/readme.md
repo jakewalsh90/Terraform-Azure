@@ -10,7 +10,7 @@ A list of examples is below:
 
 #### 1. Using Count and Length together
 
-This example uses Count to create a number of Subnets, and then uses Length within an NSG Resource block to apply that NSG to all created Subnets:
+This example uses Count to create a number of Subnets, and then uses Length within an NSG Association Resource block to apply that NSG to all created Subnets:
 
 ![Using Count with Length](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Useful-Tips/images/CountLength.png)
 

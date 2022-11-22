@@ -6,6 +6,8 @@ A list of examples is below:
 
 1. [Using Count and Length to create multiple Resources - and then further actions based on Resources created using Count. ](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Useful-Tips#1-using-count-and-subsequently-length-to-create-additional-resources-based-on-those-created-using-count)
 
+<hr>
+
 ### 1. Using Count and subsequently, Length to create additional Resources based on those created using Count.
 
 This example uses Count to create a number of Subnets, and then uses Length within an NSG Resource block to apply that NSG to all created Subnets:

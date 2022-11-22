@@ -4,7 +4,7 @@ Within this file I have included smaller arguments, snippets, and useful tips I'
 
 A list of examples is below:
 
-1. Using Count and Length to create multiple Resources - and then further actions based on Resources created using Count. 
+1. [Using Count and Length to create multiple Resources - and then further actions based on Resources created using Count. ](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Useful-Tips#1-using-count-and-subsequently-length-to-create-additional-resources-based-on-those-created-using-count)
 
 ### 1. Using Count and subsequently, Length to create additional Resources based on those created using Count.
 
@@ -12,3 +12,4 @@ A list of examples is below:
 
     ![Using Count with Length](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Useful-Tips/images/CountLength.png)
 
+    Once you have created the primary resource (using Count), you can then use length(original_resource_name) to create other resources/associations/actions that will be carried out based on the value used within Count. This saves you from using a Count number or variable in multiple locations, so results in cleaner code. 

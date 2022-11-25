@@ -68,9 +68,11 @@ resource "random_password" "vmpassword" {
 }
 # Create Key Vault Secret
 resource "azurerm_key_vault_secret" "vmpassword" {
-  name         = "vmpassword"
-  value        = random_password.vmpassword.result
-  key_vault_id = azurerm_key_vault.kv1.id
+  name            = "vmpassword"
+  value           = random_password.vmpassword.result
+  key_vault_id    = azurerm_key_vault.kv1.id
+  expiration_date = timeadd(timestamp(), "8760h")
+  content_type    = "Password"
 }
 # Virtual Networks
 resource "azurerm_virtual_network" "region1-hub1" {
@@ -138,14 +140,12 @@ resource "azurerm_virtual_network_peering" "hub-to-spoke" {
   resource_group_name       = azurerm_resource_group.rg-con.name
   virtual_network_name      = azurerm_virtual_network.region1-hub1.name
   remote_virtual_network_id = azurerm_virtual_network.region1-spoke1.id
-  allow_gateway_transit     = true
 }
 resource "azurerm_virtual_network_peering" "spoke-to-hub" {
   name                      = "spoke-to-hub-${var.region1code}"
   resource_group_name       = azurerm_resource_group.rg-con.name
   virtual_network_name      = azurerm_virtual_network.region1-spoke1.name
   remote_virtual_network_id = azurerm_virtual_network.region1-hub1.id
-  use_remote_gateways       = true
 }
 # Get Client IP Address for NSG
 data "http" "clientip" {
@@ -205,6 +205,11 @@ resource "azurerm_subnet_network_security_group_association" "nsg-spoke1-subnets
   subnet_id                 = azurerm_subnet.region1-spoke1-subnets[count.index].id
   network_security_group_id = azurerm_network_security_group.nsg-spoke01.id
 }
+# DNS
+resource "random_id" "dns-name" {
+  byte_length = 4
+  prefix      = "baselabv2-"
+}
 # Public IPs
 resource "azurerm_public_ip" "pips" {
   count               = var.vmcount
@@ -213,6 +218,7 @@ resource "azurerm_public_ip" "pips" {
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
+  domain_name_label   = "${random_id.dns-name.hex}-pip-${var.region1code}"
 
   tags = {
     Environment = var.environment_tag
@@ -231,6 +237,7 @@ resource "azurerm_network_interface" "nics" {
     subnet_id                     = azurerm_subnet.region1-spoke1-subnets[0].id
     private_ip_address_allocation = "Static"
     private_ip_address            = cidrhost(join(", ", "${azurerm_subnet.region1-spoke1-subnets[0].address_prefixes}"), "${count.index + 4}")
+    public_ip_address_id          = azurerm_public_ip.pips[count.index].id
   }
 
   tags = {
@@ -246,8 +253,7 @@ resource "azurerm_managed_disk" "data-disks" {
   resource_group_name  = azurerm_resource_group.rg-ide.name
   storage_account_type = "StandardSSD_LRS"
   create_option        = "Empty"
-  disk_size_gb         = "20"
-  max_shares           = "2"
+  disk_size_gb         = "32"
 
   tags = {
     Environment = var.environment_tag
@@ -256,7 +262,7 @@ resource "azurerm_managed_disk" "data-disks" {
 }
 # Availability Set
 resource "azurerm_availability_set" "as1" {
-  name                        = "as-${var.region1code}-ide"
+  name                        = "as-${var.region1code}-identity"
   location                    = var.region1
   resource_group_name         = azurerm_resource_group.rg-ide.name
   platform_fault_domain_count = 2
@@ -268,13 +274,15 @@ resource "azurerm_availability_set" "as1" {
 }
 # VMs
 resource "azurerm_windows_virtual_machine" "vms" {
-  count               = var.vmcount
-  name                = "vm-${var.region1code}-${count.index}"
-  resource_group_name = azurerm_resource_group.rg-ide.name
-  location            = var.region1
-  size                = var.vmsize
-  admin_username      = var.adminuser
-  admin_password      = azurerm_key_vault_secret.vmpassword
+  count                    = var.vmcount
+  name                     = "vm-${var.region1code}-${count.index}"
+  availability_set_id      = azurerm_availability_set.as1.id
+  resource_group_name      = azurerm_resource_group.rg-ide.name
+  location                 = var.region1
+  size                     = var.vmsize
+  admin_username           = var.adminuser
+  admin_password           = azurerm_key_vault_secret.vmpassword.value
+  enable_automatic_updates = "true"
   network_interface_ids = [
     azurerm_network_interface.nics[count.index].id,
   ]
@@ -287,7 +295,20 @@ resource "azurerm_windows_virtual_machine" "vms" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+    sku       = "2022-Datacenter"
     version   = "latest"
   }
+
+  tags = {
+    Environment = var.environment_tag
+    Function    = "baselabv2-identity"
+  }
+}
+#Attach Data Disks to Virtual Machines
+resource "azurerm_virtual_machine_data_disk_attachment" "disks" {
+  count              = var.vmcount
+  managed_disk_id    = azurerm_managed_disk.data-disks[count.index].id
+  virtual_machine_id = azurerm_windows_virtual_machine.vms[count.index].id
+  lun                = "10"
+  caching            = "None"
 }

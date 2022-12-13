@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg-ide" {
   location = var.region1
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-identity"
+    Function    = "BaseLabv2-identity"
   }
 }
 resource "azurerm_resource_group" "rg-con" {
@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "rg-con" {
   location = var.region1
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
+    Function    = "BaseLabv2-connectivity"
   }
 }
 resource "azurerm_resource_group" "rg-sec" {
@@ -20,7 +20,7 @@ resource "azurerm_resource_group" "rg-sec" {
   location = var.region1
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-security"
+    Function    = "BaseLabv2-security"
   }
 }
 # Key Vault
@@ -58,7 +58,7 @@ resource "azurerm_key_vault" "kv1" {
   }
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-security"
+    Function    = "BaseLabv2-security"
   }
 }
 # Create VM password
@@ -82,7 +82,7 @@ resource "azurerm_virtual_network" "region1-hub1" {
   address_space       = [cidrsubnet("${var.region1cidr}", 2, 0)]
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
+    Function    = "BaseLabv2-connectivity"
   }
 }
 resource "azurerm_virtual_network" "region1-spoke1" {
@@ -92,7 +92,7 @@ resource "azurerm_virtual_network" "region1-spoke1" {
   address_space       = [cidrsubnet("${var.region1cidr}", 2, 1)]
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
+    Function    = "BaseLabv2-connectivity"
   }
 }
 # Subnets
@@ -170,7 +170,7 @@ resource "azurerm_network_security_group" "nsg-hub" {
   }
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
+    Function    = "BaseLabv2-connectivity"
   }
 }
 resource "azurerm_network_security_group" "nsg-spoke01" {
@@ -191,7 +191,7 @@ resource "azurerm_network_security_group" "nsg-spoke01" {
   }
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-connectivity"
+    Function    = "BaseLabv2-connectivity"
   }
 }
 # NSG Association
@@ -208,7 +208,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg-spoke1-subnets
 # DNS
 resource "random_id" "dns-name" {
   byte_length = 4
-  prefix      = "baselabv2-"
+  prefix      = "BaseLabv2-"
 }
 # Public IPs
 resource "azurerm_public_ip" "pips" {
@@ -218,11 +218,11 @@ resource "azurerm_public_ip" "pips" {
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "${random_id.dns-name.hex}-pip-${var.region1code}"
+  domain_name_label   = "vm${count.index}-${random_id.dns-name.hex}-pip-${var.region1code}"
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-identity"
+    Function    = "BaseLabv2-identity"
   }
 }
 # NICs
@@ -242,7 +242,7 @@ resource "azurerm_network_interface" "nics" {
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-identity"
+    Function    = "BaseLabv2-identity"
   }
 }
 # Disks
@@ -257,7 +257,7 @@ resource "azurerm_managed_disk" "data-disks" {
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-identity"
+    Function    = "BaseLabv2-identity"
   }
 }
 # Availability Set
@@ -269,7 +269,7 @@ resource "azurerm_availability_set" "as1" {
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-identity"
+    Function    = "BaseLabv2-identity"
   }
 }
 # VMs
@@ -301,7 +301,7 @@ resource "azurerm_windows_virtual_machine" "vms" {
 
   tags = {
     Environment = var.environment_tag
-    Function    = "baselabv2-identity"
+    Function    = "BaseLabv2-identity"
   }
 }
 #Attach Data Disks to Virtual Machines

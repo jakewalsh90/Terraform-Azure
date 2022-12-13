@@ -1,3 +1,7 @@
+##########################
+# Core Feature Variables 
+##########################
+
 variable "environment_tag" {
   type        = string
   description = "Environment tag value"
@@ -25,4 +29,25 @@ variable "vmsize" {
 variable "adminuser" {
   type        = string
   description = "admin username for the created VMs"
+}
+
+##############################
+# Optional Feature Variables 
+##############################
+
+variable "bastion" {
+  type        = bool
+  description = "Sets if Azure Bastion is created"
+}
+variable "avd" {
+  type        = bool
+  description = "Sets if Azure Virtual Desktop Supporting Resources are created"
+}
+variable "vng" {
+  type        = bool
+  description = "Sets if a Virtual Network Gateway is created or not"
+}
+variable "azfw" {
+  type        = bool
+  description = "Sets if Azure Firewall is created or not"
 }

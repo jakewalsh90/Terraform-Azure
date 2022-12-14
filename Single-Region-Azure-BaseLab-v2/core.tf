@@ -207,8 +207,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg-spoke1-subnets
 }
 # DNS
 resource "random_id" "dns-name" {
-  byte_length = 4
-  prefix      = "BaseLabv2-"
+  byte_length = 3
 }
 # Public IPs
 resource "azurerm_public_ip" "pips" {
@@ -218,7 +217,7 @@ resource "azurerm_public_ip" "pips" {
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "vm${count.index}-${random_id.dns-name.hex}-pip-${var.region1code}"
+  domain_name_label   = "pip-vm-${count.index}-${random_id.dns-name.hex}"
 
   tags = {
     Environment = var.environment_tag
@@ -228,7 +227,7 @@ resource "azurerm_public_ip" "pips" {
 # NICs
 resource "azurerm_network_interface" "nics" {
   count               = var.vmcount
-  name                = "pip-${var.region1code}-${count.index}"
+  name                = "pip-${var.region1code}-vm${count.index}"
   resource_group_name = azurerm_resource_group.rg-ide.name
   location            = var.region1
 

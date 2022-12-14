@@ -2,12 +2,12 @@
 # Public IP
 resource "azurerm_public_ip" "pip-bastion" {
   count               = var.bastion ? 1 : 0
-  name                = "pip-${var.region1code}-bastion"
+  name                = "pip-${var.region1code}-bst"
   resource_group_name = azurerm_resource_group.rg-sec.name
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "pip-bastion-${random_id.dns-name.hex}-${var.region1code}"
+  domain_name_label   = "pip-bst${count.index}-${random_id.dns-name.hex}"
 
   tags = {
     Environment = var.environment_tag
@@ -17,13 +17,13 @@ resource "azurerm_public_ip" "pip-bastion" {
 # Bastion Host
 resource "azurerm_bastion_host" "bastion" {
   count               = var.bastion ? 1 : 0
-  name                = "bastion-${var.region1code}"
+  name                = "bst-${var.region1code}"
   resource_group_name = azurerm_resource_group.rg-sec.name
   location            = var.region1
 
   ip_configuration {
-    name                 = "bastion-${var.region1code}"
-    subnet_id            = azurerm_subnet.region1-hub1-AzureBastionSubnet.name
+    name                 = "bst-${var.region1code}"
+    subnet_id            = azurerm_subnet.region1-hub1-AzureBastionSubnet.id
     public_ip_address_id = azurerm_public_ip.pip-bastion[0].id
   }
 
@@ -120,17 +120,12 @@ resource "azurerm_virtual_desktop_workspace_application_group_association" "sing
   workspace_id         = azurerm_virtual_desktop_workspace.demo-avd-workspace[0].id
   application_group_id = azurerm_virtual_desktop_application_group.appgroup2[0].id
 }
-data "azurerm_shared_image_gallery" "sig" {
-  count               = var.avd ? 1 : 0
-  name                = "sig-${var.region1code}-avd-01"
-  resource_group_name = azurerm_resource_group.rg-avd[0].name
-}
 resource "azurerm_shared_image_gallery" "sig" {
   count               = var.avd ? 1 : 0
-  name                = "sig-${var.region1code}-avd-01"
+  name                = "sig${var.region1code}avd01"
   resource_group_name = azurerm_resource_group.rg-avd[0].name
   location            = var.region1
-  description         = "Shared images and things."
+  description         = "Shared Images for AVD"
 
   tags = {
     Environment = var.environment_tag
@@ -146,7 +141,7 @@ resource "azurerm_public_ip" "pip-gateway" {
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "pip-vng-${random_id.dns-name.hex}-${var.region1code}"
+  domain_name_label   = "pip-vng${count.index}-${random_id.dns-name.hex}"
 
   tags = {
     Environment = var.environment_tag
@@ -165,7 +160,7 @@ resource "azurerm_virtual_network_gateway" "gateway" {
 
   active_active = false
   enable_bgp    = false
-  sku           = "Basic"
+  sku           = "VpnGw1"
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
@@ -175,7 +170,7 @@ resource "azurerm_virtual_network_gateway" "gateway" {
   }
 }
 # Azure Firewall
-# Public IP
+# Public IPs
 resource "azurerm_public_ip" "pip-firewall" {
   count               = var.azfw ? 1 : 0
   name                = "pip-${var.region1code}-azfw"
@@ -183,7 +178,21 @@ resource "azurerm_public_ip" "pip-firewall" {
   location            = var.region1
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "pip-azfw-${random_id.dns-name.hex}-${var.region1code}"
+  domain_name_label   = "pip-azfw${count.index}-${random_id.dns-name.hex}"
+
+  tags = {
+    Environment = var.environment_tag
+    Function    = "BaseLabv2-connectivity"
+  }
+}
+resource "azurerm_public_ip" "pip-firewall-man" {
+  count               = var.azfw ? 1 : 0
+  name                = "pip-${var.region1code}-azfwman"
+  resource_group_name = azurerm_resource_group.rg-con.name
+  location            = var.region1
+  allocation_method   = "Static"
+  sku                 = "Standard"
+  domain_name_label   = "pip-azfwman${count.index}-${random_id.dns-name.hex}"
 
   tags = {
     Environment = var.environment_tag
@@ -202,5 +211,11 @@ resource "azurerm_firewall" "firewall" {
     name                 = "fw-ipconfig"
     subnet_id            = azurerm_subnet.region1-hub1-AzureFirewallSubnet.id
     public_ip_address_id = azurerm_public_ip.pip-firewall[0].id
+  }
+
+  management_ip_configuration {
+    name                 = "fw-man-ipconfig"
+    subnet_id            = azurerm_subnet.region1-hub1-AzureFirewallManagementSubnet.id
+    public_ip_address_id = azurerm_public_ip.pip-firewall-man[0].id
   }
 }

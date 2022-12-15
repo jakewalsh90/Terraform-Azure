@@ -121,14 +121,14 @@ resource "azurerm_subnet" "region1-hub1-AzureBastionSubnet" {
   address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, 3)]
 }
 resource "azurerm_subnet" "region1-hub1-subnets" {
-  count                = 4
+  count                = 2
   name                 = "snet-${count.index}-${var.region1code}-vnet-hub-01"
   resource_group_name  = azurerm_resource_group.rg-con.name
   virtual_network_name = azurerm_virtual_network.region1-hub1.name
   address_prefixes     = [cidrsubnet("${var.region1cidr}", 5, "${count.index + 4}")]
 }
 resource "azurerm_subnet" "region1-spoke1-subnets" {
-  count                = 8
+  count                = 4
   name                 = "snet-${count.index}-${var.region1code}-vnet-spoke-01"
   resource_group_name  = azurerm_resource_group.rg-con.name
   virtual_network_name = azurerm_virtual_network.region1-spoke1.name
@@ -173,7 +173,7 @@ resource "azurerm_network_security_group" "nsg-hub" {
     Function    = "BaseLabv2-connectivity"
   }
 }
-resource "azurerm_network_security_group" "nsg-spoke01" {
+resource "azurerm_network_security_group" "nsg-spoke" {
   name                = "nsg-${var.region1code}-spoke-01"
   location            = var.region1
   resource_group_name = azurerm_resource_group.rg-con.name
@@ -195,15 +195,17 @@ resource "azurerm_network_security_group" "nsg-spoke01" {
   }
 }
 # NSG Association
-resource "azurerm_subnet_network_security_group_association" "nsg-hub-subnets" {
+resource "azurerm_subnet_network_security_group_association" "nsg-hub1-subnets" {
   count                     = length(azurerm_subnet.region1-hub1-subnets)
   subnet_id                 = azurerm_subnet.region1-hub1-subnets[count.index].id
   network_security_group_id = azurerm_network_security_group.nsg-hub.id
+  depends_on = [azurerm_subnet.region1-hub1-subnets]
 }
 resource "azurerm_subnet_network_security_group_association" "nsg-spoke1-subnets" {
   count                     = length(azurerm_subnet.region1-spoke1-subnets)
   subnet_id                 = azurerm_subnet.region1-spoke1-subnets[count.index].id
-  network_security_group_id = azurerm_network_security_group.nsg-spoke01.id
+  network_security_group_id = azurerm_network_security_group.nsg-spoke.id
+  depends_on = [azurerm_subnet.region1-spoke1-subnets]
 }
 # DNS
 resource "random_id" "dns-name" {

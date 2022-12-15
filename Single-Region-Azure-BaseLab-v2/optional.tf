@@ -162,6 +162,11 @@ resource "azurerm_virtual_network_gateway" "gateway" {
   enable_bgp    = false
   sku           = "VpnGw1"
 
+  depends_on = [
+    azurerm_subnet.region1-hub1-GatewaySubnet,
+    azurerm_public_ip.pip-gateway
+  ]
+
   ip_configuration {
     name                          = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.pip-gateway[0].id
@@ -206,6 +211,13 @@ resource "azurerm_firewall" "firewall" {
   location            = var.region1
   sku_tier            = "Standard"
   sku_name            = "AZFW_VNet"
+
+  depends_on = [
+    azurerm_subnet.region1-hub1-AzureFirewallSubnet,
+    azurerm_subnet.region1-hub1-AzureFirewallManagementSubnet,
+    azurerm_public_ip.pip-firewall,
+    azurerm_public_ip.pip-firewall-man
+  ]
 
   ip_configuration {
     name                 = "fw-ipconfig"

@@ -322,7 +322,7 @@ resource "azurerm_virtual_machine_extension" "basesetup" {
   count                = var.vmcount
   name                 = "cse-${var.region1code}-${count.index}"
   virtual_machine_id   = azurerm_windows_virtual_machine.vms[count.index].id
-  depends_on           = [azurerm_virtual_machine_data_disk_attachment.disks[count.index].id]
+  depends_on           = [azurerm_virtual_machine_data_disk_attachment.disks]
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"

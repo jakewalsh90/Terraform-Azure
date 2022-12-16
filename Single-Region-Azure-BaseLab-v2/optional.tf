@@ -20,6 +20,11 @@ resource "azurerm_bastion_host" "bastion" {
   name                = "bst-${var.region1code}"
   resource_group_name = azurerm_resource_group.rg-sec.name
   location            = var.region1
+  depends_on = [
+    azurerm_public_ip.pip-bastion[0],
+    azurerm_subnet_network_security_group_association.nsg-hub1-subnets,
+    azurerm_subnet_network_security_group_association.nsg-spoke1-subnets,
+  ]
 
   ip_configuration {
     name                 = "bst-${var.region1code}"
@@ -154,6 +159,11 @@ resource "azurerm_virtual_network_gateway" "gateway" {
   name                = "vng-${var.region1code}"
   location            = var.region1
   resource_group_name = azurerm_resource_group.rg-con.name
+  depends_on = [
+    azurerm_public_ip.pip-gateway[0],
+    azurerm_subnet_network_security_group_association.nsg-hub1-subnets,
+    azurerm_subnet_network_security_group_association.nsg-spoke1-subnets,
+  ]
 
   type     = "Vpn"
   vpn_type = "RouteBased"
@@ -161,11 +171,6 @@ resource "azurerm_virtual_network_gateway" "gateway" {
   active_active = false
   enable_bgp    = false
   sku           = "VpnGw1"
-
-  depends_on = [
-    azurerm_subnet.region1-hub1-GatewaySubnet,
-    azurerm_public_ip.pip-gateway
-  ]
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
@@ -190,20 +195,7 @@ resource "azurerm_public_ip" "pip-firewall" {
     Function    = "BaseLabv2-connectivity"
   }
 }
-resource "azurerm_public_ip" "pip-firewall-man" {
-  count               = var.azfw ? 1 : 0
-  name                = "pip-${var.region1code}-azfwman"
-  resource_group_name = azurerm_resource_group.rg-con.name
-  location            = var.region1
-  allocation_method   = "Static"
-  sku                 = "Standard"
-  domain_name_label   = "pip-azfwman${count.index}-${random_id.dns-name.hex}"
-
-  tags = {
-    Environment = var.environment_tag
-    Function    = "BaseLabv2-connectivity"
-  }
-}
+# Firewall
 resource "azurerm_firewall" "firewall" {
   count               = var.azfw ? 1 : 0
   name                = "azfw-${var.region1code}"
@@ -211,12 +203,10 @@ resource "azurerm_firewall" "firewall" {
   location            = var.region1
   sku_tier            = "Standard"
   sku_name            = "AZFW_VNet"
-
   depends_on = [
-    azurerm_subnet.region1-hub1-AzureFirewallSubnet,
-    azurerm_subnet.region1-hub1-AzureFirewallManagementSubnet,
-    azurerm_public_ip.pip-firewall,
-    azurerm_public_ip.pip-firewall-man
+    azurerm_public_ip.pip-firewall[0],
+    azurerm_subnet_network_security_group_association.nsg-hub1-subnets,
+    azurerm_subnet_network_security_group_association.nsg-spoke1-subnets,
   ]
 
   ip_configuration {
@@ -225,9 +215,4 @@ resource "azurerm_firewall" "firewall" {
     public_ip_address_id = azurerm_public_ip.pip-firewall[0].id
   }
 
-  management_ip_configuration {
-    name                 = "fw-man-ipconfig"
-    subnet_id            = azurerm_subnet.region1-hub1-AzureFirewallManagementSubnet.id
-    public_ip_address_id = azurerm_public_ip.pip-firewall-man[0].id
-  }
 }

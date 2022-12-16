@@ -267,7 +267,7 @@ resource "azurerm_managed_disk" "data-disks" {
 }
 # Availability Set
 resource "azurerm_availability_set" "as1" {
-  name                        = "as-${var.region1code}-identity"
+  name                        = "as-${var.region1code}-vms"
   location                    = var.region1
   resource_group_name         = azurerm_resource_group.rg-ide.name
   platform_fault_domain_count = 2
@@ -316,4 +316,28 @@ resource "azurerm_virtual_machine_data_disk_attachment" "disks" {
   virtual_machine_id = azurerm_windows_virtual_machine.vms[count.index].id
   lun                = "10"
   caching            = "None"
+}
+# Run setup script on VMs
+resource "azurerm_virtual_machine_extension" "basesetup" {
+  count                = var.vmcount
+  name                 = "cse-${var.region1code}-${count.index}"
+  virtual_machine_id   = azurerm_windows_virtual_machine.vms[count.index].id
+  depends_on           = [azurerm_virtual_machine_data_disk_attachment.disks[count.index].id]
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "commandToExecute": "powershell.exe -Command \"./baselabv2_VMSetup.ps1; exit 0;\""
+    }
+  PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/baselabv2_VMSetup.ps1"
+        ]
+    }
+  SETTINGS
 }

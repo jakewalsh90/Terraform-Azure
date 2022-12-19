@@ -56,7 +56,7 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 *This creates an Azure Key Vault using a random name like "keyvault##########", and then creates a password string, using the random_string resource, which is stored inside the KeyVault. This can then be used during the setup of VMs with Terraform .* **See: [Azure-KeyVault-with-Secret](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Azure-KeyVault-with-Secret)**
 
 ### 3. **Single Region Base Lab Environment for Azure**
-✅ **Note: Now updated to V2 - see [Single Region Azure Base Lab V2](https://github.com/jakewalsh90/Terraform-Azure#14-single-region-base-lab-environment-for-azure---v2)**
+✅ **Note: Now updated to V2 - see [Single Region Azure Base Lab V2](https://github.com/jakewalsh90/Terraform-Azure#14-single-region-base-lab-environment-for-azure---v2)**.
 *This code creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, and a Domain Controller to simulate smaller environments or provide a quick lab for any test requirements.* **See: [Single-Region-Azure-BaseLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Single-Region-Azure-BaseLab)** 
 
 ### 4. **Single Region Base Lab Environment for Azure - with Ansible VM**

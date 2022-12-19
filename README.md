@@ -87,3 +87,6 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 
 ### 13. **Chaos Studio Test Environment**
 *This code sets up a demonstration environment to support a blog post around Azure Chaos Studio. It builds out a deployment of Windows Servers, running IIS, across two Regions. Azure Load Balancer, Firewall, and Traffic Manager are then used to provide Load Balancing and Failover.* **See: [Chaos-Studio-Test](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Chaos-Studio-Test).** *The blog post for this environment is also available* **[here](https://jakewalsh.co.uk/exploring-the-azure-chaos-studio-preview/).**
+
+### 14. **Single Region Base Lab Environment for Azure - V2**
+*Updated from my Single Region Azure Base Lab - This V2 version creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, Domain Controller/Additional VMs to simulate smaller environments or provide a quick lab for any test requirements. Now includes optional features, enabled/disabled via Variables; Azure Bastion, Azure Firewall, AVD Supporting Elements, and a Virtual Network Gateway* **See: [Single-Region-Azure-BaseLab-v2](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Single-Region-Azure-BaseLab-v2)**

@@ -233,7 +233,7 @@ resource "azurerm_public_ip" "pips" {
 # NICs
 resource "azurerm_network_interface" "nics" {
   count               = var.vmcount
-  name                = "pip-${var.region1code}-vm${count.index}"
+  name                = "nic-${var.region1code}-vm${count.index}"
   resource_group_name = azurerm_resource_group.rg-ide.name
   location            = var.region1
 

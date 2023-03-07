@@ -1,5 +1,8 @@
-# Single Region Azure Virtual Desktop Demo Lab
+# AVD Demo Environment
 
-Based on the Single Region Baselab this Lab creates the required components to test Azure Virtual Desktop in a small environment. 
+This environment uses Terraform and Packer to provide the foundations for an AVD Environment that can be added to most DevOps toolsets (GitHub Actions, Azure DevOps etc).
 
-Just add an image to the host pool and then publish apps/desktops. 
+Current files within this repo are:
+
+ - Terraform-Single-Region-Azure-BaseLab-V2 - This Terraform code creates a basic Azure environment that will provide the foundations required to Demostrate AVD (and other Azure services if required).
+ - Packer - This code provides Packer files that can be used to create machine images for AVD. Customisation within these images is currently done using PowerShell, with applications installed using Chocolatey. 

@@ -30,6 +30,7 @@ resource "azurerm_lab_service_lab" "lab1" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.region
   title               = "Lab 1"
+  description         = "Virtual Machine for Lab Environment"
 
   security {
     open_access_enabled = false

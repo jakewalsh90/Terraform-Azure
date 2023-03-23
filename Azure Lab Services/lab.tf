@@ -31,12 +31,19 @@ resource "azurerm_lab_service_lab" "lab1" {
   location            = var.region
   title               = "Lab 1"
   description         = "Virtual Machine for Lab Environment"
+  lab_plan_id         = azurerm_lab_service_plan.plan1.id
+
+  connection_setting {
+    client_rdp_access = "Public"
+  }
 
   security {
     open_access_enabled = false
   }
 
   virtual_machine {
+    shared_password_enabled = true
+
     admin_user {
       username = var.labusername
       password = azurerm_key_vault_secret.vmpassword.value

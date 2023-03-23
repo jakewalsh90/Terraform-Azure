@@ -1,0 +1,1 @@
+This lab relates to a blog post covering Azure Lab Services - you can read the post here: (https://jakewalsh.co.uk/azure-lab-services-an-overview-setup-terraform-and-more/)[https://jakewalsh.co.uk/azure-lab-services-an-overview-setup-terraform-and-more/]

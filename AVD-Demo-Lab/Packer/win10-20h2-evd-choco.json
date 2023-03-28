@@ -7,12 +7,12 @@
       "subscription_id": "__subscription_id__",
   
       "managed_image_resource_group_name": "packer-images",
-      "managed_image_name": "packer-win11-21h2-avd",
+      "managed_image_name": "packer-win10-evd-10h2",
   
       "os_type": "Windows",
       "image_publisher": "MicrosoftWindowsDesktop",
-      "image_offer": "Windows-11",
-      "image_sku": "win11-21h2-avd",
+      "image_offer": "Windows-10",
+      "image_sku": "20h2-evd",
   
       "communicator": "winrm",
       "winrm_use_ssl": true,

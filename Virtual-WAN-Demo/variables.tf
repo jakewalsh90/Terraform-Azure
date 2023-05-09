@@ -15,13 +15,13 @@ variable "region2" {
   type        = string
   description = "location 2 for the lab"
 }
-variable "Virtual-WAN-region1-hub1-prefix1" {
+variable "virtual-wan-region1-hub1-prefix1" {
   type        = string
-  description = "Address space for Virtual-WAN Location 1 Hub 1"
+  description = "Address space for virtual-wan Location 1 Hub 1"
 }
-variable "Virtual-WAN-region2-hub1-prefix1" {
+variable "virtual-wan-region2-hub1-prefix1" {
   type        = string
-  description = "Address space for Virtual-WAN Location 2 Hub 1"
+  description = "Address space for virtual-wan Location 2 Hub 1"
 }
 variable "region1-vnet1-address-space" {
   type        = string

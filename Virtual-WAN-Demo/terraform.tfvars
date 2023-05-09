@@ -1,10 +1,10 @@
 # Core Variables
-lab-name                  = "vWANDemo"
-environment_tag           = "jakewalsh90-vWAN-DemoLab"
-region1                   = "uksouth"
-region2                   = "eastus"
-vwan-region1-hub1-prefix1 = "10.10.0.0/21"
-vwan-region2-hub1-prefix1 = "10.20.0.0/21"
+lab-name                         = "virtual-wanDemo"
+environment_tag                  = "jakewalsh90-virtual-wan-DemoLab"
+region1                          = "uksouth"
+region2                          = "eastus"
+virtual-wan-region1-hub1-prefix1 = "10.10.0.0/21"
+virtual-wan-region2-hub1-prefix1 = "10.20.0.0/21"
 # Networking
 region1-vnet1-address-space = "10.10.8.0/21"
 region1-vnet1-snet1-range   = "10.10.11.0/24"

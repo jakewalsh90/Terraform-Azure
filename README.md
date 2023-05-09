@@ -75,7 +75,7 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 *This code sets up an Azure Base Lab, based on the Single Region Lab above, but also includes Azure Firewall. Firewall options, policies, and deployment settings can be tested using this lab.* **See: [Azure-Firewall-Baselab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Azure-Firewall-DemoLab)**
 
 ### 9. **Azure vWAN Demo Lab**
-*This code sets up an Azure vWAN Demo Lab. Based on a two Region deployment, with documentation.* **See: [Azure-vWAN-DemoLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/vWAN-DemoLab)** Details of this Lab are also available on my blog [here](https://jakewalsh.co.uk/deploying-azure-virtual-wan-using-terraform/).
+*This code sets up an Azure vWAN Demo Lab. Based on a two Region deployment, with documentation.* **See: [Virtual-WAN-Demo](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Virtual-WAN-Demo)** Details of this Lab are also available on my blog [here](https://jakewalsh.co.uk/deploying-azure-virtual-wan-using-terraform/).
 
 ### 10. **Web Server IIS Demo Lab**
 *This code sets up an Azure Base Lab, based on the Single Region Lab above, but installs IIS onto the VM it creates using a Custom Script Extension.* **See: [Web-Server-IIS-DemoLab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Web-Server-IIS-DemoLab)**

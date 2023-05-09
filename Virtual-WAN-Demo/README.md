@@ -5,7 +5,7 @@ This is a Terraform based demonstration of Azure vWAN 13/06/2022
 
 ## :question: What this Lab Deploys
 
-![vWAN Demo Architecture](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/vWAN-DemoLab/images/vWAN%20Lab%201.PNG)
+![vWAN Demo Architecture](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/vWAN%20Lab%201.PNG)
 
 This lab deploys the following:
 1. A Resource Group in two Azure Regions (based on variables)

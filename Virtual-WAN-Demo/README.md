@@ -1,7 +1,7 @@
 # Azure Virtual WAN DemoLab Environment
 
 ## :heavy_check_mark: Overview
-This is a Terraform based demonstration of Azure Virtual WAN 13/06/2022
+This is a Terraform based demonstration of Azure Virtual WAN
 
 ## :question: What this Lab Deploys
 

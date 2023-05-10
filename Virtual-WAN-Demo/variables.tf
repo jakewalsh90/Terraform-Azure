@@ -31,6 +31,10 @@ variable "region1-vnet1-snet1-range" {
   type        = string
   description = "Subnet address space for region 1 subnet"
 }
+variable "region1-vnet1-bastion-snet-range" {
+  type        = string
+  description = "Subnet address space for region 1 Bastion subnet"
+}
 variable "region2-vnet1-address-space" {
   type        = string
   description = "VNET address space for region 2 vnet"
@@ -38,6 +42,10 @@ variable "region2-vnet1-address-space" {
 variable "region2-vnet1-snet1-range" {
   type        = string
   description = "Subnet address space for region 2 subnet"
+}
+variable "region2-vnet1-bastion-snet-range" {
+  type        = string
+  description = "Subnet address space for region 2 Bastion subnet"
 }
 variable "vmsize" {
   type        = string

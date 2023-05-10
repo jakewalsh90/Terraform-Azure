@@ -3,9 +3,9 @@
 ## :heavy_check_mark: Overview
 This is a Terraform based demonstration of Azure Virtual WAN. The environment is designed to provide a simple foundation that you can add additional services (VPNs, ExpressRoute, Firewalls etc.) into, allowing the demonstration of concepts and technologies. 
 
-## :question: What this Lab Deploys
+## :question: What does this Lab deploy?
 
-![Virtual WAN Demo Architecture]([https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN-Demo-Lab.png])
+(https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN-Demo-Lab.png)
 
 This lab deploys the following:
 1. A Resource Group in two Azure Regions (based on variables)

@@ -5,7 +5,7 @@ This is a Terraform based demonstration of Azure Virtual WAN. The environment is
 
 ## :question: What this Lab Deploys
 
-![Virtual WAN Demo Architecture](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN-Demo-Lab.PNG)
+![Virtual WAN Demo Architecture]([https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN-Demo-Lab.png])
 
 This lab deploys the following:
 1. A Resource Group in two Azure Regions (based on variables)

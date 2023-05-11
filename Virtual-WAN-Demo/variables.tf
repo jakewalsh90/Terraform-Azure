@@ -1,8 +1,4 @@
 # Variables
-variable "lab-name" {
-  type        = string
-  description = "Name to be used for resources in this lab"
-}
 variable "environment_tag" {
   type        = string
   description = "Environment tag value"

@@ -1,7 +1,7 @@
 # virtual-wan Resources
 # virtual-wan
 resource "azurerm_virtual_wan" "virtual-wan1" {
-  name                = "${var.lab-name}-virtual-wan-01"
+  name                = "virtual-wan-demo-01"
   resource_group_name = azurerm_resource_group.region1-rg1.name
   location            = var.region1
 

@@ -1,5 +1,4 @@
 # Core Variables
-lab-name                         = "virtual-wanDemo"
 environment_tag                  = "jakewalsh90-virtual-wan-DemoLab"
 region1                          = "uksouth"
 region2                          = "eastus"

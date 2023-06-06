@@ -19,7 +19,7 @@ The following resources are deployed:
 7. Creates a Public IP for the Domain Controller VM.
 8. Creates a Network Interface Card and associates the above Public IP. 
 9. Creates a Data Disk for NTDS Storage on the Domain Controller VM.
-10. Creates a Windows 2019 VM to act as a Domain Controller. The Username for this VM is a Variable, and the Password is saved as a Secret in the Key Vault. (It was automatically generated in Step 6).
+10. Creates a Windows 2022 VM to act as a Domain Controller. The Username for this VM is a Variable, and the Password is saved as a Secret in the Key Vault. (It was automatically generated in Step 6).
 11. Attaches the Data Disk created in step 9, with caching Turned off. 
 12. Runs a Setup script on the Domain Controller VM (baselab_DCSetup.ps1 within this repos PowerShell folder), as a Custom Script Extension - that carries out the following actions:
 

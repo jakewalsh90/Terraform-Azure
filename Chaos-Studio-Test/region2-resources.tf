@@ -151,7 +151,7 @@ resource "azurerm_windows_virtual_machine" "region2-avms" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+    sku       = "2022-Datacenter"
     version   = "latest"
   }
 }
@@ -181,7 +181,7 @@ resource "azurerm_windows_virtual_machine" "region2-bvms" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+    sku       = "2022-Datacenter"
     version   = "latest"
   }
 }

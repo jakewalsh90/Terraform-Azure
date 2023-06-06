@@ -1,9 +1,6 @@
-#Chocolatey setup and installation script for the apps I use.
-#Set Execution Policy to allow script to run
-Set-ExecutionPolicy Bypass -Scope Process -Force 
-#Chocolatey install
-iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-#Chocolatey apps
+# Chocolatey setup and installation script for the apps I use.
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+# Chocolatey apps
 choco install putty -y -no-desktopshortcuts
 choco install notepadplusplus -y -no-desktopshortcuts
 choco install winscp -y -no-desktopshortcuts

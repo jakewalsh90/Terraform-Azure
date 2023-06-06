@@ -89,3 +89,46 @@ resource "azurerm_windows_virtual_machine" "region2-vm01" {
     version   = "latest"
   }
 }
+# Setup Scripts for Apps and Windows Firewall
+resource "azurerm_virtual_machine_extension" "region1-vm01-vmsetup" {
+  name                 = "${var.region1}-vm01-vmsetup"
+  virtual_machine_id   = azurerm_windows_virtual_machine.region1-vm01.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "commandToExecute": "powershell.exe -Command \"./standard_VMSetup.ps1; exit 0;\""
+    }
+  PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/standard_VMSetup.ps1"
+        ]
+    }
+  SETTINGS
+}
+resource "azurerm_virtual_machine_extension" "region2-vm01-vmsetup" {
+  name                 = "${var.region2}-vm01-vmsetup"
+  virtual_machine_id   = azurerm_windows_virtual_machine.region2-vm01.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+      "commandToExecute": "powershell.exe -Command \"./standard_VMSetup.ps1; exit 0;\""
+    }
+  PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/PowerShell/standard_VMSetup.ps1"
+        ]
+    }
+  SETTINGS
+}

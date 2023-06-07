@@ -5,11 +5,11 @@ This is a Terraform based demonstration of Azure Virtual WAN. The environment is
 
 ## :question: What does this Lab deploy?
 
-### Without Azure Firewall
+### Without Azure Firewall:
 
 ![Virtual WAN Demo Lab](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN.png?raw=true)
 
-### With Azure Firewall
+### With Azure Firewall:
 
 ![Virtual WAN Demo Lab - with Azure Firewall](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN-with-Firewall.png?raw=true)
 

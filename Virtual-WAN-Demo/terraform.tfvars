@@ -14,3 +14,5 @@ region2-vnet1-bastion-snet-range = "10.20.12.0/24"
 # VMs
 vmsize        = "Standard_B4ms"
 adminusername = "labadmin"
+# Optional - Firewalls
+azfw = false

@@ -1,7 +1,7 @@
 # Azure Virtual WAN Demo Environment
 
 ## :heavy_check_mark: Overview
-This is a Terraform based demonstration of Azure Virtual WAN. The environment is designed to provide a simple foundation that you can add additional services (VPNs, ExpressRoute, Firewalls etc.) into, allowing the demonstration of concepts and technologies. This lab has two options - with or without Azure Firewall. 
+This is a Terraform based demonstration of Azure Virtual WAN. The environment is designed to provide a simple foundation that you can add additional services (Gateways, Firewalls, etc.) into, allowing the demonstration of concepts and technologies. This lab has two options - with or without Azure Firewall, and is based on a two-region design.  
 
 ## :question: What does this Lab deploy?
 
@@ -26,3 +26,10 @@ This lab deploys the following Resources:
 8. Azure Bastion in each Region to allow for access to the VMs for Testing. 
 9. A Virtual Machine in each Azure Region (in the Regional vNets), to allow testing of Connectivity. 
 10. A Custom Script Extension that runs on both VMs to add a few testing Apps (using Chocolatey) and allows ICMP through Windows Firewall for testing. 
+
+### Enabling Azure Firewall
+
+To enable Azure Firewall set the following variable to true within the terraform.tfvars file:
+
+    # Optional - Firewalls
+    azfw = false

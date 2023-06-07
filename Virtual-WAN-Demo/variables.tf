@@ -51,3 +51,8 @@ variable "adminusername" {
   type        = string
   description = "admin username"
 }
+# Optional Resources
+variable "azfw" {
+  type        = bool
+  description = "Sets if Azure Firewalls and Policy are created or not"
+}

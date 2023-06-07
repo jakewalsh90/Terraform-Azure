@@ -13,7 +13,10 @@ This is a Terraform based demonstration of Azure Virtual WAN. The environment is
 
 ![Virtual WAN Demo Lab - with Azure Firewall](https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Virtual-WAN-Demo/images/Virtual-WAN-with-Firewall.png?raw=true)
 
-This lab deploys the following:
+### What does this Lab Deploy?
+
+This lab deploys the following Resources:
+
 1. A Resource Group in two Azure Regions (based on variables)
 2. A Virtual WAN in the Primary Region
 3. A Virtual WAN Hub in two Azure Regions

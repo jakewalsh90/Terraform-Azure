@@ -31,7 +31,7 @@ This lab deploys the following Resources:
 
 To enable Azure Firewall set the following variable to true within the terraform.tfvars file:
 
-    https://github.com/jakewalsh90/Terraform-Azure/blob/main/Virtual-WAN-Demo/terraform.tfvars#L18
+    https://github.com/jakewalsh90/Terraform-Azure/blob/666efc34099f0601bff942a893433df085472f80/Virtual-WAN-Demo/terraform.tfvars#L18
 
     # Optional - Firewalls
     azfw = true

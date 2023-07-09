@@ -88,3 +88,6 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 
 ### 14. **Single Region Base Lab Environment for Azure - V2**
 *Updated from my Single Region Azure Base Lab - This V2 version creates a simple Lab environment within a Single Azure Region. The idea here is that it allows for quick deployment of VNETs, Subnets, Domain Controller/Additional VMs to simulate smaller environments or provide a quick lab for any test requirements. Now includes optional features, enabled/disabled via Variables; Azure Bastion, Azure Firewall, AVD Supporting Elements, and a Virtual Network Gateway.* **See: [Single-Region-Azure-BaseLab-v2](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Single-Region-Azure-BaseLab-v2)**
+
+### 15. **Azure Automation Demo**
+*This environment creates a simple Azure Automation Demo Environment, along with a PowerShell runbook. A schedule that is used to trigger the runbook is used - which then shuts down VMs based on a Tag.* **See: [Azure-Automation-Demo](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Azure-Automation-Demo)**

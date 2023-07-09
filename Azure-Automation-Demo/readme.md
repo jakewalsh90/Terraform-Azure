@@ -1,4 +1,6 @@
-This lab creates a simple Azure Automation environment. This specific lab sets up an Azure Automation environment that shuts down VMs with a specific tag. The tag required on any VMs you wish to use with this Lab is "DailyShutdown" and the Tag Value for this Lab is "1800". VMs with this Tag and Value will be shut down every day at 1800. Note the time zone is set to Europe/London - you will also need to adjust the start date as required. 
+# Azure Automation Demo Environment
+
+This lab creates a simple Azure Automation environment, that shuts down VMs with a specific tag on a schedule basis. The tag required on any VMs you wish to use with this Lab is "DailyShutdown" and the Tag Value for this Lab is "1800". VMs with this Tag and Value will be shut down every day at 1800. Note the time zone is set to Europe/London - you will also need to adjust the start date as required. 
 
 The following resources are created:
 

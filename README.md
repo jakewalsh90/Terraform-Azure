@@ -6,7 +6,15 @@ This repository contains Terraform sample code for Azure -  mostly smaller deplo
 
 Due to the fact that some of the Terraform Projects in this Repository are unlikely to be used alone, the samples provided may also contain supporting elements. So in some cases, items like Resource Groups, VNETs, Subnets and more are deployed to support whatever is being demonstrated. 
   
-To utilise the code you may therefore just deploy as is and see the concept being demonstrated,  *without needing to adapt the code or rework it.* You can then take any elements you require and work them into your code, to move forward from there. 
+To utilise the code you may therefore just deploy as is and see the concept being demonstrated, without needing to adapt the code or rework it. You can then take any elements you require and work them into your code, to move forward from there. 
+
+## New to Azure Terraform?
+
+#### :heavy_check_mark:  Check out my Getting Started Blog Series:
+
+    Part 1 - [Setup and Tooling](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-1/)
+    Part 2 - [Running our first deployment](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-2/)
+    Part 3 - [Tips Tricks and Further Reading](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-3/)
 
 ## How to Deploy
 

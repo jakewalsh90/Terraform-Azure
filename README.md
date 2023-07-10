@@ -10,11 +10,11 @@ To utilise the code you may therefore just deploy as is and see the concept bein
 
 ## New to Azure Terraform?
 
-#### :heavy_check_mark:  Check out my Getting Started Blog Series:
+### :heavy_check_mark:  Check out my Getting Started Blog Series:
 
-    Part 1 - [Setup and Tooling](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-1/)
-    Part 2 - [Running our first deployment](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-2/)
-    Part 3 - [Tips Tricks and Further Reading](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-3/)
+- Part 1 - [Setup and Tooling](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-1/)
+- Part 2 - [Running our first deployment](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-2/)
+- Part 3 - [Tips Tricks and Further Reading](https://jakewalsh.co.uk/a-simple-azure-terraform-walkthrough-part-3/)
 
 ## How to Deploy
 

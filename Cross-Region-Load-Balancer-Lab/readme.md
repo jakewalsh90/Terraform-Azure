@@ -1,3 +1,3 @@
-# Cross Region Load Balancer Lab
+# Cross-Region Load Balancer Lab
 
 Blog Post Coming Soon!

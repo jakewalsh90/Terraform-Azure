@@ -9,7 +9,7 @@ resource "azurerm_public_ip" "pip-cr-lb" {
   domain_name_label   = "lb-global-${random_id.dns-name.hex}"
   depends_on          = [azurerm_resource_group.rg-con]
 }
-# Cross Region Load Balancer
+# Cross-Region Load Balancer
 resource "azurerm_lb" "cross-region-lb" {
   name                = "cross-region-lb-${var.regions.region1.location}"
   location            = var.regions.region1.location

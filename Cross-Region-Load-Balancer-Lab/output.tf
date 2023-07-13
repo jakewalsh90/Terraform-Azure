@@ -1,5 +1,5 @@
 output "_1_Access-URL-via-Cross-Region-Load-Balancer" {
-  value = "Use this URL to access via the Cross Region (Global) Load Balancer: http://${azurerm_public_ip.pip-cr-lb.fqdn} "
+  value = "Use this URL to access via the Cross-Region (Global) Load Balancer: http://${azurerm_public_ip.pip-cr-lb.fqdn} "
 }
 data "azurerm_public_ip" "example" {
   for_each            = var.regions

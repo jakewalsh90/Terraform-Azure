@@ -102,3 +102,6 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 
 ### 16. **Cross-Region (Global) Azure Load Balancer Lab Environment**
 *This environment creates a demo environment for the Azure Cross-Region (Global) Load Balancer. Using a mixture of Virtual Machines running IIS, and Regional Load Balancers as a foundation, a Cross-Region (Global) Load Balancer is then deployed to Load Balance between Regions. This can be used for basic testing and learning.* **See: [Cross-Region-Load-Balancer-Lab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Cross-Region-Load-Balancer-Lab)**
+
+### 17. **Cost Optimisation Example Lab**
+*This environment creates a sample version of my Single Region Azure BaseLab V2, but with many unused resources (Disks, Public IPs, etc.) to allow cost management tooling to pick these up and recommend optimisations as a result. It is not recommended to use this environment for anything other than demonstrating cost management tooling.* **See: [Cost-Optimisation-Example-Lab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Cost-Optimization-Example-Lab)**

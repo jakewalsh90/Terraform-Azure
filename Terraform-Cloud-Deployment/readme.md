@@ -9,3 +9,20 @@ Doing this is simple using the Azure CLI:
 
 https://github.com/jakewalsh90/Terraform-Azure/blob/1f678d1ced4510fda3f3d04387a1e4011e47b844/Terraform-Cloud-Deployment/scripts/ServicePrincipalSetup#L1
 
+This will provide an output that includes 4 important details - save these as you will need these later on to setup Terraform Cloud:
+
+ - ARM_CLIENT_ID
+ - ARM_CLIENT_SECRET
+ - ARM_TENANT_ID
+ - ARM_SUBSCRIPTION_ID
+
+ ## Setting up a GitHub Repo
+
+ A repository to store Terraform Code is required before you can deploy using Terraform Cloud - this is where our configuration will be stored. Within this repository there is a demo environment for Terraform Cloud called "Terraform-Cloud-Demo-Lab" that provides a basic environment for testing. 
+
+ You can download this here: https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Demo-Lab
+
+ You will notice that various variables are set but populated with dummy data - this will be replaced later on within Terraform Cloud:
+
+ https://github.com/jakewalsh90/Terraform-Azure/blob/006e9950c27eb62dc1c64af0e43e4e54d42642f8/Terraform-Cloud-Demo-Lab/provider.tf#L14-L25
+

@@ -31,3 +31,7 @@ https://github.com/jakewalsh90/Terraform-Azure/blob/006e9950c27eb62dc1c64af0e43e
 ### Variables.tf
 
 https://github.com/jakewalsh90/Terraform-Azure/blob/caf612f5d8a7b88bb3865d5b496f61e0698e13ae/Terraform-Cloud-Demo-Lab/variables.tf#L1-L20
+
+## Next Steps
+
+Once you have a Repository and Service Principal Setup - you can then move into Terraform Cloud and start your deployment!

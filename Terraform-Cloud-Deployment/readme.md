@@ -7,3 +7,5 @@ In order to interact with Azure, Terraform will require a Service Principal. I'v
 
 Doing this is simple using the Azure CLI:
 
+https://github.com/jakewalsh90/Terraform-Azure/blob/1f678d1ced4510fda3f3d04387a1e4011e47b844/Terraform-Cloud-Deployment/scripts/ServicePrincipalSetup#L1
+

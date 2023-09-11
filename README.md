@@ -109,3 +109,6 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 
 ### 17. **Cost Optimisation Example Lab**
 *This environment creates a sample version of my Single Region Azure BaseLab V2, but with many unused resources (Disks, Public IPs, etc.) to allow cost management tooling to pick these up and recommend optimisations as a result. It is not recommended to use this environment for anything other than demonstrating cost management tooling.* **See: [Cost-Optimisation-Example-Lab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Cost-Optimization-Example-Lab)**
+
+### 18. **Terraform Cloud Demo Lab**
+*This environment creates a simple Azure environment, with the necessary provider.tf and variables.tf configuration to deploy using Terraform Cloud.* **See: [Terraform-Cloud-Demo-Lab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Demo-Lab)**

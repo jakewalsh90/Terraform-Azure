@@ -50,11 +50,11 @@ These should be placed into a directory, and then Terraform initialised and appl
 
 ## :question: Want to see new Projects in this Repository?
 
-Please reach out to me via my Website or Twitter - I am happy to create new projects or collaborate!
+Please reach out to me via my Website - I am happy to create new projects or collaborate!
 
 ## :question: Found an issue or Bug? 
 
-Please open an issue, or feel free to create a pull request. You can also reach out to me via my Website or Twitter! :)
+Please open an issue, or feel free to create a pull request. You can also reach out to me via my Website :)
 
 ## :heavy_check_mark: Projects in this Repository
 

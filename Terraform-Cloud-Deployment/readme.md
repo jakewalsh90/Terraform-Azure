@@ -16,13 +16,18 @@ This will provide an output that includes 4 important details - save these as yo
  - ARM_TENANT_ID
  - ARM_SUBSCRIPTION_ID
 
- ## Setting up a GitHub Repo
+## Setting up a GitHub Repo
 
  A repository to store Terraform Code is required before you can deploy using Terraform Cloud - this is where our configuration will be stored. Within this repository there is a demo environment for Terraform Cloud called "Terraform-Cloud-Demo-Lab" that provides a basic environment for testing. 
 
- You can download this here: https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Demo-Lab
+You can download this here: https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Demo-Lab
 
- You will notice that various variables are set but populated with dummy data - this will be replaced later on within Terraform Cloud:
+You will notice that various variables are set but populated with dummy data - this will be replaced later on within Terraform Cloud:
 
- https://github.com/jakewalsh90/Terraform-Azure/blob/006e9950c27eb62dc1c64af0e43e4e54d42642f8/Terraform-Cloud-Demo-Lab/provider.tf#L14-L25
+### Provider.tf
 
+https://github.com/jakewalsh90/Terraform-Azure/blob/006e9950c27eb62dc1c64af0e43e4e54d42642f8/Terraform-Cloud-Demo-Lab/provider.tf#L14-L25
+
+### Variables.tf
+
+https://github.com/jakewalsh90/Terraform-Azure/blob/caf612f5d8a7b88bb3865d5b496f61e0698e13ae/Terraform-Cloud-Demo-Lab/variables.tf#L1=L20

@@ -31,7 +31,11 @@ I have setup a Chocolatey script that will provide all the tools you need to wor
 
 ### :arrow_right: GitHub Actions
 
-These projects can be deployed easily using GitHub Actions - for a full guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/GitHub-Actions-Deployment).
+These projects can be deployed using GitHub Actions - for a full guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/GitHub-Actions-Deployment).
+
+### :arrow_right: Terraform Cloud
+
+These projects can be deployed using Terraform Cloud - for a pre-requisite guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Deployment).
 
 ### :arrow_right: Manual Deployment
  

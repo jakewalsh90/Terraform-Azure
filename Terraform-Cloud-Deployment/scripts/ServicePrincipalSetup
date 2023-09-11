@@ -1,0 +1,1 @@
+az ad sp create-for-rbac -n tfc-demo-lab-env --role Contributor --scopes /subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx

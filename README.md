@@ -35,7 +35,7 @@ These projects can be deployed using GitHub Actions - for a full guide, please s
 
 ### :arrow_right: Terraform Cloud
 
-These projects can be deployed using Terraform Cloud - for a pre-requisite guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Deployment).
+These projects can be deployed using Terraform Cloud - for a prerequisite guide, please see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Terraform-Cloud-Deployment).
 
 ### :arrow_right: Manual Deployment
  

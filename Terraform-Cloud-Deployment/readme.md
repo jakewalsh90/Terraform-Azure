@@ -1,4 +1,4 @@
-# Setting up for Terraform Cloud Deployment
+# Prerequisites for Terraform Cloud Deployment
 This page explains the required pre-requisites for deploying Terraform using Terraform Cloud.
 
 ## Creating a Service Principal

@@ -23,8 +23,3 @@ provider "azurerm" {
     }
   }
 }
-
-
-
-
-

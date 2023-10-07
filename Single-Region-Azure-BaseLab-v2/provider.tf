@@ -18,12 +18,3 @@ provider "azurerm" {
     }
   }
 }
-
-
-
-
-
-
-
-
-

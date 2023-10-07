@@ -1,4 +1,4 @@
-A simple Lab to be deployed using Terraform Cloud... other deployment methods are available. 
+This is a collection of Terraform Cloud Labs. 
 
 Follow the pre-reqs below to deploy. 
 
@@ -13,5 +13,7 @@ The following elements need to be added to Terraform Cloud as variables:
  - subscription_id - Subscription ID you want to deploy into
  - tenant_id - Tenant ID
 
-#### Core Lab
+#### Lab Specific Variables
+
+##### Core Environment
  - vpn_app_id - ID of the VPN Enterprise Application, see https://learn.microsoft.com/en-us/azure/vpn-gateway/openvpn-azure-ad-tenant

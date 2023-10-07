@@ -15,12 +15,3 @@ provider "azurerm" {
   features {
   }
 }
-
-
-
-
-
-
-
-
-

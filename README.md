@@ -41,7 +41,7 @@ For most of the Projects the following files are provided:
 - terraform.tfvars
 - provider.tf
 
-These should be placed into a directory, and then Terraform initialised and applied. (Note: some larger projects split out the Terraform elements into separate files for sanity reasons.) Note that for some projects the TF Files are split out into seperate files for ease of use!
+These should be placed into a directory, and then Terraform initialised and applied. Note that for some projects the TF Files are split out into seperate files for ease of use!
 
 ## :question: Want to see new Projects in this Repository?
 
@@ -106,4 +106,4 @@ Please open an issue, or feel free to create a pull request. You can also reach 
 *This environment creates a sample version of my Single Region Azure BaseLab V2, but with many unused resources (Disks, Public IPs, etc.) to allow cost management tooling to pick these up and recommend optimisations as a result. It is not recommended to use this environment for anything other than demonstrating cost management tooling.* **See: [Cost-Optimisation-Example-Lab](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Cost-Optimization-Example-Lab)**
 
 ### 18. **Core Environment Demo Lab**
-*This environment creates a simple Azure environment designed to be ready to deploy with Terraform Cloud, with the necessary provider.tf and variables.tf configuration to deploy using Terraform Cloud. This lab is based around Azure Virtual WAN, Firewall, and many more services - and can be quickly deployed to numerous regions with an integrated Virtual WAN Topology.* **See: [Core-Environment-DemoLab-v1](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Core-Environment-DemoLab-v1)**
+*This environment creates a simple Azure environment designed to be ready to deploy with Terraform Cloud, with the necessary provider.tf and variables.tf configuration to deploy using Terraform Cloud. This lab is based around Azure Virtual WAN, Firewall, and many more services - and can be quickly deployed to numerous regions with an integrated Virtual WAN Topology. This lab also includes a Point to Site VPN, and makes use of Map Variables, CIDR Subnet and many more interesting aspects.* **See: [Core-Environment-DemoLab-v1](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Core-Environment-DemoLab-v1)**

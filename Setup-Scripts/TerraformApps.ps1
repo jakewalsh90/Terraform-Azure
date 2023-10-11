@@ -4,3 +4,5 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install vscode -y -no-desktopshortcuts
 choco install terraform -y -no-desktopshortcuts
 choco install azure-cli -y -no-desktopshortcuts
+choco install az.powershell -y -no-desktopshortcuts
+choco install github-desktop -y -no-desktopshortcuts

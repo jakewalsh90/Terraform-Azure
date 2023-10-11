@@ -20,14 +20,9 @@ To utilise the code you may therefore just deploy as is and see the concept bein
 
 ### :heavy_check_mark: Install the Right Tools First!
 
-I have setup a Chocolatey script that will provide all the tools you need to work with Terraform on Azure - see [here](https://github.com/jakewalsh90/Terraform-Azure/blob/main/Chocolatey-Setup/TerraformApps.ps1) or use the Chocolatey install script below:
+I have setup a Chocolatey script that will provide all the tools you need to work with Terraform on Azure - see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Setup-Scripts) or use the Chocolatey install script below:
 
-    # Chocolatey setup and installation script for using Terraform
-    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-    # Chocolatey apps
-    choco install vscode -y -no-desktopshortcuts
-    choco install terraform -y -no-desktopshortcuts
-    choco install azure-cli -y -no-desktopshortcuts
+https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Setup-Scripts/TerraformApps.ps1#L8-L8
 
 ### :arrow_right: GitHub Actions
 

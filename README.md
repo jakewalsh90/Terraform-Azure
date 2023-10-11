@@ -22,7 +22,7 @@ To utilise the code you may therefore just deploy as is and see the concept bein
 
 I have setup a Chocolatey script that will provide all the tools you need to work with Terraform on Azure - see [here](https://github.com/jakewalsh90/Terraform-Azure/tree/main/Setup-Scripts) or use the Chocolatey install script below:
 
-https://raw.githubusercontent.com/jakewalsh90/Terraform-Azure/main/Setup-Scripts/TerraformApps.ps1#L8-L8
+https://github.com/jakewalsh90/Terraform-Azure/blob/main/Setup-Scripts/TerraformApps.ps1#L8-L8
 
 ### :arrow_right: GitHub Actions
 

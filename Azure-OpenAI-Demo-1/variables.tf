@@ -7,7 +7,7 @@ variable "region" {
 variable "privatenetworking" {
   type    = bool
   default = true
-  
+
 }
 variable "region1-cidr" {
   type    = string

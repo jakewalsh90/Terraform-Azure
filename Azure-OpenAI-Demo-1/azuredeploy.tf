@@ -38,3 +38,18 @@ resource "azurerm_cognitive_deployment" "text-embedding-ada-002" {
     type = "Standard"
   }
 }
+# VNET and Subnet for Private Networking - if required
+resource "azurerm_virtual_network" "vnet1" {
+  count               = var.privatenetworking ? 1 : 0
+  name                = "vnet-${var.region}-aoai"
+  location            = azurerm_resource_group.rg1.location
+  resource_group_name = azurerm_resource_group.rg1.name
+  address_space       = [var.region1-cidr]
+
+  subnet = [
+    {
+      name           = "subnet1-aoai"
+      address_prefix = var.region1-subnet
+    }
+  ]
+}

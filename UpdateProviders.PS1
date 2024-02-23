@@ -2,11 +2,11 @@
 # Provider Details:
 $oldazurerm = '
       source  = "hashicorp/azurerm"
-      version = ">= 3.92.0"
+      version = ">= 3.93.0"
 '
 $newazurerm = '
       source  = "hashicorp/azurerm"
-      version = ">= 3.92.0"
+      version = ">= 3.93.0"
 '
 $oldrandom = '
       source  = "hashicorp/random"

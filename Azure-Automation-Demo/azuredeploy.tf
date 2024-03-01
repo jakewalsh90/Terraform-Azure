@@ -53,7 +53,7 @@ resource "azurerm_automation_schedule" "daily_1800" {
   frequency               = "Day"
   interval                = 1
   timezone                = "Europe/London"
-  start_time              = "2023-07-09T18:00:00+01:00"
+  start_time              = "2024-03-01T18:00:00+00:00"
   description             = "This is an example schedule"
 }
 
@@ -62,6 +62,7 @@ resource "azurerm_automation_job_schedule" "daily_1800_shutdown" {
   automation_account_name = azurerm_automation_account.automation1.name
   schedule_name           = "daily_1800"
   runbook_name            = "vm_power_off"
+  depends_on              = [azurerm_automation_schedule.daily_1800]
 
   parameters = {
     dailyshutdowntime = "1800"

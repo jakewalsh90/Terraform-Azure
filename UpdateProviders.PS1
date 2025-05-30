@@ -2,11 +2,11 @@
 # Provider Details:
 $oldazurerm = '
       source  = "hashicorp/azurerm"
-      version = ">= 4.26.0"
+      version = ">= 4.31.0"
 '
 $newazurerm = '
       source  = "hashicorp/azurerm"
-      version = ">= 4.26.0"
+      version = ">= 4.31.0"
 '
 $oldrandom = '
       source  = "hashicorp/random"
@@ -14,7 +14,7 @@ $oldrandom = '
 '
 $newrandom = '
       source  = "hashicorp/random"
-      version = ">= 3.7.1"
+      version = ">= 3.7.2"
 '
 Get-ChildItem . -Recurse | Where-Object Name -eq "provider.tf" | foreach-object {
   (Get-Content -Raw $_).Replace($oldazurerm, $newazurerm)| Set-Content $_
